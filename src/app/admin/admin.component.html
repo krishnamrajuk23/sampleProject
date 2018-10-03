@@ -1,0 +1,155 @@
+<div class="container main-section">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card p-3 mt-3">
+        <ngb-tabset type="pills">
+          <ngb-tab title="Pending">
+            <ng-template ngbTabContent>
+              <table class="table table-striped table-hover mt-2">
+                <thead class="thead-light">
+                <tr>
+                  <th>Author</th>
+                  <th>Date</th>
+                  <th>title</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let data of newsposts; let i of index">
+                  <td>{{data.publishedBy}}</td>
+                  <td>{{data.newsDate}}</td>
+                  <td>{{data.title}}</td>
+                  <td><a tabindex="0" (click)="viewPost(showModal,data)" class="elections-link">view details</a></td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr class="text-right">
+                  <td colspan="4">
+                    <ngb-pagination
+                      class="d-flex justify-content-end"
+                      [collectionSize]="newsposts?.length"
+                      [(page)]="page"
+                      [maxSize]="1"
+                      [boundaryLinks]="true">
+                    </ngb-pagination>
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Approve">
+            <ng-template ngbTabContent>
+              <table class="table table-striped table-hover mt-2">
+                <thead class="thead-light">
+                <tr>
+                  <th>Author</th>
+                  <th>Date</th>
+                  <th>title</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of approvedPost; let i of index">
+                    <td>{{data.publishedBy}}</td>
+                    <td>{{data.newsDate}}</td>
+                    <td>{{data.title}}</td>
+                    <td><a tabindex="0" (click)="viewPost(showModal,data)" class="elections-link">view details</a></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                <tr class="text-right">
+                  <td colspan="4">
+                    <ngb-pagination
+                      class="d-flex justify-content-end"
+                      [collectionSize]="newsposts?.length"
+                      [(page)]="page"
+                      [maxSize]="1"
+                      [boundaryLinks]="true">
+                    </ngb-pagination>
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Rejected">
+            <ng-template ngbTabContent>
+              <table class="table table-striped table-hover mt-2">
+                <thead class="thead-light">
+                <tr>
+                  <th>Author</th>
+                  <th>Date</th>
+                  <th>title</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of rejectPost; let i of index">
+                    <td>{{data.publishedBy}}</td>
+                    <td>{{data.newsDate}}</td>
+                    <td>{{data.title}}</td>
+                    <td><a tabindex="0" (click)="viewPost(showModal,data)" class="elections-link">view details</a></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                <tr class="text-right">
+                  <td colspan="4">
+                    <ngb-pagination
+                      class="d-flex justify-content-end"
+                      [collectionSize]="newsposts?.length"
+                      [(page)]="page"
+                      [maxSize]="1"
+                      [boundaryLinks]="true">
+                    </ngb-pagination>
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+  <ng-template #showModal let-modal>
+    <div class="modal-header align-items-center">
+      <div>
+        <h4 class="modal-title"> {{selectedPost.title}}</h4>
+        <small>Posted on : <span> {{selectedPost.newsDate}}</span></small>
+      </div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p> {{selectedPost.description}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-info" (click)="editpost(modal)">Edit</button>
+      <button type="button" class="btn btn-success" (click)="approvePost(selectedPost,modal)">Approve</button>
+      <button type="button" class="btn btn-danger" (click)="declinePost(confirmDecline)">Decline</button>
+    </div>
+  </ng-template>
+  <ng-template #confirmDecline let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Decline reason</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="comment">comment</label>
+          <div class="input-group">
+            <textarea id="comment" class="form-control" name="dp"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="declineConfirm(modal,'data')">confirm</button>
+    </div>
+  </ng-template>
+</div>

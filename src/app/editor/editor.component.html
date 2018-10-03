@@ -1,0 +1,64 @@
+<div class="container main-section">
+  <div class="row">
+    <div class="col col-sm-12">
+      <button class="btn btn-dark" (click)="addPost()">Add New Post</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card p-3 mt-3">
+        <ngb-tabset type="pills">
+          <ngb-tab title="Draft">
+            <ng-template ngbTabContent>
+              <div class="card mt-4" *ngFor="let news of editorNewsPost">
+                <div class="row p-3">
+                  <div class="col-sm-7 col-md-8">
+                    <h5 class="card-title news-title mb-0">{{news.title}} </h5>
+                    <small class="text-muted">Date:</small>
+                    <p class="news-content">{{news.description}}</p>
+                  </div>
+                  <div class="col-sm-5 col-md-4 d-flex align-items-center">
+                    <button class="btn btn-info mr-2" (click)="saveNews(news)">Edit</button>
+                    <button class="btn btn-success mr-2" (click)="publishNews(news)" >Post</button>
+                    <button class="btn btn-danger mr-2" >Delete</button>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle>Submitted</ng-template>
+            <ng-template ngbTabContent>
+              <div class="card mt-4" *ngFor="let approved of approvedNewsPost">
+                <div class="row p-3">
+                  <div class="col-sm-7 col-md-8">
+                    <h5 class="card-title news-title mb-0">{{approved.title}}</h5>
+                    <small class="text-muted">Date</small>
+                    <p class="news-content">{{approved.description}}</p>
+                  </div>
+
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Rejected">
+            <ng-template ngbTabContent>
+              <div class="card mt-4" *ngFor="let reject of rejectNewsPost">
+                <div class="row p-3">
+                  <div class="col-sm-7 col-md-8">
+                    <h5 class="card-title news-title mb-0">{{reject.title}}</h5>
+                    <small class="text-muted">Date</small>
+                    <p class="news-content">{{reject.description}}</p>
+                  </div>
+
+                </div>
+              </div>
+
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+
+</div>

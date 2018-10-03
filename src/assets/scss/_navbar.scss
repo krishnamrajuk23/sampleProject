@@ -1,0 +1,12 @@
+.navbar{
+  background-image: url("assets/images/nightsky.jpg");
+  background-repeat: repeat-x;
+  .navbar-brand{
+    color: $white;
+  }
+  .navbar-toggler{
+    color: $white;
+    font-size: 12px;
+    font-weight: 800;
+  }
+}
