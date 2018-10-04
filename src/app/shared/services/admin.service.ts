@@ -21,10 +21,13 @@ export class AdminService {
 
   updateAdminReviewNews(data) {
 
-    const formData = new FormData();
+   delete data.imageChunks;
+   delete data.imageFiles;
+   let formData = new FormData();
     formData.append('newsDetails', new Blob([JSON.stringify({...data})], {
       type: "application/json"
     }));
+
     return this.http.put(HOST_URL + ADMIN_URL,formData).subscribe(response=>{
       console.log(response);
     });

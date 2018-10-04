@@ -15,6 +15,7 @@ import { EditorComponent } from "./editor/editor.component";
 import { AdminComponent } from "./admin/admin.component";
 import { AddPostComponent } from "./editor/add-post/add-post.component";
 import { FooterComponent } from "./footer/footer.component";
+import { UploadImageComponent } from './editor/upload-image/upload-image.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FooterComponent } from "./footer/footer.component";
     AdminComponent,
     AboutComponent,
     AddPostComponent,
-    FooterComponent
+    FooterComponent,
+    UploadImageComponent
   ],
   imports: [
     BrowserModule,

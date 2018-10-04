@@ -18,7 +18,7 @@
                     <p class="news-content">{{news.description}}</p>
                   </div>
                   <div class="col-sm-5 col-md-4 d-flex align-items-center">
-                    <button class="btn btn-info mr-2" (click)="saveNews(news)">Edit</button>
+                    <button class="btn btn-info mr-2" (click)="editNews()">Edit</button>
                     <button class="btn btn-success mr-2" (click)="publishNews(news)" >Post</button>
                     <button class="btn btn-danger mr-2" >Delete</button>
                   </div>
@@ -61,4 +61,7 @@
     </div>
   </div>
 
-</div>
+
+
+  {{uploadImage}}+++
+<app-upload-image *ngIf="uploadImage" (sendValue)="updatedImageData($event)"></app-upload-image>

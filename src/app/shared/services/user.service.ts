@@ -32,13 +32,16 @@ export class UserService {
     });
   }
 
-  postToPublisher(data) {
+  postToPublisher(data,file) {
     const headers = new HttpHeaders();
 
     const formData = new FormData();
     formData.append('newsDetails', new Blob([JSON.stringify({...data.newsText})], {
       type: "application/json"
     }));
+    if(file){
+      formData.append('newsImage',file);
+    }
 
     this.http.post(HOST_URL + "user/publish-news", formData, {headers:headers}).subscribe(response=>{
       this.getDraftNewsByEditorId();

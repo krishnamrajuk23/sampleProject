@@ -1,0 +1,22 @@
+
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" >Upload Image</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true" class="fa fa-times"></span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <h3>Please Select Image or skip to processed</h3>
+
+        <input type="file" (change)="onFileUpload($event)"/>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click');skip()">Skip</button>
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click');saveImage()">Save</button>
+    </div>
+  </ng-template>
+
+

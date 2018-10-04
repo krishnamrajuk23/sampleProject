@@ -12,6 +12,8 @@ export class EditorComponent implements OnInit {
   editorNewsPost:any;
   approvedNewsPost:any = [];
   rejectNewsPost:any = [];
+  uploadImage:boolean = false;
+  publishData : any;
   constructor(private router:Router, private userService: UserService) { }
 
   ngOnInit() {
@@ -40,15 +42,26 @@ export class EditorComponent implements OnInit {
     this.userService.addToDraftNews(data);
   }
 
+  editNews(){
+    this.router.navigate(['editPost']);
+  }
+
   publishNews(data){
-    let newsText:any = {...data};
-    newsText.imageFiles = [];
-    newsText.imageChunks = [];
-    this.userService.postToPublisher({newsText});
+    this.uploadImage = true;
+    this.publishData = data;
   }
 
   getNews(data){
 
+  }
+
+  updatedImageData(event){
+    console.log(event);
+    this.uploadImage = event.hide;
+    if(event.fileUpload){
+      let newsText:any = {...this.publishData};
+      this.userService.postToPublisher({newsText},event.fileUpload);
+    }
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from '../../shared/services/user.service';
 import {SharedPropertiesService} from '../../shared/services/shared-properties.service';
 
@@ -16,9 +16,13 @@ export class AddPostComponent implements OnInit {
     private fb: FormBuilder,
     private router:Router,
     private userService: UserService,
-    private sharedProperties: SharedPropertiesService) { }
+    private sharedProperties: SharedPropertiesService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe((param)=>{
+      console.log("active route",param)
+    });
     this.editorFormDetails();
   }
 
@@ -55,7 +59,7 @@ export class AddPostComponent implements OnInit {
     newsText.imageChunks = [];
     newsText.location = [data.value.location];
 
-    this.userService.postToPublisher({newsText: newsText});
+    this.userService.postToPublisher({newsText: newsText},null);
 
   }
 
