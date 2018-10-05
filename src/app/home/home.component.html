@@ -4,9 +4,9 @@
 
       <div class="d-flex align-items-center justify-content-end my-2">
         <label for="locationselect" class="mb-0 mr-1">Choose a location:</label>
-        <input list="ice-cream-flavors" id="locationselect" name="locations"/>
-        <datalist id="ice-cream-flavors">
-          <option *ngFor="let loc of newsData" value="{{loc.location}}">
+        <input list="ice-cream-flavors" id="locationselect"  name="multiLocations" (change)="locationChangeEvent($event)"/>
+        <datalist id="ice-cream-flavors" >
+          <option *ngFor="let loc of locations" [attr.data-location]="loc.id" [value]="loc.location"></option>
         </datalist>
       </div>
     </div>
