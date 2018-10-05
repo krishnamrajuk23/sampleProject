@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {NewsService} from '../shared/services/news.service';
+import {Md5} from 'ts-md5/dist/md5';
 
 @Component({
   selector: 'app-home',

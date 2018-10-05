@@ -1,7 +1,7 @@
 <!-- Navigation -->
 
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Near News</a>
+  <a class="navbar-brand" href="#">Local News</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarSupportedContent"
     aria-expanded="false" aria-label="Toggle navigation" (click)="showMenu =! showMenu">
     <span class="navbar-toggler-icon"></span>
@@ -42,7 +42,7 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" *ngIf="isLogin">Login</h4>
-    <h4 class="modal-title" *ngIf="">reg</h4>
+    <h4 class="modal-title" *ngIf="isRegister">Registration Form</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true" class="fa fa-times"></span>
     </button>
@@ -61,7 +61,7 @@
         </div>
         <div class="d-flex justify-content-between">
           <button type="submit" class="btn btn-primary">Login</button>
-          <button type="button" class="btn btn-info" (click)="isRegister = true;isLogin = false">Register</button>
+          <button type="button" class="btn btn-info" (click)="isRegister = true;isLogin = false;registrationForm()">Register</button>
         </div>
       </form>
     </div>
@@ -69,8 +69,9 @@
       <form [formGroup]="registerForm" (ngSubmit)="onRegistration(registerForm)">
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" class="form-control" formControlName="name" id="name" placeholder="First Name" [ngClass]="{ 'is-invalid':  registerForm.controls.name.errors }">
-          <div *ngIf="registerForm.controls.name.errors " class="invalid-feedback">
+          <input type="text" class="form-control" formControlName="name" id="name" placeholder="First Name"
+                 [ngClass]="{ 'is-invalid':  registerForm.controls.name.errors && (registerForm.controls.name.touched || registerForm.controls.name.dirty) }">
+          <div *ngIf="registerForm.controls.name.errors && (registerForm.controls.name.touched || registerForm.controls.name.dirty)" class="invalid-feedback">
             <div *ngIf="registerForm.controls.name.errors.required"> Name is required</div>
           </div>
         </div>
@@ -84,26 +85,29 @@
         </div>
         <div class="form-group">
           <label for="emailId">Email address</label>
-          <input type="email" class="form-control" formControlName="emailId" id="emailId" placeholder="Email address" [ngClass]="{ 'is-invalid':  registerForm.controls.emailId.errors }"
+          <input type="email" class="form-control" formControlName="emailId" id="emailId" placeholder="Email address"
+                 [ngClass]="{ 'is-invalid':  registerForm.controls.emailId.errors && (registerForm.controls.emailId.touched || registerForm.controls.emailId.dirty) }"
             (blur)="onBlurMethod($event)">
-          <div *ngIf="registerForm.controls.emailId.errors" class="invalid-feedback">
+          <div *ngIf="registerForm.controls.emailId.errors && (registerForm.controls.emailId.touched || registerForm.controls.emailId.dirty)" class="invalid-feedback">
             <div *ngIf="registerForm.controls.emailId.errors.required">First Name is required</div>
           </div>
         </div>
 
         <div class="form-group">
           <label for="phoneNum">Phone Number</label>
-          <input type="text" class="form-control" formControlName="phoneNum" id="phoneNum" placeholder="Phone Number" [ngClass]="{ 'is-invalid':  registerForm.controls.phoneNum.errors }"
+          <input type="text" class="form-control" formControlName="phoneNum" id="phoneNum" placeholder="Phone Number"
+                 [ngClass]="{ 'is-invalid':  registerForm.controls.phoneNum.errors && (registerForm.controls.phoneNum.touched || registerForm.controls.phoneNum.dirty) }"
             (blur)="onBlurMethod($event)">
-          <div *ngIf="registerForm.controls.phoneNum.errors" class="invalid-feedback">
+          <div *ngIf="registerForm.controls.phoneNum.errors && (registerForm.controls.phoneNum.touched || registerForm.controls.phoneNum.dirty)" class="invalid-feedback">
             <div *ngIf="registerForm.controls.phoneNum.errors.required">First Name is required</div>
           </div>
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password" [ngClass]="{ 'is-invalid':  registerForm.controls.password.errors }">
-          <div *ngIf="registerForm.controls.password.errors" class="invalid-feedback">
+          <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password"
+                 [ngClass]="{ 'is-invalid':  registerForm.controls.password.errors && (registerForm.controls.password.touched || registerForm.controls.password.dirty) }">
+          <div *ngIf="registerForm.controls.password.errors && (registerForm.controls.password.touched || registerForm.controls.password.dirty)" class="invalid-feedback">
             <div *ngIf="registerForm.controls.password.errors.required">First Name is required</div>
           </div>
         </div>
@@ -119,7 +123,7 @@
           </ngx-recaptcha2>
         </div>
         <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-info" (click)="isRegister = false;isLogin = true">Login</button>
+          <button type="button" class="btn btn-info" (click)="isRegister = false;isLogin = true; loginformDetails()">Login</button>
           <button type="submit" class="btn btn-primary">Register</button>
         </div>
       </form>

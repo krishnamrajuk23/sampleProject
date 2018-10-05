@@ -15,6 +15,7 @@ import { EditorComponent } from "./editor/editor.component";
 import { AdminComponent } from "./admin/admin.component";
 import { AddPostComponent } from "./editor/add-post/add-post.component";
 import { FooterComponent } from "./footer/footer.component";
+import { AddLocationComponent } from './admin/add-location/add-location.component';
 import { UploadImageComponent } from './editor/upload-image/upload-image.component';
 
 @NgModule({
@@ -28,6 +29,7 @@ import { UploadImageComponent } from './editor/upload-image/upload-image.compone
     AboutComponent,
     AddPostComponent,
     FooterComponent,
+    AddLocationComponent,
     UploadImageComponent
   ],
   imports: [

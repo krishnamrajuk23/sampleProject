@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import {Component, OnInit, TemplateRef, ViewChild, ViewEncapsulation} from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -51,8 +51,28 @@ export class HeaderComponent implements OnInit {
     });
 
   }
+  @ViewChild('authenticatePopUp') modalTemplate:TemplateRef<any>;
 
+  public ngAfterViewInit(): void {
+    this.authenticate_loop();
+  }
+
+
+  private authenticate_loop() {
+    setTimeout (() => {
+      this.modalService.open(this.modalTemplate, { centered: true });
+    }, 30000)
+  }
+
+  goToRegister(content,alertmodal){
+    this.isLogin = false;
+    this.isRegister = true;
+    alertmodal.close();
+    this.openVerticallyCentered(content);
+  }
   openVerticallyCentered(content) {
+    this.isLogin = true;
+    this.isRegister = false;
     this.modalService.open(content, { centered: true });
   }
 

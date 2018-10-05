@@ -7,6 +7,7 @@ import { AboutComponent } from './about/about.component';
 import {EditorComponent} from "./editor/editor.component";
 import {AddPostComponent} from "./editor/add-post/add-post.component";
 import {AdminComponent} from "./admin/admin.component";
+import {AddLocationComponent} from "./admin/add-location/add-location.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'editor', component: EditorComponent },
   { path: 'addPost', component: AddPostComponent },
   { path: 'editPost', component: AddPostComponent},
-  { path: 'admin', component: AdminComponent }
+  { path: 'admin', component: AdminComponent },
+  { path: 'addLocation', component: AddLocationComponent },
 ];
 
 @NgModule({

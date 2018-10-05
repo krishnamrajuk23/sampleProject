@@ -1,18 +1,19 @@
 <div class="container main-section">
   <div class="row">
     <div class="col-lg-12">
-      <div class="d-flex align-items-center justify-content-end">
-        <label for="locationselect" class="mb-0 mr-1">Choose a flavor:</label>
-        <input list="ice-cream-flavors" id="locationselect"  name="locations" />
 
+      <div class="d-flex align-items-center justify-content-end">
+        <label for="locationselect" class="mb-0 mr-1">Choose a location:</label>
+        <input list="ice-cream-flavors" id="locationselect"  name="locations" />
         <datalist id="ice-cream-flavors">
-          <option *ngFor="let loc of newsData" value="{{loc.publishedBy}}">
+          <option *ngFor="let loc of newsData" value="{{loc.location}}">
         </datalist>
       </div>
+
       <div class="card-deck card-deck-horizontal">
         <div class="card" *ngFor="let news of newsData">
-          <div class="card p-0 m-0 flex-row flex-xs-column border-0">
-            <img class="card-img-left card-image" src="../../assets/images/test.png" alt="Card image cap">
+          <div class="card p-0 m-0 flex-row flex-xs-column border-0" >
+            <img class="card-img-left card-image" *ngIf="news.imageChunks.length > 0" [src]="'data:image/jpeg;base64,'+news.imageChunks[0].data.data" alt="Card image cap"/>
             <div class="card-body position-relative">
               <h5 class="card-title news-title">{{news.title}}</h5>
               <p class="news-content">{{news.description}}</p>
