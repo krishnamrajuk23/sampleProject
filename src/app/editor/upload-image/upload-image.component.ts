@@ -22,7 +22,7 @@ export class UploadImageComponent implements OnInit,AfterViewInit {
 
   }
   saveImage(){
-    this.sendValue.emit({fileUpload:this.imageChangedEvent, hide: false});
+    this.sendValue.emit({fileUpload:this.imageChangedEvent, hide: false,cropped: this.croppedImage});
   }
 
   skip(){

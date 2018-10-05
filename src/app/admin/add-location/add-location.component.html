@@ -18,7 +18,9 @@
           <div class="form-group row">
             <label for="state" class="col-sm-3 col-form-label">State</label>
             <div class="col-sm-9">
-              <select type="text" class="form-control" formControlName="state" id="state"></select>
+              <select class="form-control" id="state" formControlName="state">
+                <option *ngFor="let state of statesList" [ngValue]="state.state">{{ state.desc }}</option>
+              </select>
             </div>
           </div>
           <div class="d-flex justify-content-end">

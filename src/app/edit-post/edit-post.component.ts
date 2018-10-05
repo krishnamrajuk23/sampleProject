@@ -17,6 +17,13 @@ export class EditPostComponent implements OnInit {
     this.editPostFormFields();
     this.sharedProperties.editPostNews.subscribe(result=>{
       console.log(this.editPostForm);
+      this.editPostForm.patchValue({
+        title: result.title,
+        description: result.description,
+        location: result.location,
+        newsDate: result.newsDate,
+        refLink: result.refLink
+      })
     });
   }
 

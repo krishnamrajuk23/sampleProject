@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {LocationsService} from '../../shared/services/locations.service';
 
 @Component({
   selector: 'app-add-location',
@@ -8,10 +9,16 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 })
 export class AddLocationComponent implements OnInit {
   addLocationForm : FormGroup;
-  constructor(private fb: FormBuilder) { }
+  statesList:any;
+  constructor(
+    private fb: FormBuilder,
+    private locationsService:LocationsService) { }
 
   ngOnInit() {
     this.addLocationDetails();
+    this.locationsService.getStates().subscribe(result=>{
+       this.statesList = result;
+    });
   }
   addLocationDetails(){
     this.addLocationForm = this.fb.group({
@@ -22,6 +29,6 @@ export class AddLocationComponent implements OnInit {
   }
   addLocation(locData){
     let locdata:any = {...locData.value};
+    this.locationsService.postLocations(locdata);
   }
-
 }

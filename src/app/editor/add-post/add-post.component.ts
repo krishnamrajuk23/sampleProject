@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from '../../shared/services/user.service';
 import {SharedPropertiesService} from '../../shared/services/shared-properties.service';
+import {UtilService} from '../../shared/util/util.service';
+import {LocationsService} from '../../shared/services/locations.service';
 
 @Component({
   selector: 'app-add-post',
@@ -12,55 +14,72 @@ import {SharedPropertiesService} from '../../shared/services/shared-properties.s
 export class AddPostComponent implements OnInit {
 
   editorForm: FormGroup;
+  uploadImage:boolean = false;
+  publishData:any;
+  locationsData:any;
+
   constructor(
     private fb: FormBuilder,
     private router:Router,
     private userService: UserService,
     private sharedProperties: SharedPropertiesService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private util:UtilService,
+    private locations:LocationsService) { }
 
   ngOnInit() {
     this.route.params.subscribe((param)=>{
       console.log("active route",param)
     });
     this.editorFormDetails();
+    this.locations.getLocations().subscribe(response => {
+      this.locationsData = response;
+    });
   }
 
-  editorFormDetails(){
+  editorFormDetails() {
     this.editorForm = this.fb.group({
-      title:[''],
-      description:[''],
-      location:[''],
-      newsDate:[''],
-      refLink:['']
-    })
+      title: [''],
+      description: [''],
+      location: [''],
+      newsDate: [''],
+      refLink: ['']
+    });
   }
 
-  onSubmit(){
-    this.router.navigate(['editor']);
-  }
 
   addSavePost(data){
     let newsText:any = {...data.value};
 
     newsText.editorId = this.sharedProperties.loginResponseResult.userId;
-    newsText.location = [data.value.location];
+    newsText.location = [data.value.location.id];
 
     this.userService.addToDraftNews({...newsText});
     this.router.navigate(['editor']);
+
   }
 
   addPost(data){
-    let newsText:any = {...data.value};
+    this.publishData = {...data.value};
+    this.uploadImage = true;
+  }
+
+  updatedImageData(event){
+    this.uploadImage = event.hide;
+    const newsText:any = {...this.publishData};
 
     newsText.editorId = this.sharedProperties.loginResponseResult.userId;
-    newsText.publishedBy = this.sharedProperties.loginResponseResult.name;
-    newsText.imageFiles = [];
-    newsText.imageChunks = [];
-    newsText.location = [data.value.location];
+    newsText.location = [newsText.location.id];
 
-    this.userService.postToPublisher({newsText: newsText},null);
-
+    if(event.fileUpload){
+      let fileObject:any;
+       this.util.setFileData(event.fileUpload.target.files[0]);
+      fileObject = this.util.dataURLtoFile(event.cropped);
+      this.userService.postToPublisher({newsText},fileObject);
+    }else{
+      this.userService.postToPublisher({newsText},null);
+    }
+    this.router.navigate(['editor']);
   }
 
 }

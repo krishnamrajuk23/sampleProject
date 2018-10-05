@@ -35,7 +35,6 @@ export class EditorComponent implements OnInit {
         if(item.status == "R"){
           this.rejectNewsPost.push(item);
         }
-
       });
     });
   }
@@ -59,16 +58,14 @@ export class EditorComponent implements OnInit {
   }
 
   updatedImageData(event){
-    console.log(event);
     this.uploadImage = event.hide;
+    const newsText:any = {...this.publishData};
     if(event.fileUpload){
-      let newsText:any = {...this.publishData};
       this.userService.postToPublisher({newsText},event.fileUpload);
+    }else{
+      this.userService.postToPublisher({newsText},null);
     }
   }
 
-  openPopUp(content){
-
-  }
 
 }
