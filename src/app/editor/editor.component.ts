@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../shared/services/user.service";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {SharedPropertiesService} from '../shared/services/shared-properties.service';
 
 @Component({
   selector: 'app-editor',
@@ -14,7 +16,11 @@ export class EditorComponent implements OnInit {
   rejectNewsPost:any = [];
   uploadImage:boolean = false;
   publishData : any;
-  constructor(private router:Router, private userService: UserService) { }
+  constructor(
+    private router:Router,
+    private userService: UserService,
+    private modelService:NgbModal,
+    private sharedProperties: SharedPropertiesService) { }
 
   ngOnInit() {
   this.userService.getDraftNewsByEditorId();
@@ -42,17 +48,14 @@ export class EditorComponent implements OnInit {
     this.userService.addToDraftNews(data);
   }
 
-  editNews(){
+  editNews(news){
+    this.sharedProperties.setEditPostNews(news);
     this.router.navigate(['editPost']);
   }
 
   publishNews(data){
     this.uploadImage = true;
     this.publishData = data;
-  }
-
-  getNews(data){
-
   }
 
   updatedImageData(event){
@@ -62,6 +65,10 @@ export class EditorComponent implements OnInit {
       let newsText:any = {...this.publishData};
       this.userService.postToPublisher({newsText},event.fileUpload);
     }
+  }
+
+  openPopUp(content){
+
   }
 
 }

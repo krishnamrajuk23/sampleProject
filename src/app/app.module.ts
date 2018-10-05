@@ -4,6 +4,7 @@ import { NgModule } from "@angular/core";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
@@ -17,6 +18,7 @@ import { AddPostComponent } from "./editor/add-post/add-post.component";
 import { FooterComponent } from "./footer/footer.component";
 import { AddLocationComponent } from './admin/add-location/add-location.component';
 import { UploadImageComponent } from './editor/upload-image/upload-image.component';
+import { EditPostComponent } from './edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { UploadImageComponent } from './editor/upload-image/upload-image.compone
     AddPostComponent,
     FooterComponent,
     AddLocationComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    EditPostComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { UploadImageComponent } from './editor/upload-image/upload-image.compone
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    ImageCropperModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,27 +9,37 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 export class UploadImageComponent implements OnInit,AfterViewInit {
   @Output() sendValue = new EventEmitter<any>();
   @Output() hide = new EventEmitter();
-  selectedImage:any;
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  cropperReady = false;
   constructor(
-    private modalService: NgbModal,
   ) { }
   @ViewChild('content') content;
   ngOnInit() {
 
   }
   ngAfterViewInit(){
-    this.modalService.open(this.content, { centered: true });
+
   }
   saveImage(){
-    this.sendValue.emit({fileUpload:this.selectedImage, hide: false});
-  }
-
-  onFileUpload(event){
-    this.selectedImage = event.target.files[0];
+    this.sendValue.emit({fileUpload:this.imageChangedEvent, hide: false});
   }
 
   skip(){
     this.sendValue.emit({fileUpload:null, hide: false});
+  }
+
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+  }
+  imageCroppedBase64(image: string) {
+    this.croppedImage = image;
+  }
+  imageLoaded() {
+    this.cropperReady = true;
+  }
+  loadImageFailed () {
+    console.log('Load failed');
   }
 
 }

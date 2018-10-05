@@ -1,22 +1,24 @@
 
+    <div class="container main-section">
+      <input type="file" (change)="fileChangeEvent($event)" />
+      <image-cropper
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="4 / 3"
+        [resizeToWidth]="128"
+        [roundCropper]="false"
+        format="jpeg"
+        (imageCroppedBase64)="imageCroppedBase64($event)"
+        (imageLoaded)="imageLoaded()"
+        (loadImageFailed)="loadImageFailed()"
+        style="max-height: 33vh"
+        [style.display]="cropperReady ? null : 'none'"
+      ></image-cropper>
 
-  <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" >Upload Image</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true" class="fa fa-times"></span>
-      </button>
-    </div>
-    <div class="modal-body">
-        <h3>Please Select Image or skip to processed</h3>
-
-        <input type="file" (change)="onFileUpload($event)"/>
+      <img [src]="croppedImage" />
+      <button type="button" class="btn btn-light" (click)="skip()">Skip</button>
+      <button type="button" class="btn btn-light" (click)="saveImage()">Save</button>
 
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click');skip()">Skip</button>
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click');saveImage()">Save</button>
-    </div>
-  </ng-template>
 
 
