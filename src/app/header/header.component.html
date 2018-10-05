@@ -1,15 +1,14 @@
 <!-- Navigation -->
 
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Local News</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation" (click)="showMenu =! showMenu">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<header class="navbar-light navbar-expand-lg bg-white fixed-top nav-down" style="top: 0px;">
 
-  <div class="navbar-collapse justify-content-end collapse" [ngClass]="{'collapse' : showMenu ,'' : !showMenu }" id="navbarSupportedContent">
-    <ul class="navbar-nav">
-      <li class="nav-item">
+  <div class="container">
+
+    <!-- Begin Logo -->
+    <div class="row justify-content-center align-items-center brandrow">
+      <div class="col-lg-4 col-md-4 col-xs-12 hidden-xs-down customarea">
+        <a class="btn follow d-inline-block" href="https://twitter.com/wowthemesnet" target="blank"><i class="fa fa-twitter"></i>
+          Follow</a>
         <div ngbDropdown class="d-inline-block">
           <a class="nav-link hand" id="languageSelcet" ngbDropdownToggle>
             <i class="fa fa-language"></i>
@@ -20,24 +19,48 @@
             <button class="dropdown-item">Hindi</button>
           </div>
         </div>
-      </li>
-      <li class="nav-item active">
+      </div>
+      <div class="col-lg-4 col-md-4  col-xs-12 text-center logoarea">
+        <a class="navbar-brand d-block d-xs-none" href="/">Local News</a>
+      </div>
+      <div class="col-lg-4 col-md-4 mr-auto col-xs-12 text-right loginArea">
+        <a class="nav-link hand d-inline-block" *ngIf="!userInformation?.name"
+           (click)="openVerticallyCentered(content);showMenu =! showMenu">Login</a>
+        <a class="nav-link hand d-inline-block" *ngIf="userInformation?.name" (click)="logout()">Logout</a>
+      </div>
 
-        <a  *ngIf="userInformation?.name" (click)="dashboardRedirect(userInformation)" class="nav-link">Dashboard</a>
-      </li>
-      <li class="nav-item active">
-        <a routerLink="/home" (click)="showMenu =! showMenu" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="/about" (click)="showMenu =! showMenu" class="nav-link">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link hand" *ngIf="!userInformation?.name" (click)="openVerticallyCentered(content);showMenu =! showMenu">Login</a>
-        <a class="nav-link hand" *ngIf="userInformation?.name" (click)="logout()">Logout</a>
-      </li>
-    </ul>
+    </div>
+    <!-- End Logo -->
+
+    <div class="navarea">
+      <nav class="navbar navbar-toggleable-sm">
+        <a class="navbar-brand d-none d-xs-block" href="/">Local News</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation" (click)="showMenu =! showMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse"  [ngClass]="{'collapse' : showMenu ,'' : !showMenu }"
+             id="navbarSupportedContent">
+          <ul class="navbar-nav col-md-12 justify-content-center">
+            <li class="nav-item hand">
+              <a *ngIf="userInformation?.name" (click)="dashboardRedirect(userInformation)" class="nav-link">Dashboard</a>
+            </li>
+            <li class="nav-item hand">
+              <a routerLink="/home" (click)="showMenu =! showMenu" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item hand">
+              <a routerLink="/about" (click)="showMenu =! showMenu" class="nav-link">About</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    </div>
+
   </div>
-</nav>
+
+</header>
 
 <ng-template #content let-modal>
   <div class="modal-header">
@@ -52,16 +75,20 @@
       <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm,modal)">
         <div class="form-group">
           <label for="exampleInputEmail1">User ID</label>
-          <input type="text" class="form-control" formControlName="userId" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          <input type="text" class="form-control" formControlName="userId" id="exampleInputEmail1"
+                 aria-describedby="emailHelp" placeholder="Enter email">
 
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1" placeholder="Password">
+          <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1"
+                 placeholder="Password">
         </div>
         <div class="d-flex justify-content-between">
           <button type="submit" class="btn btn-primary">Login</button>
-          <button type="button" class="btn btn-info" (click)="isRegister = true;isLogin = false;registrationForm()">Register</button>
+          <button type="button" class="btn btn-info" (click)="isRegister = true;isLogin = false;registrationForm()">
+            Register
+          </button>
         </div>
       </form>
     </div>
@@ -71,14 +98,16 @@
           <label for="name">Name</label>
           <input type="text" class="form-control" formControlName="name" id="name" placeholder="First Name"
                  [ngClass]="{ 'is-invalid':  registerForm.controls.name.errors && (registerForm.controls.name.touched || registerForm.controls.name.dirty) }">
-          <div *ngIf="registerForm.controls.name.errors && (registerForm.controls.name.touched || registerForm.controls.name.dirty)" class="invalid-feedback">
+          <div
+            *ngIf="registerForm.controls.name.errors && (registerForm.controls.name.touched || registerForm.controls.name.dirty)"
+            class="invalid-feedback">
             <div *ngIf="registerForm.controls.name.errors.required"> Name is required</div>
           </div>
         </div>
         <div class="form-group">
           <label for="userid">UserID</label>
           <input type="text" class="form-control" formControlName="userId" id="userid" placeholder="User Id"
-            (blur)="onBlurMethod($event)">
+                 (blur)="onBlurMethod($event)">
           <div *ngIf="validationMessage" class="invalid-feedback">
             <span> {{validationMessage}}</span>
           </div>
@@ -87,8 +116,10 @@
           <label for="emailId">Email address</label>
           <input type="email" class="form-control" formControlName="emailId" id="emailId" placeholder="Email address"
                  [ngClass]="{ 'is-invalid':  registerForm.controls.emailId.errors && (registerForm.controls.emailId.touched || registerForm.controls.emailId.dirty) }"
-            (blur)="onBlurMethod($event)">
-          <div *ngIf="registerForm.controls.emailId.errors && (registerForm.controls.emailId.touched || registerForm.controls.emailId.dirty)" class="invalid-feedback">
+                 (blur)="onBlurMethod($event)">
+          <div
+            *ngIf="registerForm.controls.emailId.errors && (registerForm.controls.emailId.touched || registerForm.controls.emailId.dirty)"
+            class="invalid-feedback">
             <div *ngIf="registerForm.controls.emailId.errors.required">First Name is required</div>
           </div>
         </div>
@@ -97,8 +128,10 @@
           <label for="phoneNum">Phone Number</label>
           <input type="text" class="form-control" formControlName="phoneNum" id="phoneNum" placeholder="Phone Number"
                  [ngClass]="{ 'is-invalid':  registerForm.controls.phoneNum.errors && (registerForm.controls.phoneNum.touched || registerForm.controls.phoneNum.dirty) }"
-            (blur)="onBlurMethod($event)">
-          <div *ngIf="registerForm.controls.phoneNum.errors && (registerForm.controls.phoneNum.touched || registerForm.controls.phoneNum.dirty)" class="invalid-feedback">
+                 (blur)="onBlurMethod($event)">
+          <div
+            *ngIf="registerForm.controls.phoneNum.errors && (registerForm.controls.phoneNum.touched || registerForm.controls.phoneNum.dirty)"
+            class="invalid-feedback">
             <div *ngIf="registerForm.controls.phoneNum.errors.required">First Name is required</div>
           </div>
         </div>
@@ -107,7 +140,9 @@
           <label for="password">Password</label>
           <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password"
                  [ngClass]="{ 'is-invalid':  registerForm.controls.password.errors && (registerForm.controls.password.touched || registerForm.controls.password.dirty) }">
-          <div *ngIf="registerForm.controls.password.errors && (registerForm.controls.password.touched || registerForm.controls.password.dirty)" class="invalid-feedback">
+          <div
+            *ngIf="registerForm.controls.password.errors && (registerForm.controls.password.touched || registerForm.controls.password.dirty)"
+            class="invalid-feedback">
             <div *ngIf="registerForm.controls.password.errors.required">First Name is required</div>
           </div>
         </div>
@@ -123,7 +158,9 @@
           </ngx-recaptcha2>
         </div>
         <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-info" (click)="isRegister = false;isLogin = true; loginformDetails()">Login</button>
+          <button type="button" class="btn btn-info" (click)="isRegister = false;isLogin = true; loginformDetails()">
+            Login
+          </button>
           <button type="submit" class="btn btn-primary">Register</button>
         </div>
       </form>
@@ -132,5 +169,19 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+<ng-template #authenticatePopUp let-alertmodal>
+  <div class="modal-header">
+    <h4 class="modal-title">Want to post ?</h4>
+    <button type="button" class="close" aria-label="Close" (click)="alertmodal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Complete simple registration</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="goToRegister(content, alertmodal)">Go to register</button>
   </div>
 </ng-template>

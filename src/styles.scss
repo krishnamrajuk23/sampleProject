@@ -2,8 +2,10 @@
 @import "assets/scss/main";
 
 .main-section {
-  padding-top: 70px;
-  min-height: calc(100vh - 81px);
+  min-height: 60vh;
+  padding-top: 43px;
+  margin-top: 105px;
+  transition: all 0.4s;
 }
 
 ul[role="tablist"] {

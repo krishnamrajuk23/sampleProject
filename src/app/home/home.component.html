@@ -2,38 +2,37 @@
   <div class="row">
     <div class="col-lg-12">
 
-      <div class="d-flex align-items-center justify-content-end">
+      <div class="d-flex align-items-center justify-content-end my-2">
         <label for="locationselect" class="mb-0 mr-1">Choose a location:</label>
-        <input list="ice-cream-flavors" id="locationselect"  name="locations" />
+        <input list="ice-cream-flavors" id="locationselect" name="locations"/>
         <datalist id="ice-cream-flavors">
           <option *ngFor="let loc of newsData" value="{{loc.location}}">
         </datalist>
       </div>
-
-      <div class="card-deck card-deck-horizontal">
-        <div class="card" *ngFor="let news of newsData">
-          <div class="card p-0 m-0 flex-row flex-xs-column border-0" >
-            <img class="card-img-left card-image" *ngIf="news.imageChunks.length > 0" [src]="'data:image/jpeg;base64,'+news.imageChunks[0].data.data" alt="Card image cap"/>
-            <div class="card-body position-relative">
-              <h5 class="card-title news-title">{{news.title}}</h5>
-              <p class="news-content">{{news.description}}</p>
-              <a target="_blank" class="reference-link" [href]="news.refLink">{{news.refLink}}</a>
-            </div>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Updated at {{news.newsDate}} by {{news.publishedBy}}</small>
-            <div class="pull-right share-section">
-              <a class="mr-3 hand"><i class="fa fa-thumbs-up"></i>{{news.likesCount}}</a>
-              <a class="mr-3 hand"><i class="fa fa-thumbs-down"></i>{{news.dislikesCount}}</a>
-              <a class="mr-3 hand"><i class="fa fa-facebook-official"></i></a>
-              <a class="mr-3 hand"><i class="fa fa-whatsapp"></i></a>
-            </div>
-          </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 my-1" *ngFor="let news of newsData">
+      <div class="card news-card">
+        <img class="card-img-left card-image"
+             *ngIf="news.imageChunks.length > 0"
+             [src]="'data:image/jpeg;base64,'+news.imageChunks[0].data.data" alt="News image"/>
+        <div class="card-body card-block">
+          <h5 class="card-title">{{news.title}}</h5>
+          <p class="news-content">{{news.description}}</p>
+          <a target="_blank" class="reference-link" [href]="news.refLink">{{news.refLink}}</a>
         </div>
-
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        <div class="card-footer">
+          <div class="d-flex align-items-center justify-content-between">
+            <span class="author-meta">
+              <span class="post-name">{{news.publishedBy}}</span><br>
+              <span class="post-date">{{news.newsDate}}</span>
+            </span>
+            <span class="share-setion">
+              <a class="mr-2 hand d-none"><i class="fa fa-thumbs-o-down mr-1"></i>{{news.likesCount}}</a>
+              <a class="mr-2 hand d-none"><i class="fa fa-thumbs-o-up mr-1"></i>{{news.dislikesCount}}</a>
+              <a class="mr-2 hand d-none"><i class="fa fa-facebook"></i></a>
+              <a class="hand"><i class="fa fa-whatsapp"></i></a>
+            </span>
+          </div>
         </div>
       </div>
     </div>
