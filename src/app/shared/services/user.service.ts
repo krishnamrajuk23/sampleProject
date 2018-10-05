@@ -15,14 +15,14 @@ export class UserService {
   }
 
   addToDraftNews(data) {
-    return this.http.post(HOST_URL + "user/draft-news", data).subscribe(response=>{
-      this.draftNews.next(response);
+    this.http.post(HOST_URL + "user/draft-news", data).subscribe(response=>{
+      this.getDraftNewsByEditorId();
     });
   }
 
   updateDraftNews(data) {
-    return this.http.put(HOST_URL + "user/draft-news", data).subscribe(response=>{
-      this.draftNews.next(response);
+    this.http.put(HOST_URL + "user/draft-news", data).subscribe(response=>{
+      this.getDraftNewsByEditorId();
     });
   }
 
