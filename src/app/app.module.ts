@@ -5,6 +5,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
@@ -22,6 +23,7 @@ import { AddLocationComponent } from './admin/add-location/add-location.componen
 import { UploadImageComponent } from './editor/upload-image/upload-image.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { LoaderComponent } from './loader/loader.component';
+import { MultiselectComponent } from './core/multiselect/multiselect.component';
 import { LoaderInterceptorService } from './shared/services/loader-interceptor.service';
 
 @NgModule({
@@ -38,7 +40,8 @@ import { LoaderInterceptorService } from './shared/services/loader-interceptor.s
     AddLocationComponent,
     UploadImageComponent,
     EditPostComponent,
-    LoaderComponent
+    LoaderComponent,
+    MultiselectComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { LoaderInterceptorService } from './shared/services/loader-interceptor.s
     FormsModule,
     HttpClientModule,
     NgxCaptchaModule,
-    ImageCropperModule
+    ImageCropperModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
     {

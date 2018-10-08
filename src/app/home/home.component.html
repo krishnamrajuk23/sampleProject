@@ -3,11 +3,24 @@
     <div class="col-lg-12">
 
       <div class="d-flex align-items-center justify-content-end my-2">
-        <label for="locationselect" class="mb-0 mr-1">Choose a location:</label>
-        <input list="ice-cream-flavors" id="locationselect"  name="multiLocations" (change)="locationChangeEvent($event)"/>
-        <datalist id="ice-cream-flavors" >
-          <option *ngFor="let loc of locations" [attr.data-location]="loc.id" [value]="loc.location"></option>
-        </datalist>
+        <label class="mb-0 mr-1">Choose a location:</label>
+        <ng-multiselect-dropdown
+           name="location"
+          [placeholder]="'Select Location'"
+          [data]="locations"
+          [settings]="dropdownSettings"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        (onDeSelect)="onDeSelectItem($event)">
+        </ng-multiselect-dropdown>
+
+        <!--<app-multiselect *ngIf="locations"
+          name="location"
+          [data]="locations"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)">
+        </app-multiselect>
+-->
       </div>
     </div>
 

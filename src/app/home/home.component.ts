@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {NewsService} from '../shared/services/news.service';
-import {Md5} from 'ts-md5/dist/md5';
 import {LocationsService} from '../shared/services/locations.service';
 
 @Component({
@@ -12,7 +11,9 @@ import {LocationsService} from '../shared/services/locations.service';
 export class HomeComponent implements OnInit {
   newsData:any;
   locations:any;
-  locationChange:any;
+  ShowFilter = false;
+  selectedItems: Array<any> = [];
+  dropdownSettings: any = {};
   constructor(
     private modalService: NgbModal,
     private newsService:NewsService,
@@ -24,11 +25,47 @@ export class HomeComponent implements OnInit {
     });
     this.locationService.getLocations().subscribe(locations=>{
       this.locations = locations;
+      this.selectedItems = [];
+    });
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'location',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: this.ShowFilter
+    };
+  }
+
+  filterByLocationData(selectLocation:string){
+    this.newsService.getLocalNewsByLocation(selectLocation).subscribe(result => {
+      this.newsData = result;
     });
   }
 
-  locationChangeEvent(event){
-    console.log();
+  onItemSelect(item:any){
+    this.selectedItems.push(item.id);
+    this.filterByLocationData(this.selectedItems.join());
+
   }
 
+  onSelectAll(items: any) {
+    console.log('onSelectAll', items);
+  }
+
+  onDeSelectItem(item) {
+    console.log('on De select', item);
+    this.selectedItems = this.selectedItems.filter(select => {
+      if(select !== item.id){
+        return item.id;
+      }
+    });
+    this.filterByLocationData(this.selectedItems.join());
+  }
+
+  trackByFn(index, loc) {
+    return loc.id;
+  }
 }

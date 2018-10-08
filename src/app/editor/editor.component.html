@@ -27,6 +27,24 @@
               <div class="card mt-4" *ngIf="editorNewsPost"></div>
             </ng-template>
           </ngb-tab>
+          <ngb-tab title="Pending Approval">
+            <ng-template ngbTabContent>
+              <div class="card mt-4" *ngFor="let news of pendingNewsPost">
+                <div class="row p-3">
+                  <div class="col-sm-7 col-md-8">
+                    <h5 class="card-title news-title mb-0">{{news.title}} </h5>
+                    <small class="text-muted">Date:</small>
+                    <p class="news-content">{{news.description}}</p>
+                  </div>
+                  <div class="col-sm-5 col-md-4 d-flex align-items-center">
+                    <button class="btn btn-info mr-2" (click)="editNews(news)">Edit</button>
+                    <button class="btn btn-success mr-2" (click)="publishNews(news)" >Post</button>
+                    <button class="btn btn-danger mr-2" >Delete</button>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle>Submitted</ng-template>
             <ng-template ngbTabContent>

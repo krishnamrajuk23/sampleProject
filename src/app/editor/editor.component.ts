@@ -14,6 +14,7 @@ export class EditorComponent implements OnInit {
   editorNewsPost:any;
   approvedNewsPost:any = [];
   rejectNewsPost:any = [];
+  pendingNewsPost:any = [];
   uploadImage:boolean = false;
   publishData : any;
   constructor(
@@ -23,10 +24,13 @@ export class EditorComponent implements OnInit {
     private sharedProperties: SharedPropertiesService) { }
 
   ngOnInit() {
-  this.userService.getDraftNewsByEditorId();
-  this.userService.draftNews.subscribe(result=>{
-      this.editorNewsPost = result;
-  });
+    this.userService.getDraftNewsByEditorId();
+    // Draft news Data
+    this.userService.draftNews.subscribe(result=>{
+        this.editorNewsPost = result;
+    });
+
+    // Published News Data
     this.userService.getPublisherNewById().subscribe((result:any)=>{
       result.map(item=>{
         if(item.status == "A"){
@@ -34,6 +38,9 @@ export class EditorComponent implements OnInit {
         }
         if(item.status == "R"){
           this.rejectNewsPost.push(item);
+        }
+        if(item.status === null){
+          this.pendingNewsPost.push(item);
         }
       });
     });
