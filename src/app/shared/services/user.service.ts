@@ -8,7 +8,8 @@ import {SharedPropertiesService} from './shared-properties.service';
   providedIn: "root"
 })
 export class UserService {
-  draftNews = new Subject<any>();
+  draftNews$ = new Subject<any>();
+  publishedNews$ = new Subject<any>();
   userObject:any;
   constructor(private http: HttpClient,private sharedProperties:SharedPropertiesService) {
     this.userObject = this.sharedProperties.loginResponseResult;
@@ -16,6 +17,7 @@ export class UserService {
 
   addToDraftNews(data) {
     this.http.post(HOST_URL + "user/draft-news", data).subscribe(response=>{
+      console.log("drafts",response);
       this.getDraftNewsByEditorId();
     });
   }
@@ -28,7 +30,7 @@ export class UserService {
 
   getDraftNewsByEditorId() {
     this.http.get(HOST_URL + "user/draft-news/" + this.userObject.userId).subscribe(response=>{
-      this.draftNews.next(response);
+      this.draftNews$.next(response);
     });
   }
 
@@ -45,10 +47,13 @@ export class UserService {
 
     this.http.post(HOST_URL + "user/publish-news", formData, {headers:headers}).subscribe(response=>{
       this.getDraftNewsByEditorId();
+      this.getPublisherNewById();
     });
   }
 
   getPublisherNewById() {
-    return this.http.get(HOST_URL + "user/publish-news/" + this.userObject.userId);
+    this.http.get(HOST_URL + "user/publish-news/" + this.userObject.userId).subscribe(response=>{
+      this.publishedNews$.next(response);
+    });
   }
 }

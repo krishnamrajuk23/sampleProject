@@ -24,14 +24,15 @@ export class EditorComponent implements OnInit {
     private sharedProperties: SharedPropertiesService) { }
 
   ngOnInit() {
-    this.userService.getDraftNewsByEditorId();
     // Draft news Data
-    this.userService.draftNews.subscribe(result=>{
+    this.userService.getDraftNewsByEditorId(); // first time service call on page load
+    this.userService.draftNews$.subscribe(result=>{
         this.editorNewsPost = result;
     });
 
     // Published News Data
-    this.userService.getPublisherNewById().subscribe((result:any)=>{
+    this.userService.getPublisherNewById();  // first time service call on page load
+    this.userService.publishedNews$.subscribe((result:any)=>{
       result.map(item=>{
         if(item.status == "A"){
           this.approvedNewsPost.push(item);
@@ -74,5 +75,8 @@ export class EditorComponent implements OnInit {
     }
   }
 
+  trackFun(index,value){
+    return value.id;
+  }
 
 }
