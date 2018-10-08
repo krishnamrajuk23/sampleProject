@@ -54,9 +54,7 @@ export class HeaderComponent implements OnInit {
   @ViewChild('authenticatePopUp') modalTemplate:TemplateRef<any>;
 
   public ngAfterViewInit(): void {
-    if(!this.userInformation.name){
       this.authenticate_loop();
-    }
   }
 
 
