@@ -5,6 +5,8 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
@@ -19,6 +21,8 @@ import { FooterComponent } from "./footer/footer.component";
 import { AddLocationComponent } from './admin/add-location/add-location.component';
 import { UploadImageComponent } from './editor/upload-image/upload-image.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
+import { LoaderComponent } from './loader/loader.component';
+import { LoaderInterceptorService } from './shared/services/loader-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,8 @@ import { EditPostComponent } from './edit-post/edit-post.component';
     FooterComponent,
     AddLocationComponent,
     UploadImageComponent,
-    EditPostComponent
+    EditPostComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,13 @@ import { EditPostComponent } from './edit-post/edit-post.component';
     NgxCaptchaModule,
     ImageCropperModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

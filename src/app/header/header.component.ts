@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit {
   private authenticate_loop() {
     setTimeout (() => {
       this.modalService.open(this.modalTemplate, { centered: true });
-    }, 3000)
+    }, 30000)
   }
 
   goToRegister(content,alertmodal){
