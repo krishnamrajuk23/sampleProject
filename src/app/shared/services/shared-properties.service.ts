@@ -9,7 +9,7 @@ import {NewsModal} from '../modal/news.modal';
 export class SharedPropertiesService {
   loginResponseResult: LoginDataModal;
   loginStatusResponse =  new Subject<LoginDataModal>();
-  editPostNews = new Subject<NewsModal>();
+  editPostNews : NewsModal;
   constructor() {
     if(sessionStorage.getItem('loginResult')){
       this.loginResponseResult = JSON.parse(sessionStorage.getItem('loginResult'));
@@ -23,6 +23,6 @@ export class SharedPropertiesService {
   }
 
   setEditPostNews(news){
-    this.editPostNews.next(news);
+    this.editPostNews = news;
   }
 }

@@ -25,6 +25,10 @@ export class UserService {
   updateDraftNews(data) {
     this.http.put(HOST_URL + "user/draft-news", data).subscribe(response=>{
       this.getDraftNewsByEditorId();
+    },(error)=>{
+      console.log("updated draft news",error);
+      this.getDraftNewsByEditorId();
+      this.getPublisherNewById();
     });
   }
 
@@ -46,6 +50,10 @@ export class UserService {
     }
 
     this.http.post(HOST_URL + "user/publish-news", formData, {headers:headers}).subscribe(response=>{
+      this.getDraftNewsByEditorId();
+      this.getPublisherNewById();
+    },(error)=>{
+      console.log("publish news",error);
       this.getDraftNewsByEditorId();
       this.getPublisherNewById();
     });

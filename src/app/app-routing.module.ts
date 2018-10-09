@@ -8,16 +8,19 @@ import {EditorComponent} from "./editor/editor.component";
 import {AddPostComponent} from "./editor/add-post/add-post.component";
 import {AdminComponent} from "./admin/admin.component";
 import {AddLocationComponent} from "./admin/add-location/add-location.component";
+import {EditPostComponent} from './edit-post/edit-post.component';
+import {AuthGuardService} from './shared/services/auth-guard.service';
+import {EditorGuardService} from './shared/routeGuards/editor-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'editor', component: EditorComponent },
-  { path: 'addPost', component: AddPostComponent },
-  { path: 'editPost', component: AddPostComponent},
-  { path: 'admin', component: AdminComponent },
-  { path: 'addLocation', component: AddLocationComponent },
+  { path: 'editor', component: EditorComponent,canActivate:[EditorGuardService] },
+  { path: 'addPost', component: AddPostComponent,canActivate:[EditorGuardService,AuthGuardService] },
+  { path: 'editPost', component: EditPostComponent,canActivate:[EditorGuardService,AuthGuardService]},
+  { path: 'admin', component: AdminComponent, canActivate:[AuthGuardService]},
+  { path: 'addLocation', component: AddLocationComponent, canActivate:[AuthGuardService] },
 ];
 
 @NgModule({
