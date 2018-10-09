@@ -17,8 +17,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'editor', component: EditorComponent,canActivate:[EditorGuardService] },
-  { path: 'addPost', component: AddPostComponent,canActivate:[EditorGuardService,AuthGuardService] },
-  { path: 'editPost', component: EditPostComponent,canActivate:[EditorGuardService,AuthGuardService]},
+  { path: 'addPost', component: AddPostComponent },
+  { path: 'editPost', component: EditPostComponent},
   { path: 'admin', component: AdminComponent, canActivate:[AuthGuardService]},
   { path: 'addLocation', component: AddLocationComponent, canActivate:[AuthGuardService] },
 ];
