@@ -34,7 +34,7 @@
 
     <div class="navarea">
       <nav class="navbar navbar-toggleable-sm">
-        <a class="navbar-brand d-none d-xs-block" href="/">Local News</a>
+        <a class="navbar-brand d-none d-xs-block" href="/">Near News</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation" (click)="showMenu =! showMenu">
@@ -44,13 +44,15 @@
              id="navbarSupportedContent">
           <ul class="navbar-nav col-md-12 justify-content-center">
             <li class="nav-item hand">
-              <a *ngIf="userInformation?.name" (click)="dashboardRedirect(userInformation)" class="nav-link">Dashboard</a>
+              <a *ngIf="userInformation?.name"
+                 [ngClass]="{'active-link':dashboard}"
+                 (click)="dashboardRedirect(userInformation)" class="nav-link">Dashboard</a>
             </li>
             <li class="nav-item hand">
-              <a routerLink="/home" (click)="showMenu =! showMenu" class="nav-link">Home</a>
+              <a routerLink="/home" routerLinkActive="active-link" (click)="showMenu =! showMenu" class="nav-link">Home</a>
             </li>
             <li class="nav-item hand">
-              <a routerLink="/about" (click)="showMenu =! showMenu" class="nav-link">About</a>
+              <a routerLink="/about" routerLinkActive="active-link" (click)="showMenu =! showMenu" class="nav-link">About</a>
             </li>
           </ul>
         </div>

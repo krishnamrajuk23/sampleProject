@@ -1,20 +1,3 @@
-.news-card {
-  min-height: 350px; }
-  .news-card .card-title {
-    font-size: 1.25rem;
-    line-height: 1.25;
-    font-weight: 700;
-    color: rgba(0, 0, 0, 0.8); }
-  .news-card .news-content {
-    color: #888;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    font-weight: 400; }
-  .news-card .card-footer {
-    font-size: 13px; }
-    .news-card .card-footer .author-meta {
-      white-space: nowrap !important;
-      text-overflow: ellipsis !important;
-      overflow: hidden !important; }
+
 
 /*# sourceMappingURL=home.component.css.map */

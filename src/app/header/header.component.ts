@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
   siteKey = '6Ldd13AUAAAAACSxjaIFUPhhHCRi1vBDeep0b3EG';
   recaptcha:string;
   userInformation : LoginDataModal;
+  dashboard = false;
 
   constructor(
     private modalService: NgbModal,
@@ -49,7 +50,9 @@ export class HeaderComponent implements OnInit {
     this.sharedProperties.loginStatusResponse.subscribe(result => {
       this.userInformation = result;
     });
-
+    if(this.router.url === "/editor" || this.router.url === "/admin"){
+      this.dashboard = true;
+    }
   }
   @ViewChild('authenticatePopUp') modalTemplate:TemplateRef<any>;
 
@@ -93,7 +96,6 @@ export class HeaderComponent implements OnInit {
     modal.close();
     this.loginService.loginStatus(loginForm.value).subscribe(response=>{
       this.sharedProperties.setLoginStatus(response);
-
     });
 
   }
@@ -138,6 +140,7 @@ export class HeaderComponent implements OnInit {
 
   dashboardRedirect(response){
     (!response.approver) ? this.router.navigate(["editor"]): this.router.navigate(['admin']);
+
   }
 
   logout(){
