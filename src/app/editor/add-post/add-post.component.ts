@@ -17,6 +17,8 @@ export class AddPostComponent implements OnInit {
   uploadImage:boolean = false;
   publishData:any;
   locationsData:any;
+  selectLocation:any ={};
+  url:any;
 
   constructor(
     private fb: FormBuilder,
@@ -80,6 +82,10 @@ export class AddPostComponent implements OnInit {
       this.userService.postToPublisher({newsText},null);
     }
     this.router.navigate(['editor']);
+  }
+
+  fileChangeEvent(event){
+    this.url = this.util.showImagePreview(event);
   }
 
 }

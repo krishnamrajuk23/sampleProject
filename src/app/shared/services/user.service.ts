@@ -19,6 +19,8 @@ export class UserService {
     this.http.post(HOST_URL + "user/draft-news", data).subscribe(response=>{
       console.log("drafts",response);
       this.getDraftNewsByEditorId();
+    },(error)=>{
+      this.getDraftNewsByEditorId();
     });
   }
 
@@ -35,7 +37,7 @@ export class UserService {
   getDraftNewsByEditorId() {
     this.http.get(HOST_URL + "user/draft-news/" + this.userObject.userId).subscribe(response=>{
       this.draftNews$.next(response);
-    });
+    })
   }
 
   postToPublisher(data,file) {

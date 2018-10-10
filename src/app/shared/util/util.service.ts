@@ -18,5 +18,19 @@ export class UtilService{
     return new File([u8arr], this.fileData.name, {type:mime});
   }
 
+  showImagePreview(event:any){
+      let url:any;
+      if (event.target.files && event.target.files[0]) {
+        let reader = new FileReader();
+
+        reader.onload = (event: ProgressEvent) => {
+          url = (<FileReader>event.target).result;
+        };
+
+        reader.readAsDataURL(event.target.files[0]);
+      }
+      return url;
+  }
+
 
 }
