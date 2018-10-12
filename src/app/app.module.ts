@@ -27,6 +27,8 @@ import { MultiselectComponent } from './core/multiselect/multiselect.component';
 import { LoaderInterceptorService } from './shared/services/loader-interceptor.service';
 import {AppInterceptor} from "./app.interceptor";
 import { AlertComponent } from './shared/components/alert/alert.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,8 @@ import { AlertComponent } from './shared/components/alert/alert.component';
     HttpClientModule,
     NgxCaptchaModule,
     ImageCropperModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     {
