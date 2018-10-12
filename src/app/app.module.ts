@@ -25,6 +25,8 @@ import { EditPostComponent } from './edit-post/edit-post.component';
 import { LoaderComponent } from './loader/loader.component';
 import { MultiselectComponent } from './core/multiselect/multiselect.component';
 import { LoaderInterceptorService } from './shared/services/loader-interceptor.service';
+import {AppInterceptor} from "./app.interceptor";
+import { AlertComponent } from './shared/components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { LoaderInterceptorService } from './shared/services/loader-interceptor.s
     UploadImageComponent,
     EditPostComponent,
     LoaderComponent,
-    MultiselectComponent
+    MultiselectComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,11 @@ import { LoaderInterceptorService } from './shared/services/loader-interceptor.s
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppInterceptor,
       multi: true
     }
   ],

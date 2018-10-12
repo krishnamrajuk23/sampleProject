@@ -58,4 +58,7 @@ export class AdminComponent implements OnInit {
     this.selectedPost = data;
     this.modalService.open(showModal, { centered: true });
   }
+  trackByFunc(index,value){
+    return value.id;
+  }
 }

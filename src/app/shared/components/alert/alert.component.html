@@ -1,0 +1,9 @@
+
+<div class="alert alert-style"
+     [ngClass]="{'alert-success':alert.status === 200, 'alert-danger':alert.status != 200}"
+     role="alert" *ngIf="alert.show">
+  <strong>Holy guacamole!</strong>{{alert.message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

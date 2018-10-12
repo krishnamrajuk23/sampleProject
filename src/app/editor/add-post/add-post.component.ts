@@ -43,9 +43,8 @@ export class AddPostComponent implements OnInit {
     this.editorForm = this.fb.group({
       title: [''],
       description: [''],
-      location: [''],
       newsDate: [''],
-      refLink: ['']
+      imageUpload:['']
     });
   }
 

@@ -51,7 +51,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let data of approvedPost; let i of index">
+                  <tr *ngFor="let data of approvedPost; let i of index; trackBy: trackByFunc">
                     <td>{{data.publishedBy}}</td>
                     <td>{{data.newsDate}}</td>
                     <td>{{data.title}}</td>
