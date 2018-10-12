@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "assets/scss/main";
 
+.p-l-3{
+  padding-left: 3rem !important;
+}
+
 .main-section {
   min-height: 60vh;
   padding-top: 43px;
@@ -47,3 +51,4 @@ ul[role="tablist"] {
   word-break: break-word;
   color: #000000;
 }
+

@@ -45,8 +45,9 @@ export class AdminComponent implements OnInit {
     this.adminService.updateAdminReviewNews(data);
     modal.close();
   }
-  declinePost(confirmDecline){
+  declinePost(data,confirmDecline,modal){
     this.modalService.open(confirmDecline, { centered: true });
+    modal.close();
   }
   declineConfirm(modal,data){
     data.status = "R";

@@ -44,7 +44,7 @@ export class UserService {
     const headers = new HttpHeaders();
 
     const formData = new FormData();
-    formData.append('newsDetails', new Blob([JSON.stringify({...data.newsText})], {
+    formData.append('newsDetails', new Blob([JSON.stringify({...data})], {
       type: "application/json"
     }));
     if(file){

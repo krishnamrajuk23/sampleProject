@@ -19,17 +19,16 @@ export class UtilService{
   }
 
   showImagePreview(event:any){
-      let url:any;
+      let url:any = "";
       if (event.target.files && event.target.files[0]) {
+        this.setFileData(event.target.files[0]);
         let reader = new FileReader();
-
+        reader.readAsDataURL(event.target.files[0]);
         reader.onload = (event: ProgressEvent) => {
           url = (<FileReader>event.target).result;
         };
-
-        reader.readAsDataURL(event.target.files[0]);
+        return url;
       }
-      return url;
   }
 
 

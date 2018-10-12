@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from '../../shared/services/user.service';
 import {SharedPropertiesService} from '../../shared/services/shared-properties.service';
@@ -17,7 +17,7 @@ export class AddPostComponent implements OnInit {
   uploadImage:boolean = false;
   publishData:any;
   locationsData:any;
-  selectLocation:any ={};
+  selectLocation:any;
   url:any;
 
   constructor(
@@ -41,19 +41,17 @@ export class AddPostComponent implements OnInit {
 
   editorFormDetails() {
     this.editorForm = this.fb.group({
-      title: [''],
-      description: [''],
-      newsDate: [''],
-      imageUpload:['']
+      title: ['',Validators.required],
+      description: ['',Validators.required],
+      newsDate: ['',Validators.required]
     });
   }
 
 
   addSavePost(data){
     let newsText:any = {...data.value};
-
     newsText.editorId = this.sharedProperties.loginResponseResult.userId;
-    newsText.location = [data.value.location.id];
+    newsText.location = this.selectLocation ? [this.selectLocation.id] : null;
 
     this.userService.addToDraftNews({...newsText});
     this.router.navigate(['editor']);
@@ -61,30 +59,30 @@ export class AddPostComponent implements OnInit {
   }
 
   addPost(data){
-    this.publishData = {...data.value};
-    this.uploadImage = true;
-  }
+    if(data.valid){
+      this.publishData = {...data.value};
 
-  updatedImageData(event){
-    this.uploadImage = event.hide;
-    const newsText:any = {...this.publishData};
-
-    newsText.editorId = this.sharedProperties.loginResponseResult.userId;
-    newsText.location = [newsText.location.id];
-
-    if(event.fileUpload){
-      let fileObject:any;
-       this.util.setFileData(event.fileUpload.target.files[0]);
-      fileObject = this.util.dataURLtoFile(event.cropped);
-      this.userService.postToPublisher({newsText},fileObject);
-    }else{
-      this.userService.postToPublisher({newsText},null);
+      this.publishData.editorId = this.sharedProperties.loginResponseResult.userId;
+      this.publishData.location = [this.selectLocation.id];
+      if(this.url){
+        const fileObject = this.util.dataURLtoFile(this.url);
+        this.userService.postToPublisher({...this.publishData},fileObject);
+      }else{
+        this.userService.postToPublisher({...this.publishData},null);
+      }
+      this.router.navigate(['editor']);
     }
-    this.router.navigate(['editor']);
   }
 
   fileChangeEvent(event){
-    this.url = this.util.showImagePreview(event);
+    if (event.target.files && event.target.files[0]) {
+      this.util.setFileData(event.target.files[0]);
+      let reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: ProgressEvent) => {
+        this.url = (<FileReader>event.target).result;
+      };
+    }
   }
 
 }

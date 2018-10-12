@@ -129,7 +129,7 @@
     <div class="modal-footer">
       <button type="button" class="btn btn-info" (click)="editpost(modal)">Edit</button>
       <button type="button" class="btn btn-success" (click)="approvePost(selectedPost,modal)">Approve</button>
-      <button type="button" class="btn btn-danger" (click)="declinePost(confirmDecline)">Decline</button>
+      <button type="button" class="btn btn-danger" (click)="declinePost(selectedPost,confirmDecline,modal)">Decline</button>
     </div>
   </ng-template>
   <ng-template #confirmDecline let-modal>
@@ -150,7 +150,7 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="declineConfirm(modal,'data')">confirm</button>
+      <button type="button" class="btn btn-outline-dark" (click)="declineConfirm(modal,selectedPost)">confirm</button>
     </div>
   </ng-template>
 </div>
