@@ -66,4 +66,13 @@ export class UserService {
       this.publishedNews$.next(response);
     });
   }
+
+  deleteDraftNewById(id){
+    this.http.delete(HOST_URL+'user/draft-news/'+id).subscribe(response=>{
+      this.getDraftNewsByEditorId();
+    },(error)=>{
+      console.log("publish news",error);
+      this.getDraftNewsByEditorId();
+    });
+  }
 }

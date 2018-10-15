@@ -75,6 +75,10 @@ export class EditorComponent implements OnInit {
     }
   }
 
+  deleteDraftNews(id){
+    this.userService.deleteDraftNewById(id);
+  }
+
   trackFun(index,value){
     return value.id;
   }
