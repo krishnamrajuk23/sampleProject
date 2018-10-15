@@ -3,9 +3,5 @@ input{
   min-width: 250px;
   padding: 0.3rem 0.6rem;
 }
-@media (min-width: 320px) and (max-width: 480px) {
-  input{
-    min-width: auto;
-  }
-}
+
 
