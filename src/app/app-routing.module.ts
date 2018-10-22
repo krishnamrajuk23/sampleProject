@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'addPost', component: AddPostComponent },
   { path: 'editPost', component: EditPostComponent},
   { path: 'admin', component: AdminComponent, canActivate:[AuthGuardService]},
-  { path: 'addLocation', component: AddLocationComponent, canActivate:[AuthGuardService] },
+  { path: 'addLocation', component: AddLocationComponent, /*canActivate:[AuthGuardService]*/ },
 ];
 
 @NgModule({

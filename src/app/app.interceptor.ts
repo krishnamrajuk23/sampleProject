@@ -29,7 +29,7 @@ export class AppInterceptor implements HttpInterceptor{
   private success(event){
     if(event.status === 200){
        this.alertService.showAlert({
-         message: event.error ? event.error.text : event,
+         message: event.error ? "successful submitted" : "successful submitted",
          status:200,
          type:'success'
        });

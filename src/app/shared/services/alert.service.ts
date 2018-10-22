@@ -11,18 +11,19 @@ export class AlertService {
   }
 
   showAlert(status){
+    console.log(status);
     this.alertState.next({show: true,...status});
-    this.autoClose();
+    //this.autoClose();
   }
   hideAlert(status){
     this.alertState.next({show: false,...status});
-    this.autoClose();
+   // this.autoClose();
   }
 
   autoClose(){
-    setTimeout(()=>{
+    /*setTimeout(()=>{
       this.alertState.next({show:false})
-    },10000);
+    },100000);*/
   }
 
 }

@@ -14,7 +14,8 @@ export class AdminService {
   newsData =  new Subject<any>();
 
   getAdminReviewNews() {
-    return this.http.get(HOST_URL + ADMIN_URL).subscribe(response =>{
+
+    return this.http.get(HOST_URL + ADMIN_URL+"&access_token" ).subscribe(response =>{
       this.newsData.next(response);
     });
   }

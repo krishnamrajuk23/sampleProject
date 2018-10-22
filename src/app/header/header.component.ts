@@ -94,10 +94,8 @@ export class HeaderComponent implements OnInit {
       return;
     }
     modal.close();
-    this.loginService.authToken(this.loginForm.value);
-   /* this.loginService.loginStatus(loginForm.value).subscribe(response=>{
-      this.sharedProperties.setLoginStatus(response);
-    });*/
+   /* this.loginService.authToken(this.loginForm.value);*/
+   this.loginService.loginStatus(loginForm.value);
 
   }
 

@@ -6,6 +6,8 @@ import {SharedPropertiesService} from '../../shared/services/shared-properties.s
 import {UtilService} from '../../shared/util/util.service';
 import {LocationsService} from '../../shared/services/locations.service';
 
+declare let google: any;
+
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
@@ -30,6 +32,14 @@ export class AddPostComponent implements OnInit {
     private locations:LocationsService) { }
 
   ngOnInit() {
+
+    // Load the Google Transliterate API
+    google.load("elements", "1", {
+      packages: "transliteration"
+    });
+
+
+
     this.route.params.subscribe((param)=>{
       console.log("active route",param)
     });
@@ -84,5 +94,33 @@ export class AddPostComponent implements OnInit {
       };
     }
   }
+
+  changelanguage(lan,language) {
+    console.log("language",language);
+    var langOptions = document.getElementById("prefLanguage").options;
+    lan = langOptions[lan.target.selectedIndex].text;
+
+    var options = {
+      sourceLanguage:
+      google.elements.transliteration.LanguageCode.ENGLISH,
+      destinationLanguage:
+        [google.elements.transliteration.LanguageCode[lan.toUpperCase()]],
+      shortcutKey: 'ctrl+g',
+      transliterationEnabled: true
+    };
+
+    // Create an instance on TransliterationControl with the required
+    // options.
+    var control =
+      new google.elements.transliteration.TransliterationControl(options);
+
+    // Enable transliteration in the textbox with id
+    // 'transliterateTextarea'.
+    control.makeTransliteratable(['transliterateTextarea']);
+    control.makeTransliteratable(['title']);
+
+  }
+
+
 
 }
