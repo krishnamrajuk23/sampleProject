@@ -11,7 +11,7 @@
           [settings]="dropdownSettings"
           (onSelect)="onItemSelect($event)"
           (onSelectAll)="onSelectAll($event)"
-        (onDeSelect)="onDeSelectItem($event)">
+          (onDeSelect)="onDeSelectItem($event)">
         </ng-multiselect-dropdown>
 
         <!--<app-multiselect *ngIf="locations"
@@ -28,7 +28,7 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card-columns">
-        <div class="card news-card" *ngFor="let news of newsData">
+        <div class="card news-card shadow rounded" *ngFor="let news of newsData">
           <img class="card-img-left card-image"
                *ngIf="news.imageChunks.length > 0"
                [src]="'data:image/jpeg;base64,'+news.imageChunks[0].data.data" alt="News image"/>

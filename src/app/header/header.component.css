@@ -10,27 +10,10 @@
   color: rgba(0, 0, 0, 0.9) !important; }
 
 header.navbar-light {
-  background: rgba(255, 255, 255, 0.97);
+  background: #eef8f4;
   box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.15);
   padding: 10px;
   transition: top 0.2s ease-in-out;
   color: rgba(0, 0, 0, 0.5); }
-
-@media (min-width: 320px) and (max-width: 480px) {
-  .brandrow {
-    position: relative; }
-    .brandrow .customarea, .brandrow .loginArea {
-      position: absolute;
-      top: 10px;
-      width: 50%; }
-    .brandrow .customarea {
-      left: 0; }
-    .brandrow .loginArea {
-      right: 0; }
-    .brandrow .logoarea {
-      display: none; }
-
-  .navarea {
-    margin-top: 50px; } }
 
 /*# sourceMappingURL=header.component.css.map */

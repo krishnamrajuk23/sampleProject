@@ -12,7 +12,7 @@
   width: 100%;
   position: relative;
   overflow: hidden;
-  background-color: #FFF; }
+  background-color: transparent; }
 
 .loader:before {
   display: block;
@@ -21,7 +21,7 @@
   left: -200px;
   width: 200px;
   height: 4px;
-  background-color: red;
+  background-color: #02b875;
   animation: loading 2s linear infinite; }
 
 @keyframes loading {
