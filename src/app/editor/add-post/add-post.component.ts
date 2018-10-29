@@ -21,6 +21,7 @@ export class AddPostComponent implements OnInit {
   locationsData:any;
   selectLocation:any;
   url:any;
+  selectedLanguage:any;
 
   constructor(
     private fb: FormBuilder,
@@ -95,10 +96,8 @@ export class AddPostComponent implements OnInit {
     }
   }
 
-  changelanguage(lan,language) {
-    console.log("language",language);
-    var langOptions = document.getElementById("prefLanguage").options;
-    lan = langOptions[lan.target.selectedIndex].text;
+  changelanguage(lan) {
+    lan = lan.currentTarget[lan.target.selectedIndex].text;
 
     var options = {
       sourceLanguage:
@@ -117,7 +116,7 @@ export class AddPostComponent implements OnInit {
     // Enable transliteration in the textbox with id
     // 'transliterateTextarea'.
     control.makeTransliteratable(['transliterateTextarea']);
-    control.makeTransliteratable(['title']);
+    //control.makeTransliteratable(['title']);
 
   }
 

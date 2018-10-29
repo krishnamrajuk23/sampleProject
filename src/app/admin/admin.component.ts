@@ -15,7 +15,12 @@ export class AdminComponent implements OnInit {
   rejectPost = [];
   page = 1;
   selectedPost;
-
+  submittedPosts = [];
+  adminList = [
+    {desc: "Pending", id:1},
+    {desc: "Approved",id:2},
+    {desc: "Rejected",id:3}];
+  selectedAdminList = this.adminList[0];
   constructor(
     private adminService:AdminService,
     private modalService: NgbModal,
@@ -58,6 +63,11 @@ export class AdminComponent implements OnInit {
   viewPost(showModal,data){
     this.selectedPost = data;
     this.modalService.open(showModal, { centered: true });
+  }
+
+  selectedList(list){
+    console.log(list);
+    this.submittedPosts = (list.desc === 'Approved') ? this.approvedPost : this.rejectPost;
   }
   trackByFunc(index,value){
     return value.id;

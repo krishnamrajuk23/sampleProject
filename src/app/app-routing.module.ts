@@ -16,10 +16,10 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'editor', component: EditorComponent,canActivate:[EditorGuardService] },
+  { path: 'editor', component: EditorComponent,/*canActivate:[EditorGuardService]*/ },
   { path: 'addPost', component: AddPostComponent },
   { path: 'editPost', component: EditPostComponent},
-  { path: 'admin', component: AdminComponent, canActivate:[AuthGuardService]},
+  { path: 'admin', component: AdminComponent,/* canActivate:[AuthGuardService]*/},
   { path: 'addLocation', component: AddLocationComponent, /*canActivate:[AuthGuardService]*/ },
 ];
 

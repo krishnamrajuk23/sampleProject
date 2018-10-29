@@ -8,18 +8,19 @@
         <option *ngFor="let loc of locationsData" [ngValue]="loc">{{ loc.location }}</option>
       </select>
     </div>
-    <select id="prefLanguage" (change)="changelanguage($event,language)" #language>
-      <option value="en" DISABLED>SELECT</option>
-      <option value="te">Telugu</option>
-      <option value="hi">Hindi</option>
-      <option value="en">English</option>
-    </select>
+
   </div>
 
   <div class="card">
     <div class="row">
       <div class="col">
         <form [formGroup]="editorForm"  class="p-5">
+          <select id="prefLanguage" (change)="changelanguage($event)" [(ngModel)]="selectedLanguage">
+            <option value="en" DISABLED>SELECT</option>
+            <option value="te">Telugu</option>
+            <option value="hi">Hindi</option>
+            <option value="en">English</option>
+          </select>
           <div class="form-group row">
             <label for="title" class="col-sm-2 col-form-label">Story Title</label>
             <div class="col-sm-10">

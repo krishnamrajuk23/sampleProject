@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../shared/services/user.service";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {SharedPropertiesService} from '../shared/services/shared-properties.service';
+import { } from '@types/googlemaps';
+
+declare let google: any;
 
 @Component({
   selector: 'app-editor',
@@ -17,6 +20,17 @@ export class EditorComponent implements OnInit {
   pendingNewsPost:any = [];
   uploadImage:boolean = false;
   publishData : any;
+
+  editorList = [
+    {desc: "Draft", id:1},
+    {desc: "Pending",id:2},
+    {desc: "Approved",id:3},
+    {desc: "Rejected",id:4}];
+
+  // google map template reference
+  @ViewChild('gmap') gmapElement: any;
+  map: any; // google map api object
+
   constructor(
     private router:Router,
     private userService: UserService,
@@ -45,6 +59,26 @@ export class EditorComponent implements OnInit {
         }
       });
     });
+
+    // google current location tracking
+    navigator.geolocation.getCurrentPosition(position => {
+      this.showTrackingPosition(position);
+    });
+
+
+  }
+
+  // google current location tracking position
+  showTrackingPosition(position){
+    let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    this.map.panTo(location);
+
+    let mapProp = {
+      center: location,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
   }
 
   addPost(){
