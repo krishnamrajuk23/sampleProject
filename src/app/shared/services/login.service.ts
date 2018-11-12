@@ -36,4 +36,8 @@ export class LoginService {
         this.sharedService.setAccessToken(response.access_token);
     });
   }
+
+  getUserAuthDetails(token){
+      return this.http.get(HOST_URL + "user/user-details?access_token=",token);
+  }
 }

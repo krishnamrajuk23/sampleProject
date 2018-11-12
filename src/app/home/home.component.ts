@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   ShowFilter = false;
   selectedItems: Array<any> = [];
   dropdownSettings: any = {};
+  localurl = location.href;
   constructor(
     private modalService: NgbModal,
     private newsService:NewsService,
@@ -64,6 +65,13 @@ export class HomeComponent implements OnInit {
     });
     this.filterByLocationData(this.selectedItems.join());
   }
+
+  // Share data on whatsapp
+  getLinkWhatsapp(number, message) {
+    message = message.split(' ').join('%20');
+    window.open('https://api.whatsapp.com/send?phone=' + '' + '&text=%20' + message,'_blank');
+  }
+
 
   trackByFn(index, loc) {
     return loc.id;
