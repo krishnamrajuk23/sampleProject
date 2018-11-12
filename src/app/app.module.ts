@@ -29,6 +29,9 @@ import {AppInterceptor} from "./app.interceptor";
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { TwitterShareComponent } from './shared/components/twitter-share/twitter-share.component';
+import { SearchComponent } from './admin/search/search.component';
+import { SinglePostViewComponent } from './single-post-view/single-post-view.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { environment } from '../environments/environment';
     EditPostComponent,
     LoaderComponent,
     MultiselectComponent,
-    AlertComponent
+    AlertComponent,
+    TwitterShareComponent,
+    SearchComponent,
+    SinglePostViewComponent
   ],
   imports: [
     BrowserModule,

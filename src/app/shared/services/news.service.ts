@@ -11,6 +11,9 @@ export class NewsService {
   getLocalNews() {
     return this.http.get(HOST_URL + "public/news");
   }
+  getLocalNewsById(id) {
+    return this.http.get(HOST_URL + "public/news?newsId="+id);
+  }
 
   getLocalNewsByLocation(locations){
     return this.http.get(HOST_URL + "public/news?locations="+locations);

@@ -34,7 +34,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/assets/libs/googleTranslator-jsapi.js"
+
             ]
           },
           "configurations": {

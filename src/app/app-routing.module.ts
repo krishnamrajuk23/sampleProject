@@ -11,10 +11,12 @@ import {AddLocationComponent} from "./admin/add-location/add-location.component"
 import {EditPostComponent} from './edit-post/edit-post.component';
 import {AuthGuardService} from './shared/services/auth-guard.service';
 import {EditorGuardService} from './shared/routeGuards/editor-guard.service';
+import {SinglePostViewComponent} from './single-post-view/single-post-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'home/:id', component: SinglePostViewComponent},
   { path: 'about', component: AboutComponent },
   { path: 'editor', component: EditorComponent,/*canActivate:[EditorGuardService]*/ },
   { path: 'addPost', component: AddPostComponent },
