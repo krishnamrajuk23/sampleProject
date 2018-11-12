@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="col">
+    <input type="search" (change)="searchChannel()" placeholder="Search" name="search">
+    <ul>
+      <li *ngFor="let list of listSearch"></li>
+    </ul>
+  </div>
+</div>
