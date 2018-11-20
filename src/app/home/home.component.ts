@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NewsService} from '../shared/services/news.service';
 import {LocationsService} from '../shared/services/locations.service';
+import {GooglePlaceDirective} from 'ngx-google-places-autocomplete';
+
+declare var google:any;
 
 @Component({
   selector: 'app-home',
@@ -10,15 +13,20 @@ import {LocationsService} from '../shared/services/locations.service';
 })
 export class HomeComponent implements OnInit {
   newsData:any;
-  locations:any;
+  locations:any = [];
   ShowFilter = false;
   selectedItems: Array<any> = [];
   dropdownSettings: any = {};
   localurl = location.href;
+  address:any;
+
+  @ViewChild('places') places: GooglePlaceDirective;
+  @ViewChild('search' ) public searchElement: ElementRef;
+
   constructor(
     private modalService: NgbModal,
     private newsService:NewsService,
-    private locationService: LocationsService) { }
+    private locationService: LocationsService,) { }
 
   ngOnInit() {
     this.newsService.getLocalNews().subscribe(result => {
@@ -76,4 +84,12 @@ export class HomeComponent implements OnInit {
   trackByFn(index, loc) {
     return loc.id;
   }
+
+
+  public handleAddressChange(address) {
+    console.log(address.geometry.location.toJSON());
+    /*this.lng = address.geometry.location.lng();
+    this.lat  = address.geometry.location.lat();*/
+  }
+
 }

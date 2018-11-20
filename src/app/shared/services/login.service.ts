@@ -15,7 +15,7 @@ export class LoginService {
     if(this.sharedService.accessToken$){
       this.sharedService.accessToken$.subscribe(result=>{
         if(typeof (result) === 'string' && result){
-          return this.http.post<LoginDataModal>(HOST_URL + "user/user-details?access_token=", result).subscribe(response=>{
+          return this.http.get<LoginDataModal>(HOST_URL + "user/user-details?access_token="+result).subscribe(response=>{
             this.sharedService.setLoginStatus(response);
           });
         }

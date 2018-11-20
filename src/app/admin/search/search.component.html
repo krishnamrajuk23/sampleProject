@@ -1,8 +1,31 @@
-<div class="row">
-  <div class="col">
-    <input type="search" (change)="searchChannel()" placeholder="Search" name="search">
-    <ul>
-      <li *ngFor="let list of listSearch"></li>
-    </ul>
+<div class="container main-section">
+  <div class="row">
+    <div class="col">
+      <input type="search" [(ngModel)]="search" (change)="searchUsers(search)" placeholder="Name/Phone No" name="search" (mouseup)="showSerach = true" (mouseleave)="showSerach = false">
+      <ul class="list-group-item" *ngIf="showSerach">
+        <li class="" *ngFor="let list of listArray;trackBy: trackByFunc">{{list.name}}</li>
+      </ul>
+    </div>
   </div>
+  <table class="table table-striped">
+    <thead>
+      <th>Name</th>
+      <th>Phone Number</th>
+      <th>Email</th>
+      <th>User Type</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of listArray;trackBy: trackByFunc">
+        <td>{{list.name}}</td>
+        <td>{{list.phno}}</td>
+        <td>{{list.email}}</td>
+        <td>
+         <label class="switch">
+          <input type="checkbox" [(ngModel)]="toggleChecked" (change)="paidUser(list.paid)">
+          <span class="slider round"></span>
+         </label>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

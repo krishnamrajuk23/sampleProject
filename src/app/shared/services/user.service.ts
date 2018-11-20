@@ -11,31 +11,41 @@ export class UserService {
   draftNews$ = new Subject<any>();
   publishedNews$ = new Subject<any>();
   userObject:any;
+  userAuth: boolean;
   constructor(private http: HttpClient,private sharedProperties:SharedPropertiesService) {
     this.userObject = this.sharedProperties.loginResponseResult;
+    this.userAuth = this.userObject['roles'].indexOf('ROLE_USER') > -1 ? true : false;
+    this.sharedProperties.accessToken$.subscribe(result=>{
+      this.sharedProperties.tokenAuthKey = result
+    })
+
   }
 
   addToDraftNews(data) {
-    this.http.post(HOST_URL + "user/draft-news", data).subscribe(response=>{
-      console.log("drafts",response);
-      this.getDraftNewsByEditorId();
-    },(error)=>{
-      this.getDraftNewsByEditorId();
-    });
+    if(this.userAuth){
+      this.http.post(HOST_URL + "user/draft-news?access_token="+this.sharedProperties.tokenAuthKey, data).subscribe(response=>{
+        console.log("drafts",response);
+        this.getDraftNewsByEditorId();
+      },(error)=>{
+        this.getDraftNewsByEditorId();
+      });
+    }
   }
 
   updateDraftNews(data) {
-    this.http.put(HOST_URL + "user/draft-news", data).subscribe(response=>{
-      this.getDraftNewsByEditorId();
-    },(error)=>{
-      console.log("updated draft news",error);
-      this.getDraftNewsByEditorId();
-      this.getPublisherNewById();
-    });
+    if(this.userAuth) {
+      this.http.put(HOST_URL + "user/draft-news?access_token="+this.sharedProperties.tokenAuthKey, data).subscribe(response => {
+        this.getDraftNewsByEditorId();
+      }, (error) => {
+        console.log("updated draft news", error);
+        this.getDraftNewsByEditorId();
+        this.getPublisherNewById();
+      });
+    }
   }
 
   getDraftNewsByEditorId() {
-    this.http.get(HOST_URL + "user/draft-news/" + this.userObject.userId).subscribe(response=>{
+    this.http.get(HOST_URL + "user/draft-news/" + this.userObject.userId+"?access_token="+this.sharedProperties.tokenAuthKey).subscribe(response=>{
       this.draftNews$.next(response);
     })
   }
@@ -51,7 +61,7 @@ export class UserService {
       formData.append('newsImage',file);
     }
 
-    this.http.post(HOST_URL + "user/publish-news", formData, {headers:headers}).subscribe(response=>{
+    this.http.post(HOST_URL + "user/publish-news"+"?access_token="+this.sharedProperties.tokenAuthKey, formData, {headers:headers}).subscribe(response=>{
       this.getDraftNewsByEditorId();
       this.getPublisherNewById();
     },(error)=>{
@@ -62,13 +72,13 @@ export class UserService {
   }
 
   getPublisherNewById() {
-    this.http.get(HOST_URL + "user/publish-news/" + this.userObject.userId).subscribe(response=>{
+    this.http.get(HOST_URL + "user/publish-news/" + this.userObject.userId+"?access_token="+this.sharedProperties.tokenAuthKey).subscribe(response=>{
       this.publishedNews$.next(response);
     });
   }
 
   deleteDraftNewById(id){
-    this.http.delete(HOST_URL+'user/draft-news/'+id).subscribe(response=>{
+    this.http.delete(HOST_URL+'user/draft-news/'+id+"?access_token="+this.sharedProperties.tokenAuthKey).subscribe(response=>{
       this.getDraftNewsByEditorId();
     },(error)=>{
       console.log("publish news",error);

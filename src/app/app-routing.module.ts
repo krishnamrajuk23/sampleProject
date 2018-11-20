@@ -12,6 +12,7 @@ import {EditPostComponent} from './edit-post/edit-post.component';
 import {AuthGuardService} from './shared/services/auth-guard.service';
 import {EditorGuardService} from './shared/routeGuards/editor-guard.service';
 import {SinglePostViewComponent} from './single-post-view/single-post-view.component';
+import {SearchComponent} from './admin/search/search.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'editPost', component: EditPostComponent},
   { path: 'admin', component: AdminComponent,/* canActivate:[AuthGuardService]*/},
   { path: 'addLocation', component: AddLocationComponent, /*canActivate:[AuthGuardService]*/ },
+  { path: 'searchUsers', component: SearchComponent, /*canActivate:[AuthGuardService]*/ },
 ];
 
 @NgModule({

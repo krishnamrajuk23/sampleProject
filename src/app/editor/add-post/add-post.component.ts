@@ -54,7 +54,8 @@ export class AddPostComponent implements OnInit {
     this.editorForm = this.fb.group({
       title: ['',Validators.required],
       description: ['',Validators.required],
-      newsDate: ['',Validators.required]
+      newsDate: ['',Validators.required],
+      location:['',Validators.required]
     });
   }
 

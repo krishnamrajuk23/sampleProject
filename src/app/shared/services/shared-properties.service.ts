@@ -11,9 +11,15 @@ export class SharedPropertiesService {
   loginStatusResponse =  new Subject<LoginDataModal>();
   editPostNews : NewsModal;
   accessToken$ = new Subject<string>();
+  tokenAuthKey : string;
+
   constructor() {
     if(sessionStorage.getItem('loginResult')){
       this.loginResponseResult = JSON.parse(sessionStorage.getItem('loginResult'));
+    }
+    if(sessionStorage.getItem('token')){
+      this.tokenAuthKey = sessionStorage.getItem('token');
+      this.accessToken$.next(sessionStorage.getItem('token'));
     }
   }
 
@@ -29,6 +35,7 @@ export class SharedPropertiesService {
 
   setAccessToken(token){
     this.accessToken$.next(token);
+    sessionStorage.setItem('token',token);
   }
 
 }

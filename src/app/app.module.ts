@@ -32,6 +32,11 @@ import { environment } from '../environments/environment';
 import { TwitterShareComponent } from './shared/components/twitter-share/twitter-share.component';
 import { SearchComponent } from './admin/search/search.component';
 import { SinglePostViewComponent } from './single-post-view/single-post-view.component';
+import { GooglePlacesDirective } from './shared/directives/google-places.directive';
+
+
+
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 @NgModule({
   declarations: [
@@ -52,7 +57,8 @@ import { SinglePostViewComponent } from './single-post-view/single-post-view.com
     AlertComponent,
     TwitterShareComponent,
     SearchComponent,
-    SinglePostViewComponent
+    SinglePostViewComponent,
+    GooglePlacesDirective
   ],
   imports: [
     BrowserModule,
@@ -64,7 +70,8 @@ import { SinglePostViewComponent } from './single-post-view/single-post-view.com
     NgxCaptchaModule,
     ImageCropperModule,
     NgMultiSelectDropDownModule.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    GooglePlaceModule
   ],
   providers: [
     {
