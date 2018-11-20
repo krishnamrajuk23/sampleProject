@@ -55,7 +55,7 @@ export class AddPostComponent implements OnInit {
       title: ['',Validators.required],
       description: ['',Validators.required],
       newsDate: ['',Validators.required],
-      location:['',Validators.required]
+
     });
   }
 
@@ -119,6 +119,12 @@ export class AddPostComponent implements OnInit {
     control.makeTransliteratable(['transliterateTextarea']);
     //control.makeTransliteratable(['title']);
 
+  }
+
+  public handleAddressChange(address) {
+    console.log(address.geometry.location.toJSON());
+    /*this.lng = address.geometry.location.lng();
+    this.lat  = address.geometry.location.lat();*/
   }
 
 

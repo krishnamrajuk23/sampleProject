@@ -17,7 +17,7 @@ export class UserService {
     this.userAuth = this.userObject['roles'].indexOf('ROLE_USER') > -1 ? true : false;
     this.sharedProperties.accessToken$.subscribe(result=>{
       this.sharedProperties.tokenAuthKey = result
-    })
+    });
 
   }
 

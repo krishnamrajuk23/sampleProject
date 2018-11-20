@@ -71,7 +71,7 @@ export class EditorComponent implements OnInit {
   // google current location tracking position
   showTrackingPosition(position){
     let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    this.map.panTo(location);
+    this.map ? this.map.panTo(location) : null  ;
 
     let mapProp = {
       center: location,

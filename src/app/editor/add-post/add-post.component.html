@@ -38,7 +38,7 @@
           <div class="form-group row">
             <label for="description" class="col-sm-2 col-form-label">Story Location:</label>
             <div class="col-sm-10">
-              <input id="locationId" google-place rows="5" class="form-control" formControlName="location" >
+              <input ngx-google-places-autocomplete  #places="ngx-places"  (onAddressChange)="handleAddressChange($event)"/>
             </div>
           </div>
 
@@ -48,13 +48,19 @@
               <input type="date" class="form-control" id="date" formControlName="newsDate">
             </div>
           </div>
+          <div class="form-group row">
+            <label for="description" class="col-sm-2 col-form-label">Current Location:</label>
+            <div class="col-sm-10">
+              <input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+            </div>
+          </div>
 
           <div class="form-group row">
             <label for="description" class="col-sm-2 col-form-label">Image Upload:</label>
             <div class="col-sm-10">
               <input type="file" (change)="fileChangeEvent($event)"/>
-            </div>
-            <img [src]="url" *ngIf="url" width="700" height="600">
+            </div>w
+            <img [src]="url" *ngIf="url" idth="700" height="600">
           </div>
 
 

@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { HOST_URL } from "../config/host.config";
 import {Subject} from "rxjs";
 import {getResponseURL} from "@angular/http/src/http_utils";
+import {SharedPropertiesService} from './shared-properties.service';
 
 const ADMIN_URL: string = "admin/review-news";
 
@@ -10,12 +11,12 @@ const ADMIN_URL: string = "admin/review-news";
   providedIn: "root"
 })
 export class AdminService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private sharedProperties : SharedPropertiesService) {}
   newsData =  new Subject<any>();
 
   getAdminReviewNews() {
 
-    return this.http.get(HOST_URL + ADMIN_URL+"&access_token" ).subscribe(response =>{
+    return this.http.get(HOST_URL + ADMIN_URL+"&access_toke="+ this.sharedProperties.tokenAuthKey ).subscribe(response =>{
       this.newsData.next(response);
     });
   }
@@ -29,7 +30,7 @@ export class AdminService {
       type: "application/json"
     }));
 
-    return this.http.put(HOST_URL + ADMIN_URL,formData).subscribe(response=>{
+    return this.http.put(HOST_URL + ADMIN_URL+ "&access_toke="+ this.sharedProperties.tokenAuthKey ,formData).subscribe(response=>{
       console.log(response);
     });
   }
