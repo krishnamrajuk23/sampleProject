@@ -31,6 +31,8 @@ export class EditorComponent implements OnInit {
   @ViewChild('gmap') gmapElement: any;
   map: any; // google map api object
 
+  selectedEditorList = this.editorList[0];
+
   constructor(
     private router:Router,
     private userService: UserService,
@@ -41,13 +43,13 @@ export class EditorComponent implements OnInit {
     // Draft news Data
     this.userService.getDraftNewsByEditorId(); // first time service call on page load
     this.userService.draftNews$.subscribe(result=>{
-        this.editorNewsPost = result;
+        this.editorNewsPost = result.data;
     });
 
     // Published News Data
     this.userService.getPublisherNewById();  // first time service call on page load
     this.userService.publishedNews$.subscribe((result:any)=>{
-      result.map(item=>{
+      result.data.map(item=>{
         if(item.status == "A"){
           this.approvedNewsPost.push(item);
         }
@@ -95,8 +97,8 @@ export class EditorComponent implements OnInit {
   }
 
   publishNews(data){
-    this.uploadImage = true;
     this.publishData = data;
+    this.userService.postToPublisher(data,null);
   }
 
   updatedImageData(event){

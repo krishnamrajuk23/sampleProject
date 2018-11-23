@@ -4,15 +4,17 @@
       <button class="btn btn-dark" (click)="addPost()">Add New Post</button>
     </div>
   </div>
-  <div #gmap style=”width:100%;height:400px”></div>
+  <div #gmap style="width:100%;height:400px"></div>
   <div class="row">
     <div class="col-sm-12">
       <div class="card p-3 mt-3">
-        <ngb-tabset type="pills">
-          <ngb-tab title="Draft">
-            <ng-template ngbTabContent>
+        <select class="form-control col-3" id="state" [(ngModel)]="selectedEditorList">
+          <option *ngFor="let list of editorList" [ngValue]="list">{{ list.desc }}</option>
+        </select>
+        <div type="pills">
+          <div *ngIf="selectedEditorList.desc === 'Draft'">
               <div class="row mt-3" >
-                <div class="col-lg-4 col-md-4 col-sm-6 my-1" *ngFor="let news of editorNewsPost;let i = index; trackBy: trackFun">
+                <div class="col-lg-4 col-md-4 col-sm-6 my-1" *ngFor="let news of editorNewsPost;let i = index;trackBy: trackFun">
                   <div class="card news-card">
                     <div class="card-body card-block">
                       <h5 class="card-title">{{news.title}}</h5>
@@ -34,31 +36,28 @@
                   </div>
                 </div>
               </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Pending Approval">
-            <ng-template ngbTabContent>
-              <div class="row mt-3" >
-                <div class="col-lg-4 col-md-4 col-sm-6 my-1" *ngFor="let news of pendingNewsPost">
-                  <div class="card news-card">
-                    <div class="card-body card-block">
-                      <h5 class="card-title">{{news.title}}</h5>
-                      <p class="news-content">{{news.description}}</p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="d-flex align-items-center justify-content-between">
+          </div>
+          <div *ngIf="selectedEditorList.desc === 'Pending'">
+            <div class="row mt-3" >
+              <div class="col-lg-4 col-md-4 col-sm-6 my-1" *ngFor="let pending of pendingNewsPost">
+                <div class="card news-card">
+                  <div class="card-body card-block">
+                    <h5 class="card-title">{{pending.title}}</h5>
+                    <p class="news-content">{{pending.description}}</p>
+                  </div>
+                  <div class="card-footer">
+                    <div class="d-flex align-items-center justify-content-between">
                         <span class="author-meta">
-                          <span class="post-date">{{news.newsDate}}</span>
+                          <span class="post-date">{{pending.newsDate}}</span>
                         </span>
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Submitted">
-            <ng-template ngbTabContent>
+            </div>
+          </div>
+          <div *ngIf="selectedEditorList.desc === 'Approved'">
+
               <div class="row mt-3" >
                 <div class="col-lg-4 col-md-4 col-sm-6 my-1" *ngFor="let approved of approvedNewsPost">
                   <div class="card news-card">
@@ -76,10 +75,9 @@
                   </div>
                 </div>
               </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Rejected">
-            <ng-template ngbTabContent>
+          </div>
+          <div *ngIf="selectedEditorList.desc === 'Rejected'">
+
               <div class="row mt-3" >
                 <div class="col-lg-4 col-md-4 col-sm-6 my-1" *ngFor="let reject of rejectNewsPost">
                   <div class="card news-card">
@@ -97,15 +95,12 @@
                   </div>
                 </div>
               </div>
-            </ng-template>
-          </ngb-tab>
-        </ngb-tabset>
+
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<app-upload-image *ngIf="uploadImage"
-                  (sendValue)="updatedImageData($event)"
->
-</app-upload-image>
+<app-upload-image *ngIf="uploadImage" (sendValue)="updatedImageData($event)"></app-upload-image>
+</div>

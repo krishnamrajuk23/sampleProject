@@ -5,6 +5,7 @@ import {UserService} from '../../shared/services/user.service';
 import {SharedPropertiesService} from '../../shared/services/shared-properties.service';
 import {UtilService} from '../../shared/util/util.service';
 import {LocationsService} from '../../shared/services/locations.service';
+import {ChannelService} from "../../shared/services/channel.service";
 
 declare let google: any;
 
@@ -18,10 +19,14 @@ export class AddPostComponent implements OnInit {
   editorForm: FormGroup;
   uploadImage:boolean = false;
   publishData:any;
-  locationsData:any;
-  selectLocation:any;
+  selectChannel:any;
+  channelData: any;
+  location:any;
   url:any;
   selectedLanguage:any;
+  channel:any;
+  currentLocation:any;
+  language:any = 'en';
 
   constructor(
     private fb: FormBuilder,
@@ -30,24 +35,22 @@ export class AddPostComponent implements OnInit {
     private sharedProperties: SharedPropertiesService,
     private route: ActivatedRoute,
     private util:UtilService,
-    private locations:LocationsService) { }
+    private locations:LocationsService,
+    private channelService: ChannelService) { }
 
   ngOnInit() {
-
     // Load the Google Transliterate API
-    google.load("elements", "1", {
+    /*google.load("elements", "1", {
       packages: "transliteration"
-    });
+    });*/
 
-
-
-    this.route.params.subscribe((param)=>{
-      console.log("active route",param)
-    });
     this.editorFormDetails();
-    this.locations.getLocations().subscribe(response => {
-      this.locationsData = response;
+
+    this.channelService.getPublicChannels().subscribe((response:any)=>{
+      console.log(response);
+      this.channelData = response.data;
     });
+
   }
 
   editorFormDetails() {
@@ -55,15 +58,17 @@ export class AddPostComponent implements OnInit {
       title: ['',Validators.required],
       description: ['',Validators.required],
       newsDate: ['',Validators.required],
-
     });
   }
 
 
   addSavePost(data){
     let newsText:any = {...data.value};
-    newsText.editorId = this.sharedProperties.loginResponseResult.userId;
-    newsText.location = this.selectLocation ? [this.selectLocation.id] : null;
+    newsText.editorId = this.sharedProperties.loginResponseResult.data.userId;
+    newsText.currentLocation =  {lat:17.387140,lng:78.491684};
+    newsText.channel = this.channel;
+    newsText.language = this.language;
+    newsText.location = this.location ? this.location : [{lat:17.387140,lng:78.491684}];
 
     this.userService.addToDraftNews({...newsText});
     this.router.navigate(['editor']);
@@ -74,8 +79,12 @@ export class AddPostComponent implements OnInit {
     if(data.valid){
       this.publishData = {...data.value};
 
-      this.publishData.editorId = this.sharedProperties.loginResponseResult.userId;
-      this.publishData.location = [this.selectLocation.id];
+      this.publishData.editorId = this.sharedProperties.loginResponseResult.data.userId;
+      this.publishData.currentLocation = this.currentLocation ?  this.currentLocation : [{lat:17.387140,lng:78.491684}];
+      this.publishData.channel = this.channel;
+      this.publishData.language = this.language;
+      this.publishData.location = this.location ? this.location : [{lat:17.387140,lng:78.491684}];
+
       if(this.url){
         const fileObject = this.util.dataURLtoFile(this.url);
         this.userService.postToPublisher({...this.publishData},fileObject);
@@ -121,12 +130,32 @@ export class AddPostComponent implements OnInit {
 
   }
 
-  public handleAddressChange(address) {
+  public handleAddressChange(address,editFormData) {
     console.log(address.geometry.location.toJSON());
+    this.location = [{lat:17.387140,lng:78.491684}];
     /*this.lng = address.geometry.location.lng();
     this.lat  = address.geometry.location.lat();*/
   }
 
+  findMe(){
+    console.log("clicked");
+    this.currentLocation = {lat:17.387140,lng:78.491684};
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.showPosition(position);
+    });
+  }
 
+  showPosition(position) {
+    let geoLocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    let geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'latLng': geoLocate}, function (results, status) {
+      console.log("geocode",results)
+    });
+  }
+
+  selectChannelObj(selectChannel){
+    console.log("selectChannel",selectChannel);
+    this.channel = selectChannel.id;
+  }
 
 }

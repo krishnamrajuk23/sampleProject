@@ -31,7 +31,7 @@ export class LoginService {
     header = header.append('Authorization','Basic ' + btoa(username+':'+password));
     header = header.append('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
 
-    this.http.post(HOST_URL+`oauth/token?grant_type=password&username=${credentionals.userId}` + "&password="+credentionals.password,"",
+    this.http.post(HOST_URL+`oauth/token?grant_type=password&username=${credentionals.user}` + "&password="+credentionals.password,"",
       { headers: header }).subscribe((response:any)=>{
         this.sharedService.setAccessToken(response.access_token);
     });

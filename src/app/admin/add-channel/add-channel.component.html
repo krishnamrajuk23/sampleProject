@@ -1,0 +1,56 @@
+<div class="container main-section">
+  <div class="row">
+    <div class="col col-sm-12">
+      <div class="card p-3 mt-3">
+        <form class="p-5" [formGroup]="addChannelForm">
+          <div class="form-group row">
+            <label for="location" class="col-sm-3 col-form-label">Channel</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" formControlName="name" id="location" maxlength="150">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="locDesc" class="col-sm-3 col-form-label">Channel Description</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" formControlName="desc" id="locDesc" maxlength="150">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="locDesc" class="col-sm-3 col-form-label">Location</label>
+            <div class="col-sm-9">
+              <input ngx-google-places-autocomplete  #placesRef="ngx-places"  (onAddressChange)="handleAddressChange($event)"/>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="locDesc" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9">
+              <input type="radio" formControlName="publicChannel" [value]="flag" (click)="selectChannelType(flag)"> Private
+              <input type="radio" formControlName="publicChannel" [value]="!flag" (click)="selectChannelType(!flag)" [checked]="true"> Public
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="approverFlag">
+            <label for="locDesc" class="col-sm-3 col-form-label">Approver</label>
+            <div class="col-sm-9">
+              <input list="options" id="option-input" />
+              <datalist id="options">
+                <!-- you have to add your option elements inside of a select element for legacy reasons -->
+                <select [(ngModel)]="selectApprover" [ngModelOptions]="{standalone: true}">
+                  <!--<option *ngFor="let approver of approversData" [value]="approver" />-->
+                </select>
+              </datalist>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary" (click)="addChannel(addChannelForm)">Save</button>
+          </div>
+
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -45,10 +45,12 @@ export class HeaderComponent implements OnInit {
     this.loginformDetails();
     if(this.sharedProperties.loginResponseResult){
       this.sharedProperties.setLoginStatus(this.sharedProperties.loginResponseResult);
-      this.userInformation = this.sharedProperties.loginResponseResult;
+      this.userInformation = this.sharedProperties.loginResponseResult.data;
     }
-    this.sharedProperties.loginStatusResponse.subscribe(result => {
-      this.userInformation = result;
+    this.sharedProperties.loginStatusResponse.subscribe((result:any) => {
+      if(result){
+        this.userInformation = result ? result.data : result;
+      }
     });
     if(this.router.url === "/editor" || this.router.url === "/admin"){
       this.dashboard = true;
@@ -67,25 +69,19 @@ export class HeaderComponent implements OnInit {
     }, 30000)
   }
 
-  goToRegister(content,alertmodal){
-    this.isLogin = false;
-    this.isRegister = true;
-    alertmodal.close();
-    this.openVerticallyCentered(content);
-  }
+
   openVerticallyCentered(content) {
     this.isLogin = true;
     this.isRegister = false;
     this.modalService.open(content, { centered: true });
   }
-
+  // Login form fields
   loginformDetails() {
     this.loginForm = this.fb.group({
-      userId: ["",Validators.required],
+      user: ["",Validators.required],
       password: ["",Validators.required]
     });
   }
-
 
   onLogin(loginForm, modal) {
     this.loginStatus = true;
@@ -96,16 +92,21 @@ export class HeaderComponent implements OnInit {
     modal.close();
    /* this.loginService.authToken(this.loginForm.value);*/
    this.loginService.loginStatus(loginForm.value);
+  }
 
+  goToRegister(content,alertmodal){
+    this.isLogin = false;
+    this.isRegister = true;
+    alertmodal.close();
+    this.openVerticallyCentered(content);
   }
 
   registrationForm() {
     this.registerForm = this.fb.group({
       name: ["", Validators.required],
-      emailId: ["", [Validators.required, Validators.email]],
+      emailId: ["", /*[Validators.required, Validators.email]*/],
       phoneNum: ["", Validators.required],
       password: ["", Validators.required],
-      userId: ["", Validators.required],
       recaptchaResp: ['', Validators.required]
     });
   }
@@ -138,7 +139,8 @@ export class HeaderComponent implements OnInit {
   }
 
   dashboardRedirect(response){
-    (!response.approver) ? this.router.navigate(["editor"]): this.router.navigate(['admin']);
+    const redirect = response.roles.indexOf("ROLE_USER") > -1 && response.roles.indexOf("ROLE_ADMIN") > -1? true : false;
+    (redirect) ? this.router.navigate(['admin']) : this.router.navigate(["editor"]);
 
   }
 

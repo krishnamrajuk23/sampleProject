@@ -5,4 +5,5 @@ export class LoginDataModal{
   name: string;
   phoneNum: string;
   userId: string;
+  [key:string]: any;
 }

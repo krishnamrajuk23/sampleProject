@@ -29,12 +29,8 @@ export class HomeComponent implements OnInit {
     private locationService: LocationsService,) { }
 
   ngOnInit() {
-    this.newsService.getLocalNews().subscribe(result => {
-      this.newsData = result;
-    });
-    this.locationService.getLocations().subscribe(locations=>{
-      this.locations = locations;
-      this.selectedItems = [];
+    this.newsService.getLocalNews().subscribe((result:any) => {
+      this.newsData = result.data ? result.data : [];
     });
 
     this.dropdownSettings = {

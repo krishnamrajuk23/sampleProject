@@ -11,12 +11,15 @@ const ADMIN_URL: string = "admin/review-news";
   providedIn: "root"
 })
 export class AdminService {
-  constructor(private http: HttpClient, private sharedProperties : SharedPropertiesService) {}
+  constructor(private http: HttpClient, private sharedProperties : SharedPropertiesService) {
+    this.sharedProperties.accessToken$.subscribe(result => {
+      this.sharedProperties.tokenAuthKey = result
+    });
+  }
   newsData =  new Subject<any>();
 
   getAdminReviewNews() {
-
-    return this.http.get(HOST_URL + ADMIN_URL+"&access_toke="+ this.sharedProperties.tokenAuthKey ).subscribe(response =>{
+    return this.http.get(HOST_URL + ADMIN_URL+"&access_token="+ this.sharedProperties.tokenAuthKey ).subscribe(response =>{
       this.newsData.next(response);
     });
   }
@@ -30,8 +33,42 @@ export class AdminService {
       type: "application/json"
     }));
 
-    return this.http.put(HOST_URL + ADMIN_URL+ "&access_toke="+ this.sharedProperties.tokenAuthKey ,formData).subscribe(response=>{
+    return this.http.put(HOST_URL + ADMIN_URL+ "?access_token="+ this.sharedProperties.tokenAuthKey ,formData).subscribe(response=>{
       console.log(response);
     });
   }
+
+  createChannels(payload){
+    /*
+    * publicChannel : false -  private channel creation
+    * publicChannel : true - Public channel creation
+    * */
+    this.http.post(HOST_URL + "admin/channel?access_token="+this.sharedProperties.tokenAuthKey ,payload).subscribe((result)=>{
+      console.log(result);
+    });
+  }
+
+  getUsersListByName(name){
+    this.http.get(HOST_URL + "admin/users?search="+ name +"access_token="+this.sharedProperties.tokenAuthKey).subscribe((result)=>{
+      console.log(result);
+    });
+  }
+  getUsersAllList(){
+    this.http.get(HOST_URL + "admin/users?access_token="+this.sharedProperties.tokenAuthKey).subscribe((result)=>{
+      console.log(result);
+    });
+  }
+
+  createPaidUser(userId){
+    this.http.post(HOST_URL + `admin/paid-user/${userId}?access_token=`+this.sharedProperties.tokenAuthKey,null).subscribe((result)=>{
+      console.log(result);
+    });
+  }
+
+  getPaidUser(name){
+    this.http.get(HOST_URL + `admin/paid-user?search=${name}access_token=`+this.sharedProperties.tokenAuthKey).subscribe((result)=>{
+      console.log(result);
+    });
+  }
+
 }

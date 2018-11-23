@@ -4,8 +4,8 @@
   <div class="form-group row p-l-3">
     <label for="title" class="col-sm-2 col-form-label">Channel</label>
     <div class="col-sm-5">
-      <select class="form-control" id="location" [(ngModel)]="selectLocation">
-          <!--<option *ngFor="let loc of locationsData" [ngValue]="loc">{{ loc.location }}</option>-->
+      <select class="form-control" id="location" [(ngModel)]="selectChannel" (change)="selectChannelObj(selectChannel)">
+          <option *ngFor="let data of channelData" [ngValue]="data">{{ data.desc }}</option>
       </select>
     </div>
 
@@ -15,7 +15,7 @@
     <div class="row">
       <div class="col">
         <form [formGroup]="editorForm"  class="p-5">
-          <select id="prefLanguage" (change)="changelanguage($event)" [(ngModel)]="selectedLanguage">
+          <select id="prefLanguage" (change)="changelanguage($event)" [(ngModel)]="selectedLanguage"  [ngModelOptions]="{standalone: true}">
             <option value="en" DISABLED>SELECT</option>
             <option value="te">Telugu</option>
             <option value="hi">Hindi</option>
@@ -38,7 +38,7 @@
           <div class="form-group row">
             <label for="description" class="col-sm-2 col-form-label">Story Location:</label>
             <div class="col-sm-10">
-              <input ngx-google-places-autocomplete  #places="ngx-places"  (onAddressChange)="handleAddressChange($event)"/>
+              <input ngx-google-places-autocomplete  #places="ngx-places"  (onAddressChange)="handleAddressChange($event,editorForm)"/>
             </div>
           </div>
 
@@ -51,7 +51,8 @@
           <div class="form-group row">
             <label for="description" class="col-sm-2 col-form-label">Current Location:</label>
             <div class="col-sm-10">
-              <input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+              <input type="text" (keydown)="findMe()" />
+              <!--<input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>-->
             </div>
           </div>
 
@@ -59,14 +60,14 @@
             <label for="description" class="col-sm-2 col-form-label">Image Upload:</label>
             <div class="col-sm-10">
               <input type="file" (change)="fileChangeEvent($event)"/>
-            </div>w
+            </div>
             <img [src]="url" *ngIf="url" idth="700" height="600">
           </div>
 
 
           <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-primary mr-4" (click)="addSavePost(editorForm)" [disabled]="!(selectLocation && editorForm.valid)">Save</button>
-            <button type="submit" class="btn btn-primary" (click)="addPost(editorForm)" [disabled]="!(selectLocation && editorForm.valid) ">Post</button>
+            <button type="button" class="btn btn-primary mr-4" (click)="addSavePost(editorForm)" [disabled]="!(editorForm.valid)">Save</button>
+            <button type="submit" class="btn btn-primary" (click)="addPost(editorForm)" [disabled]="!(editorForm.valid) ">Post</button>
           </div>
         </form>
       </div>
