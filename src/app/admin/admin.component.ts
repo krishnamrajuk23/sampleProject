@@ -31,7 +31,7 @@ export class AdminComponent implements OnInit {
     this.adminService.getAdminReviewNews();
     this.adminService.newsData.subscribe(result =>{
       this.newsposts = result;
-       result.map(item=>{
+       result.data.map(item=>{
         if(item.status == "A"){
           this.approvedPost.push(item);
         }else if(item.status == "R"){

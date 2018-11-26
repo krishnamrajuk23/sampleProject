@@ -19,7 +19,7 @@ export class AdminService {
   newsData =  new Subject<any>();
 
   getAdminReviewNews() {
-    return this.http.get(HOST_URL + ADMIN_URL+"&access_token="+ this.sharedProperties.tokenAuthKey ).subscribe(response =>{
+    return this.http.get(HOST_URL + ADMIN_URL+"?access_token="+ this.sharedProperties.tokenAuthKey ).subscribe(response =>{
       this.newsData.next(response);
     });
   }
@@ -49,14 +49,10 @@ export class AdminService {
   }
 
   getUsersListByName(name){
-    this.http.get(HOST_URL + "admin/users?search="+ name +"access_token="+this.sharedProperties.tokenAuthKey).subscribe((result)=>{
-      console.log(result);
-    });
+    return this.http.get(HOST_URL + "admin/users?search="+ name +"access_token="+this.sharedProperties.tokenAuthKey);
   }
   getUsersAllList(){
-    this.http.get(HOST_URL + "admin/users?access_token="+this.sharedProperties.tokenAuthKey).subscribe((result)=>{
-      console.log(result);
-    });
+    return this.http.get(HOST_URL + "admin/users?access_token="+this.sharedProperties.tokenAuthKey);
   }
 
   createPaidUser(userId){
@@ -66,7 +62,7 @@ export class AdminService {
   }
 
   getPaidUser(name){
-    this.http.get(HOST_URL + `admin/paid-user?search=${name}access_token=`+this.sharedProperties.tokenAuthKey).subscribe((result)=>{
+    this.http.get(HOST_URL + `admin/paid-user/search=${name}?access_token=`+this.sharedProperties.tokenAuthKey).subscribe((result)=>{
       console.log(result);
     });
   }

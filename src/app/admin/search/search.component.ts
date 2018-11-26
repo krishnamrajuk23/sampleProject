@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AdminService} from "../../shared/services/admin.service";
 
 @Component({
   selector: 'app-search',
@@ -11,23 +12,27 @@ export class SearchComponent implements OnInit {
   listArray:any[];
   search:string = '';
   toggleChecked:boolean = false;
-  constructor() { }
+  userAllList : any;
+  searchUserObject : any;
+  constructor(private adminService: AdminService) { }
 
   ngOnInit() {
+    this.adminService.getUsersAllList().subscribe((response:any) =>{
+      this.userAllList = response.data;
+    });
+
   }
 
   searchUsers(value){
-    this.listArray=  this.listSearch.filter(list =>{
-      if(list.name.indexOf(value) > -1){
-        return list;
-      }
+    this.adminService.getUsersListByName(value).subscribe((response:any)=>{
+      this.userAllList = response.data;
     });
   }
 
-  paidUser(paid){
-    if(paid == 'Y'){
-      this.toggleChecked = true;
+  paidUser(list){
+    if(this.toggleChecked){
       // Send to api post request as paid
+      this.adminService.createPaidUser(list.userId);
     } else{
       this.toggleChecked = true;
       // Send to api post request as unpaid
