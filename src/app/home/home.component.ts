@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
   localurl = location.href;
   address:any;
   subscribedChannelList : any[] = [];
+  showChannelNews : boolean = false;
+  channelNewsData: any[] = [];
 
   @ViewChild('places') places: GooglePlaceDirective;
   @ViewChild('search' ) public searchElement: ElementRef;
@@ -125,6 +127,13 @@ export class HomeComponent implements OnInit {
           news.isSubscribed = false;
         });
     }  
+  }
+
+  openChannelNews(channelId){
+    this.showChannelNews = true;
+    this.newsService.getChannelNewsById(channelId).subscribe((res:any)=>{
+      this.channelNewsData = res.data;
+    });
   }
 
 

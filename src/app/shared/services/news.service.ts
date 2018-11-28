@@ -19,4 +19,8 @@ export class NewsService {
     return this.http.get(HOST_URL + "public/news?locations="+locations);
   }
 
+  getChannelNewsById(channelId){
+    return this.http.get(HOST_URL+ "public/news/"+channelId);
+  }
+
 }
