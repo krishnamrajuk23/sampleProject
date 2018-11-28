@@ -44,9 +44,9 @@ export class AddPostComponent implements OnInit {
 
   ngOnInit() {
     // Load the Google Transliterate API
-    /*google.load("elements", "1", {
+    google.load("elements", "1", {
       packages: "transliteration"
-    });*/
+    });
 
     this.editorFormDetails();
 
