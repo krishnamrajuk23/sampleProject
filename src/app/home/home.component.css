@@ -1,3 +1,16 @@
+.subscribed-channel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: #17a2b8;
+  color: #fff; }
+  .subscribed-channel i {
+    color: #fff; }
+    .subscribed-channel i.is-subscribed {
+      color: #ab3939; }
 
+.share-setion {
+  font-size: 21px; }
 
 /*# sourceMappingURL=home.component.css.map */

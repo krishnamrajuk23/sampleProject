@@ -1,12 +1,19 @@
+@import "../../assets/scss/variables";
 
 .subscribed-channel{
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    background: #90c981;
-    color: #fff;
+    background: $cyan;
+    color: $white;
     i{
-      color: #fff;
+      color: $white;
+      &.is-subscribed{
+        color: #ab3939;
+      }
     }
+}
+.share-setion{
+  font-size: 21px;
 }

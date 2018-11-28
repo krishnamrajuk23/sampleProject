@@ -1,5 +1,5 @@
 
-<div class="alert alert-style"
+<div class="alert"
      [ngClass]="{'alert-success':alert.status === 200, 'alert-danger':alert.status != 200}"
      role="alert" *ngIf="alert.show">
   {{alert.message | json}}

@@ -1,30 +1,45 @@
 <div class="container main-section">
-  <div class="row">
-    <div class="col">
-      <input type="search" [(ngModel)]="search" (change)="searchUsers(search)"
-             placeholder="Name/Phone No" name="search">
+  <div class="card p-3 mt-3">
+    <div class="row">
+      <div class="col-3 mb-2">
+        <input type="search" class="form-control" [(ngModel)]="search" (change)="searchUsers(search)"
+               placeholder="Name/Phone No" name="search">
 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <table class="table table-striped">
+          <thead>
+          <th>Name</th>
+          <th>Phone Number</th>
+          <th>Email</th>
+          <th>User Type</th>
+          </thead>
+          <tbody>
+          <tr *ngFor="let list of userAllList;trackBy: trackByFunc;let i = index">
+            <td>{{list.name}}</td>
+            <td>{{list.phoneNum}}</td>
+            <td>{{list.emailId}}</td>
+            <td>
+              <!-- <label class="switch">
+                <input type="checkbox" [(ngModel)]="list.isPaid" (change)="paidUser(list)">
+                <span class="slider round"></span>
+               </label>-->
+              <div class="onoffswitch">
+                <input type="checkbox" [(ngModel)]="list.isPaid" (change)="paidUser(list)" name="onoffswitch"
+                       class="onoffswitch-checkbox" id="paid_{{i}}">
+                <label class="onoffswitch-label" for="paid_{{i}}">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-  <table class="table table-striped">
-    <thead>
-      <th>Name</th>
-      <th>Phone Number</th>
-      <th>Email</th>
-      <th>User Type</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let list of userAllList;trackBy: trackByFunc">
-        <td>{{list.name}}</td>
-        <td>{{list.phoneNum}}</td>
-        <td>{{list.emailId}}</td>
-        <td>
-         <label class="switch">
-          <input type="checkbox" [(ngModel)]="list.isPaid" (change)="paidUser(list)">
-          <span class="slider round"></span>
-         </label>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
 </div>

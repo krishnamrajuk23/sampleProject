@@ -2,7 +2,7 @@ import { Component, ElementRef, AfterViewInit, Input } from '@angular/core';
 
 @Component({
   selector: 'tweet',
-  template: `<a href="https://twitter.com/share" [attr.data-text]="text" [attr.data-url]="url" class="twitter-share-button"></a>`
+  template: `<a href="https://twitter.com/share" [attr.data-text]="text" [attr.data-url]="url"><i class="fa fa-twitter"></i></a>`
 })
 
 export class TwitterShareComponent implements AfterViewInit {

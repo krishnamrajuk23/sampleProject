@@ -2,27 +2,31 @@
   <div class="row">
     <div class="col-lg-12">
 
-      <div class="d-flex align-items-center justify-content-end my-2">
-        <label class="mb-0 mr-1">Search:</label>
-       <!-- <input type="text" class="form-control" placeholder="Location" name="Location" [(ngModel)]="address" #LocationCtrl="ngModel"
-               Googleplace (setAddress)="getAddressOnChange($event,LocationCtrl)">-->
+      <div class="d-flex align-items-center justify-content-end my-2 col-4 pull-right p-0">
+          <label class="mb-0 mr-1">Search:</label>
+          <!-- <input type="text" class="form-control" placeholder="Location" name="Location" [(ngModel)]="address" #LocationCtrl="ngModel"
+                  Googleplace (setAddress)="getAddressOnChange($event,LocationCtrl)">-->
 
-        <input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+          <input class="form-control" ngx-google-places-autocomplete #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
       </div>
     </div>
 
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <h4 (click)="showChannelNews = false" *ngIf="showChannelNews"> Back </h4>
+      <a class="hand d-flex align-items-center mb-3" (click)="showChannelNews = false" *ngIf="showChannelNews">
+        <i class="fa fa-angle-left mr-2 fa-2x"></i><span>Back</span>
+      </a>
       <div class="card-columns" *ngIf="!showChannelNews">
         <div class="card news-card shadow rounded" *ngFor="let news of newsData">
-            <div class="subscribed-channel" *ngIf="news.channel && !news.channelData.publicChannel">
-                <span (click)="openChannelNews(news.channel)">{{news.channelData.name ? news.channelData.name : news.channelData.desc}}</span>
-                <button type="button" class="btn btn-link" (click)="subscriptionChannel(news.channel,news)">
-                  <i class="fa " aria-hidden="true" [ngClass]="{'fa-heart':news.isSubscribed == true,'fa-heart-o': !news.isSubscribed}"></i>
-                </button>
-              </div>
+          <div class="subscribed-channel" *ngIf="news.channel && !news.channelData.publicChannel">
+            <a class="hand" (click)="openChannelNews(news.channel)">{{news.channelData.name ? news.channelData.name :
+                                                                    news.channelData.desc}}</a>
+            <button type="button" class="btn btn-link" (click)="subscriptionChannel(news.channel,news)">
+              <i class="fa " aria-hidden="true"
+                 [ngClass]="{'fa-heart is-subscribed':news.isSubscribed == true,'fa-heart-o': !news.isSubscribed}"></i>
+            </button>
+          </div>
           <img class="card-img-left card-image"
                *ngIf="news.imageChunks.length > 0"
                [src]="'data:image/jpeg;base64,'+news.imageChunks[0].data.data" alt="News image"/>
@@ -37,13 +41,13 @@
               <span class="post-name">{{news.publishedBy}}</span><br>
               <span class="post-date">{{news.newsDate}}</span>
             </span>
-            <span class="share-setion">
-              <tweet [text]="news.title" [url]
-                ="localurl+'/'+ news.id"></tweet>
-              <a class="hand" (click)="getLinkWhatsapp(news.phoneNumber,news.description)"><i class="fa fa-whatsapp"></i></a>
+              <span class="share-setion">
+              <tweet [text]="news.title" class="mr-1" [url]="localurl+'/'+ news.id"></tweet>
+              <a class="hand" (click)="getLinkWhatsapp(news.phoneNumber,news.description)"><i
+                class="fa fa-whatsapp"></i></a>
             </span>
             </div>
-            
+
           </div>
         </div>
 
@@ -51,23 +55,24 @@
 
       <!-- Channel relevanet news data-->
       <div class="card-columns" *ngIf="showChannelNews">
-          <div class="card news-card shadow rounded" *ngFor="let news of channelNewsData">
-              <div class="subscribed-channel">
-                  <span>{{news.channelData.name ? news.channelData.name : news.channelData.desc}}</span>
-                  <button type="button" class="btn btn-link" (click)="subscriptionChannel(news.channel,news)">
-                    <i class="fa " aria-hidden="true" [ngClass]="{'fa-heart':news.isSubscribed == true,'fa-heart-o': !news.isSubscribed}"></i>
-                  </button>
-                </div>
-            <img class="card-img-left card-image"
-                 *ngIf="news.imageChunks.length > 0"
-                 [src]="'data:image/jpeg;base64,'+news.imageChunks[0].data.data" alt="News image"/>
-            <div class="card-body card-block">
-              <h5 class="card-title">{{news.title}}</h5>
-              <p class="news-content">{{news.description}}</p>
-              <a target="_blank" class="reference-link" [href]="news.refLink">{{news.refLink}}</a>
-            </div>
-            <div class="card-footer">
-              <div class="d-flex align-items-center justify-content-between">
+        <div class="card news-card shadow rounded" *ngFor="let news of channelNewsData">
+          <div class="subscribed-channel">
+            <span>{{news.channelData.name ? news.channelData.name : news.channelData.desc}}</span>
+            <button type="button" class="btn btn-link" (click)="subscriptionChannel(news.channel,news)">
+              <i class="fa " aria-hidden="true"
+                 [ngClass]="{'fa-heart is-subscribed':news.isSubscribed == true,'fa-heart-o': !news.isSubscribed}"></i>
+            </button>
+          </div>
+          <img class="card-img-left card-image"
+               *ngIf="news.imageChunks.length > 0"
+               [src]="'data:image/jpeg;base64,'+news.imageChunks[0].data.data" alt="News image"/>
+          <div class="card-body card-block">
+            <h5 class="card-title">{{news.title}}</h5>
+            <p class="news-content">{{news.description}}</p>
+            <a target="_blank" class="reference-link" [href]="news.refLink">{{news.refLink}}</a>
+          </div>
+          <div class="card-footer">
+            <div class="d-flex align-items-center justify-content-between">
               <span class="author-meta">
                 <span class="post-name">{{news.publishedBy}}</span><br>
                 <span class="post-date">{{news.newsDate}}</span>
@@ -75,14 +80,15 @@
               <span class="share-setion">
                 <tweet [text]="news.title" [url]
                   ="localurl+'/'+ news.id"></tweet>
-                <a class="hand" (click)="getLinkWhatsapp(news.phoneNumber,news.description)"><i class="fa fa-whatsapp"></i></a>
+                <a class="hand" (click)="getLinkWhatsapp(news.phoneNumber,news.description)"><i
+                  class="fa fa-whatsapp"></i></a>
               </span>
-              </div>
-              
             </div>
+
           </div>
-  
         </div>
+
+      </div>
     </div>
 
   </div>
