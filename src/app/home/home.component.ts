@@ -108,11 +108,23 @@ export class HomeComponent implements OnInit {
     this.lat  = address.geometry.location.lat();*/
   }
 
-  subscriptionChannel(channelId){
-    this.channelService.subscribeChannel(channelId).subscribe(
-      (response)=>{
-      console.log(response);
-    },(error)=>{this.sharedProperties.setRegistrationRequired(true)});
+  subscriptionChannel(channelId,news){
+    /* If isSubscribe is false make channel as subscribe through service call
+    * else subscribe channel to unsubscribe channel for the user
+    **/
+    if(!news.isSubscribed){
+      this.channelService.subscribeChannel(channelId).subscribe(
+        (response)=>{
+          news.isSubscribed = true;
+        },(error)=>{
+        this.sharedProperties.setRegistrationRequired(true)
+      });
+    }else{
+      this.channelService.unsubscribeChannel(channelId).subscribe(
+        (response)=>{
+          news.isSubscribed = false;
+        });
+    }  
   }
 
 
