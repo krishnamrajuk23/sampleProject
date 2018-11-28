@@ -47,6 +47,11 @@ export class HomeComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: this.ShowFilter
     };
+
+    this.channelService.getSubscribeChannel().subscribe((res:any)=>{
+      console.log("channel subscribe",res);
+      
+    });
   }
 
   filterByLocationData(selectLocation:string){
@@ -97,4 +102,6 @@ export class HomeComponent implements OnInit {
       console.log(response);
     },(error)=>{this.sharedProperties.setRegistrationRequired(true)});
   }
+
+  
 }

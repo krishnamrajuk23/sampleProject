@@ -31,4 +31,9 @@ export class ChannelService {
   subscribeChannelList(){
     return this.http.get(HOST_URL + "user/subscribed-channels?access_token="+ this.sharedProperties.tokenAuthKey);
   }
+
+  getSubscribeChannel(){
+    return this.http.get(HOST_URL + "user/subscribed-channels?access_token="+ this.sharedProperties.tokenAuthKey);
+  }
+  
 }

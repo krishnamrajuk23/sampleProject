@@ -29,7 +29,9 @@
         <div class="card news-card shadow rounded" *ngFor="let news of newsData">
             <div class="subscribed-channel" *ngIf="news.channel && !news.channelData.publicChannel">
                 <span>{{news.channelData.name ? news.channelData.name : news.channelData.desc}}</span>
-                <button type="button" class="btn btn-link" (click)="subscriptionChannel(news.channel)"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-link" (click)="subscriptionChannel(news.channel)">
+                  <i class="fa fa-heart-o" aria-hidden="true"></i>
+                </button>
               </div>
           <img class="card-img-left card-image"
                *ngIf="news.imageChunks.length > 0"
