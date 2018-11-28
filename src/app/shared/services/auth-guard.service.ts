@@ -12,7 +12,7 @@ export class AuthGuardService implements CanActivate{
     private router: Router) { }
 
   canActivate(){
-    if(this.sharedProperty.loginResponseResult.approver){
+    if(this.sharedProperty.loginResponseResult){
       return true;
     }
     this.router.navigate(['home']);

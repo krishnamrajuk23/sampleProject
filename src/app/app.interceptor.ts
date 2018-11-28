@@ -41,7 +41,7 @@ export class AppInterceptor implements HttpInterceptor{
   private error(event){
     if(event.status !== 200){
       this.alertService.hideAlert({
-        message: event.error.text,
+        message: event.error? event.error.text : 'Bad Request please try again later',
         status:event.status,
         type:'error'
       });

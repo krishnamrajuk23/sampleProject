@@ -20,11 +20,15 @@ export class ChannelService {
     return this.http.get(HOST_URL + "public/channels?publicChannel="+ false);
   }
 
-  subscribeChannel(id){
-    return this.http.get(HOST_URL + "user/channel/subscribe/"+id+"?access_token="+ this.sharedProperties.tokenAuthKey);
+  subscribeChannel(channelId){
+    return this.http.post(HOST_URL + "user/channel/subscribe/"+channelId+"?access_token="+ this.sharedProperties.tokenAuthKey,null);
   }
 
-  unsubscribeChannel(id){
-    return this.http.get(HOST_URL  + "user/channel/unsubscribe/"+id+"?access_token="+ this.sharedProperties.tokenAuthKey);
+  unsubscribeChannel(channelId){
+    return this.http.delete(HOST_URL  + "user/channel/unsubscribe/"+channelId+"?access_token="+ this.sharedProperties.tokenAuthKey);
+  }
+
+  subscribeChannelList(){
+    return this.http.get(HOST_URL + "user/subscribed-channels?access_token="+ this.sharedProperties.tokenAuthKey);
   }
 }

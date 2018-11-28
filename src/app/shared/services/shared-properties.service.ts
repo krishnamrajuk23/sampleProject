@@ -12,6 +12,7 @@ export class SharedPropertiesService {
   editPostNews : NewsModal;
   accessToken$ = new Subject<string>();
   tokenAuthKey : string;
+  registrationRequired = new Subject<boolean>();
 
   constructor() {
     if(sessionStorage.getItem('loginResult')){
@@ -36,6 +37,10 @@ export class SharedPropertiesService {
   setAccessToken(token){
     this.accessToken$.next(token);
     sessionStorage.setItem('token',token);
+  }
+
+  setRegistrationRequired(flag){
+    this.registrationRequired.next(flag);
   }
 
 }

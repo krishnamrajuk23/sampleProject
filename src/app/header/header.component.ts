@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
   recaptcha:string;
   userInformation : LoginDataModal;
   dashboard = false;
+  @ViewChild('content') content;
 
   constructor(
     private modalService: NgbModal,
@@ -55,6 +56,12 @@ export class HeaderComponent implements OnInit {
     if(this.router.url === "/editor" || this.router.url === "/admin"){
       this.dashboard = true;
     }
+
+    this.sharedProperties.registrationRequired.subscribe(response=>{
+      this.isRegister = response ? true : false;
+      this.isLogin = false;
+      this.modalService.open(this.content, { centered: true });
+    })
   }
   @ViewChild('authenticatePopUp') modalTemplate:TemplateRef<any>;
 

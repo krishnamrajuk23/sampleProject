@@ -34,6 +34,7 @@
     "ngx-captcha": "^5.0.3",
     "ngx-google-places-autocomplete": "^2.0.1",
     "ngx-image-cropper": "^1.0.2",
+    "npm": "^6.4.1",
     "rxjs": "^6.0.0",
     "ts-md5": "^1.2.4",
     "zone.js": "~0.8.26"

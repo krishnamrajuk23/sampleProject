@@ -9,13 +9,14 @@ const projectId = "localNews";
   templateUrl: './add-channel.component.html',
   styleUrls: ['./add-channel.component.scss']
 })
-export class AddLocationComponent implements OnInit {
+export class AddChannelComponent implements OnInit {
   addChannelForm : FormGroup;
-  flag: boolean = true; //public
+  flag: boolean = false; //public
   locationPoints : any[] = [];
   approversData: any[];
   selectApprover: any;
-  approverFlag : boolean = false;
+  approverFlag : boolean = true;
+  approversId:string;
 
 constructor(
     private fb: FormBuilder,
@@ -24,9 +25,9 @@ constructor(
 
   ngOnInit() {
     this.addChannelDetails();
-    /*this.locationsService.getStates().subscribe(result=>{
-       this.statesList = result;
-    });*/
+    this.adminService.getPaidUser().subscribe((response:any)=>{
+      this.approversData = response.data;
+    })
   }
 
   addChannelDetails(){
@@ -39,19 +40,23 @@ constructor(
   }
 
   handleAddressChange(loc){
-    console.log("location",loc.geometry.location.toJSON());
     this.locationPoints.push(loc.geometry.location.toJSON());
   }
 
   addChannel(channelObj){
-    console.log("channels", channelObj.value);
-    channelObj.value.locations = this.locationPoints.length > 0 ? this.locationPoints : [{lat:83.23121, lng:32.342211}];
-    channelObj.value.publicChannel = this.flag ;
-    this.adminService.createChannels(channelObj.value);
+    const channel = channelObj.value;
+    channel.locations = this.locationPoints.length > 0 ? this.locationPoints : [{lat:83.23121, lng:32.342211}];
+    channel.publicChannel = this.flag ;
+    channel.approvers = [this.approversId];
+    this.adminService.createChannels(channel);
   }
 
   selectChannelType(flag){
     this.approverFlag = flag;
+  }
+
+  approverSelection(selectApprover){
+    this.approversId = selectApprover.userId;
   }
 
 }

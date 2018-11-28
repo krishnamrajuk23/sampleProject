@@ -1,4 +1,4 @@
-input{
+input:not(input[type="radio"]){
   min-height: 36px;
   min-width: 250px;
   padding: 0.3rem 0.6rem;

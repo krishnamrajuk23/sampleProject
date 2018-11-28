@@ -19,7 +19,7 @@ import { EditorComponent } from "./editor/editor.component";
 import { AdminComponent } from "./admin/admin.component";
 import { AddPostComponent } from "./editor/add-post/add-post.component";
 import { FooterComponent } from "./footer/footer.component";
-import { AddLocationComponent } from './admin/add-channel/add-channel.component';
+import { AddChannelComponent } from './admin/add-channel/add-channel.component';
 import { UploadImageComponent } from './editor/upload-image/upload-image.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { LoaderComponent } from './loader/loader.component';
@@ -37,6 +37,7 @@ import { GooglePlacesDirective } from './shared/directives/google-places.directi
 
 
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { ApproveNewsComponent } from './editor/approve-news/approve-news.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
     AboutComponent,
     AddPostComponent,
     FooterComponent,
-    AddLocationComponent,
+    AddChannelComponent,
     UploadImageComponent,
     EditPostComponent,
     LoaderComponent,
@@ -58,7 +59,8 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
     TwitterShareComponent,
     SearchComponent,
     SinglePostViewComponent,
-    GooglePlacesDirective
+    GooglePlacesDirective,
+    ApproveNewsComponent
   ],
   imports: [
     BrowserModule,

@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.adminService.getAdminReviewNews();
     this.adminService.newsData.subscribe(result =>{
-      this.newsposts = result;
+      this.newsposts = result.data;
        result.data.map(item=>{
         if(item.status == "A"){
           this.approvedPost.push(item);
@@ -40,26 +40,31 @@ export class AdminComponent implements OnInit {
       });
     });
   }
+
   editpost(modal){
     this.router.navigate(['addPost']);
     modal.close();
   }
+
   approvePost(data,modal){
-    data.status = "A";
-    data.reviewerId = this.sharedProperty.loginResponseResult.userId;
+    data.status = "A"; // Approve the post
+    data.reviewerId = this.sharedProperty.loginResponseResult.data.userId;
     this.adminService.updateAdminReviewNews(data);
     modal.close();
   }
+
   declinePost(data,confirmDecline,modal){
     this.modalService.open(confirmDecline, { centered: true });
     modal.close();
   }
+
   declineConfirm(modal,data){
-    data.status = "R";
+    data.status = "R"; // Reject the post 
     data.reviewerId = this.sharedProperty.loginResponseResult.userId;
     this.adminService.updateAdminReviewNews(data);
     modal.close();
   }
+
   viewPost(showModal,data){
     this.selectedPost = data;
     this.modalService.open(showModal, { centered: true });
@@ -69,7 +74,9 @@ export class AdminComponent implements OnInit {
     console.log(list);
     this.submittedPosts = (list.desc === 'Approved') ? this.approvedPost : this.rejectPost;
   }
+
   trackByFunc(index,value){
     return value.id;
   }
+  
 }

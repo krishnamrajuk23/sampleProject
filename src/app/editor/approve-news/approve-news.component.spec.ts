@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddChannelComponent } from './add-channel.component';
+import { ApproveNewsComponent } from './approve-news.component';
 
-describe('AddLocationComponent', () => {
-  let component: AddChannelComponent;
-  let fixture: ComponentFixture<AddChannelComponent>;
+describe('ApproveNewsComponent', () => {
+  let component: ApproveNewsComponent;
+  let fixture: ComponentFixture<ApproveNewsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddChannelComponent ]
+      declarations: [ ApproveNewsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddChannelComponent);
+    fixture = TestBed.createComponent(ApproveNewsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

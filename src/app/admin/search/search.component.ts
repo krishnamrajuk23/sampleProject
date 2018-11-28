@@ -12,31 +12,36 @@ export class SearchComponent implements OnInit {
   listArray:any[];
   search:string = '';
   toggleChecked:boolean = false;
-  userAllList : any;
+  userAllList : any[] = [];
   searchUserObject : any;
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
     this.adminService.getUsersAllList().subscribe((response:any) =>{
-      this.userAllList = response.data;
+      this.userAllList = response.data.map((item:any)=>{
+        item.isPaid = (item.roles.indexOf('ROLE_PUSER1') > -1);
+        return item; 
+      });
+      console.log("user list",this.userAllList);
     });
-
+    
   }
 
   searchUsers(value){
     this.adminService.getUsersListByName(value).subscribe((response:any)=>{
-      this.userAllList = response.data;
+      this.userAllList = response.data.map((item:any)=>{
+        item.isPaid = (item.roles.indexOf('ROLE_PUSER1') > -1);
+        return item; 
+      });
     });
+    console.log("user list",this.userAllList);
   }
 
   paidUser(list){
-    if(this.toggleChecked){
+    if(!list.isPaid){
       // Send to api post request as paid
       this.adminService.createPaidUser(list.userId);
-    } else{
-      this.toggleChecked = true;
-      // Send to api post request as unpaid
-    }
+    } 
   }
 
   trackByFunc(index,value){

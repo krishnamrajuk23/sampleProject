@@ -6,6 +6,7 @@ import {SharedPropertiesService} from '../../shared/services/shared-properties.s
 import {UtilService} from '../../shared/util/util.service';
 import {LocationsService} from '../../shared/services/locations.service';
 import {ChannelService} from "../../shared/services/channel.service";
+import { AdminService } from '../../shared/services/admin.service';
 
 declare let google: any;
 
@@ -27,6 +28,8 @@ export class AddPostComponent implements OnInit {
   channel:any;
   currentLocation:any;
   language:any = 'en';
+  approversData:any;
+  selectApprover:any;
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +39,8 @@ export class AddPostComponent implements OnInit {
     private route: ActivatedRoute,
     private util:UtilService,
     private locations:LocationsService,
-    private channelService: ChannelService) { }
+    private channelService: ChannelService,
+    private adminService:AdminService) { }
 
   ngOnInit() {
     // Load the Google Transliterate API
@@ -46,10 +50,13 @@ export class AddPostComponent implements OnInit {
 
     this.editorFormDetails();
 
-    this.channelService.getPublicChannels().subscribe((response:any)=>{
-      console.log(response);
+    this.channelService.subscribeChannelList().subscribe((response:any)=>{
       this.channelData = response.data;
     });
+
+    this.adminService.getPaidUser().subscribe((response:any)=>{
+      this.approversData = response.data;
+    })
 
   }
 
@@ -80,7 +87,7 @@ export class AddPostComponent implements OnInit {
       this.publishData = {...data.value};
 
       this.publishData.editorId = this.sharedProperties.loginResponseResult.data.userId;
-      this.publishData.currentLocation = this.currentLocation ?  this.currentLocation : [{lat:17.387140,lng:78.491684}];
+      this.publishData.currentLocation = this.currentLocation ?  this.currentLocation : {lat:17.387140,lng:78.491684};
       this.publishData.channel = this.channel;
       this.publishData.language = this.language;
       this.publishData.location = this.location ? this.location : [{lat:17.387140,lng:78.491684}];
@@ -156,6 +163,11 @@ export class AddPostComponent implements OnInit {
   selectChannelObj(selectChannel){
     console.log("selectChannel",selectChannel);
     this.channel = selectChannel.id;
+    if(Array.isArray(selectChannel.approvers)){
+      this.selectApprover = this.approversData.filter(item=>{
+        return item.userId === selectChannel.approvers[0];
+      })[0];
+    }
   }
 
 }

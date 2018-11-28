@@ -30,16 +30,15 @@
               <input type="radio" formControlName="publicChannel" [value]="!flag" (click)="selectChannelType(!flag)" [checked]="true"> Public
             </div>
           </div>
-          <div class="form-group row" *ngIf="approverFlag">
+          <div class="form-group row" *ngIf="!approverFlag">
             <label for="locDesc" class="col-sm-3 col-form-label">Approver</label>
             <div class="col-sm-9">
-              <input list="options" id="option-input" />
-              <datalist id="options">
                 <!-- you have to add your option elements inside of a select element for legacy reasons -->
-                <select [(ngModel)]="selectApprover" [ngModelOptions]="{standalone: true}">
-                  <!--<option *ngFor="let approver of approversData" [value]="approver" />-->
+                
+                <select [(ngModel)]="selectApprover" [ngModelOptions]="{standalone: true}" 
+                  class="form-control col-4" (change)="approverSelection(selectApprover)">
+                  <option *ngFor="let approver of approversData" [ngValue]="approver">{{approver.name}} </option>
                 </select>
-              </datalist>
             </div>
           </div>
 

@@ -49,7 +49,7 @@ export class AdminService {
   }
 
   getUsersListByName(name){
-    return this.http.get(HOST_URL + "admin/users?search="+ name +"access_token="+this.sharedProperties.tokenAuthKey);
+    return this.http.get(HOST_URL + "admin/users?search="+ name +"&access_token="+this.sharedProperties.tokenAuthKey);
   }
   getUsersAllList(){
     return this.http.get(HOST_URL + "admin/users?access_token="+this.sharedProperties.tokenAuthKey);
@@ -61,10 +61,8 @@ export class AdminService {
     });
   }
 
-  getPaidUser(name){
-    this.http.get(HOST_URL + `admin/paid-user/search=${name}?access_token=`+this.sharedProperties.tokenAuthKey).subscribe((result)=>{
-      console.log(result);
-    });
+  getPaidUser(){
+   return this.http.get(HOST_URL + `admin/paid-users?access_token=`+this.sharedProperties.tokenAuthKey);
   }
 
 }

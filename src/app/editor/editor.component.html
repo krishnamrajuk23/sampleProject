@@ -1,10 +1,11 @@
 <div class="container main-section" *ngIf="!uploadImage">
   <div class="row">
     <div class="col col-sm-12">
-      <button class="btn btn-dark" (click)="addPost()">Add New Post</button>
+      <button class="btn btn-dark mr-2" (click)="addPost()">Add New Post</button>
+      <button class="btn btn-dark" routerLink="/admin">Review News</button>
     </div>
   </div>
-  <div #gmap style="width:100%;height:400px"></div>
+  
   <div class="row">
     <div class="col-sm-12">
       <div class="card p-3 mt-3">

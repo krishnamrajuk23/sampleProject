@@ -3,6 +3,9 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NewsService} from '../shared/services/news.service';
 import {LocationsService} from '../shared/services/locations.service';
 import {GooglePlaceDirective} from 'ngx-google-places-autocomplete';
+import { ChannelService } from '../shared/services/channel.service';
+import { Router } from '../../../node_modules/@types/express';
+import { SharedPropertiesService } from '../shared/services/shared-properties.service';
 
 declare var google:any;
 
@@ -26,7 +29,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private newsService:NewsService,
-    private locationService: LocationsService,) { }
+    private locationService: LocationsService,
+    private channelService: ChannelService,
+    private sharedProperties: SharedPropertiesService) { }
 
   ngOnInit() {
     this.newsService.getLocalNews().subscribe((result:any) => {
@@ -76,11 +81,9 @@ export class HomeComponent implements OnInit {
     window.open('https://api.whatsapp.com/send?phone=' + '' + '&text=%20' + message,'_blank');
   }
 
-
   trackByFn(index, loc) {
     return loc.id;
   }
-
 
   public handleAddressChange(address) {
     console.log(address.geometry.location.toJSON());
@@ -88,4 +91,10 @@ export class HomeComponent implements OnInit {
     this.lat  = address.geometry.location.lat();*/
   }
 
+  subscriptionChannel(channelId){
+    this.channelService.subscribeChannel(channelId).subscribe(
+      (response)=>{
+      console.log(response);
+    },(error)=>{this.sharedProperties.setRegistrationRequired(true)});
+  }
 }

@@ -14,13 +14,13 @@
       <th>User Type</th>
     </thead>
     <tbody>
-      <tr *ngFor="let list of showSerach;trackBy: trackByFunc">
+      <tr *ngFor="let list of userAllList;trackBy: trackByFunc">
         <td>{{list.name}}</td>
         <td>{{list.phoneNum}}</td>
         <td>{{list.emailId}}</td>
         <td>
          <label class="switch">
-          <input type="checkbox" [(ngModel)]="toggleChecked" (change)="paidUser(list)">
+          <input type="checkbox" [(ngModel)]="list.isPaid" (change)="paidUser(list)">
           <span class="slider round"></span>
          </label>
         </td>

@@ -5,7 +5,7 @@
     <label for="title" class="col-sm-2 col-form-label">Channel</label>
     <div class="col-sm-5">
       <select class="form-control" id="location" [(ngModel)]="selectChannel" (change)="selectChannelObj(selectChannel)">
-          <option *ngFor="let data of channelData" [ngValue]="data">{{ data.desc }}</option>
+          <option *ngFor="let data of channelData" [ngValue]="data">{{ data.name ? data.name : data.desc }}</option>
       </select>
     </div>
 
@@ -57,18 +57,28 @@
           </div>
 
           <div class="form-group row">
+            <label for="description" class="col-sm-2 col-form-label">Approver:</label>
+            <div class="col-sm-10">
+            <select [(ngModel)]="selectApprover" [ngModelOptions]="{standalone: true}" 
+                    class="form-control col-4" (change)="approverSelection(selectApprover)" [disabled]="true">
+                <option *ngFor="let approver of approversData" [ngValue]="approver">{{approver.name}} </option>
+            </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
             <label for="description" class="col-sm-2 col-form-label">Image Upload:</label>
             <div class="col-sm-10">
               <input type="file" (change)="fileChangeEvent($event)"/>
             </div>
             <img [src]="url" *ngIf="url" idth="700" height="600">
-          </div>
-
+          </div>        
 
           <div class="d-flex justify-content-end">
             <button type="button" class="btn btn-primary mr-4" (click)="addSavePost(editorForm)" [disabled]="!(editorForm.valid)">Save</button>
             <button type="submit" class="btn btn-primary" (click)="addPost(editorForm)" [disabled]="!(editorForm.valid) ">Post</button>
           </div>
+
         </form>
       </div>
     </div>

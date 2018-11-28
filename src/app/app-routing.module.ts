@@ -7,7 +7,7 @@ import { AboutComponent } from './about/about.component';
 import {EditorComponent} from "./editor/editor.component";
 import {AddPostComponent} from "./editor/add-post/add-post.component";
 import {AdminComponent} from "./admin/admin.component";
-import {AddLocationComponent} from "./admin/add-channel/add-channel.component";
+import {AddChannelComponent} from "./admin/add-channel/add-channel.component";
 import {EditPostComponent} from './edit-post/edit-post.component';
 import {AuthGuardService} from './shared/services/auth-guard.service';
 import {EditorGuardService} from './shared/routeGuards/editor-guard.service';
@@ -23,8 +23,9 @@ const routes: Routes = [
   { path: 'addPost', component: AddPostComponent },
   { path: 'editPost', component: EditPostComponent},
   { path: 'admin', component: AdminComponent,/* canActivate:[AuthGuardService]*/},
-  { path: 'addLocation', component: AddLocationComponent, /*canActivate:[AuthGuardService]*/ },
+  { path: 'addChannel', component: AddChannelComponent, canActivate:[AuthGuardService] },
   { path: 'searchUsers', component: SearchComponent, /*canActivate:[AuthGuardService]*/ },
+  { path: 'approveNews', component: SearchComponent, /*canActivate:[AuthGuardService]*/ },
 ];
 
 @NgModule({
