@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   dropdownSettings: any = {};
   localurl = location.href;
   address:any;
+  subscribedChannelList : any[] = [];
 
   @ViewChild('places') places: GooglePlaceDirective;
   @ViewChild('search' ) public searchElement: ElementRef;
@@ -36,6 +37,19 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.newsService.getLocalNews().subscribe((result:any) => {
       this.newsData = result.data ? result.data : [];
+      this.channelService.getSubscribeChannel().subscribe((res:any)=>{
+        this.subscribedChannelList = res.data;
+        this.subscribedChannelList.map(list=>{
+          if(!list.publicChannel){
+            this.newsData = this.newsData.map(item=>{
+              if(item.channel){
+                item.isSubscribed = true;
+              }
+              return item;
+            });
+          }
+        });        
+      });
     });
 
     this.dropdownSettings = {
@@ -48,10 +62,8 @@ export class HomeComponent implements OnInit {
       allowSearchFilter: this.ShowFilter
     };
 
-    this.channelService.getSubscribeChannel().subscribe((res:any)=>{
-      console.log("channel subscribe",res);
-      
-    });
+    
+
   }
 
   filterByLocationData(selectLocation:string){
@@ -103,5 +115,5 @@ export class HomeComponent implements OnInit {
     },(error)=>{this.sharedProperties.setRegistrationRequired(true)});
   }
 
-  
+
 }
