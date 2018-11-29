@@ -38,18 +38,22 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.newsService.getLocalNews().subscribe((result:any) => {
-      this.newsData = result.data ? result.data : [];
+      let newsData = [];
+      newsData = result.data ? result.data : [];
       this.channelService.getSubscribeChannel().subscribe((res:any)=>{
         this.subscribedChannelList = res.data;
         this.subscribedChannelList.map(list=>{
           if(!list.publicChannel){
-            this.newsData = this.newsData.map(item=>{
+            newsData = newsData.map(item=>{
               if(item.channel){
                 item.isSubscribed = true;
               }
               return item;
             });
-          }
+          }          
+        });
+        this.newsData = newsData.sort((first,second) =>{
+          return +new Date(second.newsDate) - (+new Date(first.newsDate)); 
         });        
       });
     });
@@ -64,7 +68,12 @@ export class HomeComponent implements OnInit {
       allowSearchFilter: this.ShowFilter
     };
 
+    let locationObj = '['+JSON.stringify({'lat':17.385044,'lng':78.486671})+']';
     
+    this.locationService.getLocations(locationObj).subscribe(response=>{
+      console.log("Location result", response);
+    });
+
 
   }
 
@@ -105,7 +114,15 @@ export class HomeComponent implements OnInit {
   }
 
   public handleAddressChange(address) {
-    console.log(address.geometry.location.toJSON());
+
+    let loc = address.geometry.location.toJSON();
+    let locationObj = [];
+    locationObj.push(JSON.stringify({lat:loc.lat,lng:loc.lng}));
+
+    this.locationService.getLocations(locationObj).subscribe(response=>{
+      console.log("Location result", response);
+    });
+
     /*this.lng = address.geometry.location.lng();
     this.lat  = address.geometry.location.lat();*/
   }

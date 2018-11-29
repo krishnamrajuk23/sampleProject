@@ -9,8 +9,8 @@ export class LocationsService {
 
   constructor(private http: HttpClient) { }
 
-  getLocations(){
-    return this.http.get(HOST_URL+'public/locations');
+  getLocations(location){
+    return this.http.get(HOST_URL+'public/news?locations='+location);
   }
 
   postLocations(data){

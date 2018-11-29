@@ -38,9 +38,7 @@ export class EditPostComponent implements OnInit {
       newsDate: [this.editPostData.newsDate],
       refLink: [this.editPostData.refLink]
     });
-    this.locations.getLocations().subscribe(response => {
-      this.locationsData = response;
-    });
+    
   }
 
   updateSavePost(data){

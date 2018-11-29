@@ -8,23 +8,25 @@
           <option *ngFor="let data of channelData" [ngValue]="data">{{ data.name ? data.name : data.desc }}</option>
       </select>
     </div>
+    <div class="col-sm">
+        <label>Language</label>
+        <select id="prefLanguage" class="form-control d-flex col-4" (change)="changelanguage($event)" [(ngModel)]="selectedLanguage"  [ngModelOptions]="{standalone: true}">
+            <option value="en" DISABLED>SELECT</option>
+            <option value="te">Telugu</option>
+            <option value="hi">Hindi</option>
+            <option value="en">English</option>
+          </select> 
+    </div>
 
   </div>
 
   <div class="card">
 
-      <ng4geo-autocomplete [userSettings]="userSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+      <!--<ng4geo-autocomplete [userSettings]="userSettings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>-->
     <div class="row">
       <div class="col">
         <form [formGroup]="editorForm"  class="p-5">
-          <select id="prefLanguage" (change)="changelanguage($event)" [(ngModel)]="selectedLanguage"  [ngModelOptions]="{standalone: true}">
-            <option value="en" DISABLED>SELECT</option>
-            <option value="te">Telugu</option>
-            <option value="hi">Hindi</option>
-            <option value="en">English</option>
-          </select>
-
-          
+                  
 
           <div class="form-group row">
             <label for="title" class="col-sm-2 col-form-label">Story Title</label>
@@ -32,7 +34,6 @@
               <input type="text" class="form-control" formControlName="title" id="title" maxlength="150" >
             </div>
           </div>
-
 
           <div class="form-group row">
             <label for="description" class="col-sm-2 col-form-label">Story Description:</label>
@@ -80,6 +81,7 @@
           </div>        
 
           <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-primary mr-4" (click)="cancel()" >Cancel</button>
             <button type="button" class="btn btn-primary mr-4" (click)="addSavePost(editorForm)" [disabled]="!(editorForm.valid)">Save</button>
             <button type="submit" class="btn btn-primary" (click)="addPost(editorForm)" [disabled]="!(editorForm.valid) ">Post</button>
           </div>

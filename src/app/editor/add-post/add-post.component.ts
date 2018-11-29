@@ -188,4 +188,8 @@ export class AddPostComponent implements OnInit {
     }
   }
 
+  cancel(){
+    this.router.navigate(['editor']);
+  }
+
 }

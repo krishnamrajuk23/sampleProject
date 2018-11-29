@@ -61,12 +61,18 @@ export class HeaderComponent implements OnInit {
       this.isRegister = response ? true : false;
       this.isLogin = false;
       this.modalService.open(this.content, { centered: true });
-    })
+    });
+
+    setTimeout(()=>{
+      if(!this.userInformation){
+        this.authenticate_loop();
+      }      
+    },1000)
   }
   @ViewChild('authenticatePopUp') modalTemplate:TemplateRef<any>;
 
   public ngAfterViewInit(): void {
-      this.authenticate_loop();
+      
   }
 
 
