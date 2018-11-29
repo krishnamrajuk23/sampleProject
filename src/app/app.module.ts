@@ -7,6 +7,7 @@ import { NgxCaptchaModule } from 'ngx-captcha';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 
 
 import { AppComponent } from "./app.component";
@@ -73,7 +74,8 @@ import { ApproveNewsComponent } from './editor/approve-news/approve-news.compone
     ImageCropperModule,
     NgMultiSelectDropDownModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    GooglePlaceModule
+    GooglePlaceModule,
+    Ng4GeoautocompleteModule.forRoot()
   ],
   providers: [
     {

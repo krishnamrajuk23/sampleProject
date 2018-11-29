@@ -30,6 +30,13 @@ export class AddPostComponent implements OnInit {
   language:any = 'en';
   approversData:any;
   selectApprover:any;
+  private controlLanguageTranslation:any;
+  userSettings: any = {
+    inputPlaceholderText: 'This is the placeholder text doring component initialization'
+  }
+  
+  
+
 
   constructor(
     private fb: FormBuilder,
@@ -40,7 +47,14 @@ export class AddPostComponent implements OnInit {
     private util:UtilService,
     private locations:LocationsService,
     private channelService: ChannelService,
-    private adminService:AdminService) { }
+    private adminService:AdminService) {
+
+      setTimeout(()=>{
+        this.userSettings['inputPlaceholderText'] = 'This is the placeholder text after doing some external operation after some time';
+        this.userSettings = Object.assign({},this.userSettings)
+      },10000)
+     }
+    
 
   ngOnInit() {
     // Load the Google Transliterate API
@@ -117,8 +131,7 @@ export class AddPostComponent implements OnInit {
     lan = lan.currentTarget[lan.target.selectedIndex].text;
 
     var options = {
-      sourceLanguage:
-      google.elements.transliteration.LanguageCode.ENGLISH,
+      sourceLanguage:'en',
       destinationLanguage:
         [google.elements.transliteration.LanguageCode[lan.toUpperCase()]],
       shortcutKey: 'ctrl+g',
@@ -127,15 +140,20 @@ export class AddPostComponent implements OnInit {
 
     // Create an instance on TransliterationControl with the required
     // options.
-    var control =
+    this.controlLanguageTranslation =
       new google.elements.transliteration.TransliterationControl(options);
 
     // Enable transliteration in the textbox with id
     // 'transliterateTextarea'.
-    control.makeTransliteratable(['transliterateTextarea']);
+    this.controlLanguageTranslation.makeTransliteratable(['transliterateTextarea']);
+    this.controlLanguageTranslation.makeTransliteratable(['title']);
     //control.makeTransliteratable(['title']);
 
   }
+
+  // description(name){
+  //   this.controlLanguageTranslation.makeTransliteratable([name]);
+  // }
 
   public handleAddressChange(address,editFormData) {
     console.log(address.geometry.location.toJSON());
