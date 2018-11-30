@@ -1,0 +1,42 @@
+.nn-radio{
+  display: flex;
+  input[type="radio"] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    &:checked + label::before {
+      background-color: #fff;
+      border: 1px solid $blue;
+    }
+    &:checked + label::after{
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+      background-color: $blue;
+      position: absolute;
+      left: 5px;
+      content: '';
+    }
+    &:focus + label::before {
+      // the mixin is not used here to make sure there is feedback
+      box-shadow: 0 0 10px 0 #31c1ff;
+    }
+    + label {
+      font-size: 18px;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      padding-left: 30px;
+      position: relative;
+      &::before {
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        border: 1px solid $blue;
+        position: absolute;
+        left: 0;
+        content: '';
+      }
+    }
+  }
+}
