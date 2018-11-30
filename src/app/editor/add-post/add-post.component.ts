@@ -34,8 +34,8 @@ export class AddPostComponent implements OnInit {
   userSettings: any = {
     inputPlaceholderText: 'This is the placeholder text doring component initialization'
   }
-  
-  
+
+
 
 
   constructor(
@@ -54,7 +54,7 @@ export class AddPostComponent implements OnInit {
         this.userSettings = Object.assign({},this.userSettings)
       },10000)
      }
-    
+
 
   ngOnInit() {
     // Load the Google Transliterate API
@@ -190,6 +190,13 @@ export class AddPostComponent implements OnInit {
 
   cancel(){
     this.router.navigate(['editor']);
+  }
+  approverSelection(event){
+    console.log("Event ",event);
+  }
+
+  autoCompleteCallback1(event){
+    console.log("location",event);
   }
 
 }

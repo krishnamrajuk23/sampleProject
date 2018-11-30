@@ -2,6 +2,7 @@
   <h3>Create New Post</h3>
 
   <div class="form-group row p-l-3">
+
     <label for="title" class="col-sm-2 col-form-label">Channel</label>
     <div class="col-sm-5">
       <select class="form-control" id="location" [(ngModel)]="selectChannel" (change)="selectChannelObj(selectChannel)">
@@ -15,7 +16,7 @@
             <option value="te">Telugu</option>
             <option value="hi">Hindi</option>
             <option value="en">English</option>
-          </select> 
+          </select>
     </div>
 
   </div>
@@ -26,7 +27,7 @@
     <div class="row">
       <div class="col">
         <form [formGroup]="editorForm"  class="p-5">
-                  
+
 
           <div class="form-group row">
             <label for="title" class="col-sm-2 col-form-label">Story Title</label>
@@ -34,17 +35,16 @@
               <input type="text" class="form-control" formControlName="title" id="title" maxlength="150" >
             </div>
           </div>
-
           <div class="form-group row">
-            <label for="description" class="col-sm-2 col-form-label">Story Description:</label>
+            <label  class="col-sm-2 col-form-label">Story Description:</label>
             <div class="col-sm-10">
               <textarea type="text"  class="form-control" formControlName="description" id="transliterateTextarea"></textarea>
             </div>
           </div>
           <div class="form-group row">
-            <label for="description" class="col-sm-2 col-form-label">Story Location:</label>
+            <label class="col-sm-2 col-form-label">Story Location:</label>
             <div class="col-sm-10">
-              <input ngx-google-places-autocomplete  #places="ngx-places"  (onAddressChange)="handleAddressChange($event,editorForm)"/>
+              <ng4geo-autocomplete (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
             </div>
           </div>
 
@@ -55,17 +55,17 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="description" class="col-sm-2 col-form-label">Current Location:</label>
+            <label  class="col-sm-2 col-form-label">Current Location:</label>
             <div class="col-sm-10">
-              <input type="text" (keydown)="findMe()" />
+              <ng4geo-autocomplete (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
               <!--<input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>-->
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="description" class="col-sm-2 col-form-label">Approver:</label>
+            <label class="col-sm-2 col-form-label">Approver:</label>
             <div class="col-sm-10">
-            <select [(ngModel)]="selectApprover" [ngModelOptions]="{standalone: true}" 
+            <select [(ngModel)]="selectApprover" [ngModelOptions]="{standalone: true}"
                     class="form-control col-4" (change)="approverSelection(selectApprover)" [disabled]="true">
                 <option *ngFor="let approver of approversData" [ngValue]="approver">{{approver.name}} </option>
             </select>
@@ -78,7 +78,7 @@
               <input type="file" (change)="fileChangeEvent($event)"/>
             </div>
             <img [src]="url" *ngIf="url" idth="700" height="600">
-          </div>        
+          </div>
 
           <div class="d-flex justify-content-end">
               <button type="button" class="btn btn-primary mr-4" (click)="cancel()" >Cancel</button>
@@ -87,6 +87,48 @@
           </div>
 
         </form>
+
+
+        <div class="one half">
+          <div class="five sixth">
+            <div class="one third padded">
+              <label><b class="">Type Indian Language</b></label>
+            </div>
+            <div class="two third padded">
+              <select id="language" style="font-family:verdna,Arial;font-size: 15px;">
+                <option value="en_in">English</option>
+                <option value="hi_in" selected="selected" alt="Type in Hindi">Hindi</option>
+                <option value="pn_in" alt="Type in Panjabi">Punjabi</option>
+                <option value="as_in" alt="Type in Assamese">Assamese</option>
+                <option value="gj_in" alt="Type in Gujarati">Gujarati</option>
+                <option value="mr_in" alt="Type in Marathi">Marathi</option>
+                <option value="bn_in" alt="Type in Bengali">Bengali</option>
+                <option value="ml_in" alt="Type in Malayalam">Malayalam</option>
+                <option value="tm_in" alt="Type in Tamil">Tamil</option>
+                <option value="tl_in" alt="Type in Telugu">Telugu</option>
+                <option value="kn_in" alt="Type in Kannada">Kannada</option>
+                <option value="or_in" alt="Type in Oriya">Odia</option>
+                <option value="ur_in" alt="Type in Odia">Urdu</option>
+              </select>
+            </div>
+          </div>
+          <div class="one sixth" style="text-align:right;">
+            <a  id="kbdIcon"><img src="./CDAC_files/KbdIcon.ico"
+                                          alt="GIST : onscreen Floating keyboard"
+                                          style="height: 30px; width: 60px; margin: 6px 0px 0px 3px;"></a>
+          </div>
+        </div>
+
+        <div class="two third" style="width: 84%;">
+          <div class="row">
+                                <textarea name="txtInputSpace1" rows="2" cols="20" id="nameInput"
+                                          style="font-family: gist_telugu_font; font-size: medium; height: 100px;"
+                                          placeholder="(Eg: bharat)" autocomplete="off"></textarea>
+          </div>
+          <div class="row">
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
