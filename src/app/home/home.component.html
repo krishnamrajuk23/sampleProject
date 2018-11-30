@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-lg-12">
 
-      <div class="d-flex align-items-center justify-content-end my-2 col-6 pull-right p-0">
-          <label class="mb-0 mr-1 col-3">Select Location:</label>
+      <div class="d-flex align-items-center justify-content-end my-2 pull-right p-0">
+          <label class="mb-0 mr-1 col-6 text-right">Select Location:</label>
           <!-- <input type="text" class="form-control" placeholder="Location" name="Location" [(ngModel)]="address" #LocationCtrl="ngModel"
                   Googleplace (setAddress)="getAddressOnChange($event,LocationCtrl)">-->
 
@@ -20,7 +20,7 @@
       <div class="card-columns" *ngIf="!showChannelNews">
         <div class="card news-card shadow rounded" *ngFor="let news of newsData">
           <div class="subscribed-channel" *ngIf="news.channel && !news.channelData.publicChannel">
-            <a class="hand" (click)="openChannelNews(news.channel)">{{news.channelData.name ? news.channelData.name :
+            <a class="hand text-capitalize" (click)="openChannelNews(news.channel)">{{news.channelData.name ? news.channelData.name :
                                                                     news.channelData.desc}}</a>
             <button type="button" class="btn btn-link" (click)="subscriptionChannel(news.channel,news)">
               <i class="fa " aria-hidden="true"
@@ -57,7 +57,7 @@
       <div class="card-columns" *ngIf="showChannelNews">
         <div class="card news-card shadow rounded" *ngFor="let news of channelNewsData">
           <div class="subscribed-channel">
-            <span>{{news.channelData.name ? news.channelData.name : news.channelData.desc}}</span>
+            <span class="text-capitalize">{{news.channelData.name ? news.channelData.name : news.channelData.desc}}</span>
             <button type="button" class="btn btn-link" (click)="subscriptionChannel(news.channel,news)">
               <i class="fa " aria-hidden="true"
                  [ngClass]="{'fa-heart is-subscribed':news.isSubscribed == true,'fa-heart-o': !news.isSubscribed}"></i>
