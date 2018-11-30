@@ -50,12 +50,13 @@ export class HomeComponent implements OnInit {
               }
               return item;
             });
-          }          
+          }
         });
         this.newsData = newsData.sort((first,second) =>{
-          return +new Date(second.newsDate) - (+new Date(first.newsDate)); 
-        });        
+          return +new Date(second.newsDate) - (+new Date(first.newsDate));
+        });
       });
+      this.newsData = this.newsData ? this.newsData : newsData;
     });
 
     this.dropdownSettings = {
@@ -69,7 +70,7 @@ export class HomeComponent implements OnInit {
     };
 
     let locationObj = '['+JSON.stringify({'lat':17.385044,'lng':78.486671})+']';
-    
+
     this.locationService.getLocations(locationObj).subscribe(response=>{
       console.log("Location result", response);
     });
@@ -143,7 +144,7 @@ export class HomeComponent implements OnInit {
         (response)=>{
           news.isSubscribed = false;
         });
-    }  
+    }
   }
 
   openChannelNews(channelId){
