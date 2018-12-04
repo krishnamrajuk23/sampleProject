@@ -20,7 +20,7 @@ export class NewsService {
   }
 
   getChannelNewsById(channelId){
-    return this.http.get(HOST_URL+ "public/news/"+channelId);
+    return this.http.get(HOST_URL+ "public/channel/"+channelId + "/news");
   }
 
 }

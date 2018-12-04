@@ -27,9 +27,9 @@
                  [ngClass]="{'fa-heart is-subscribed':news.isSubscribed == true,'fa-heart-o': !news.isSubscribed}"></i>
             </button>
           </div>
-          <img class="card-img-left card-image"
+          <!--<img class="card-img-left card-image"
                *ngIf="news.imageChunks.length > 0"
-               [src]="'data:image/jpeg;base64,'+news.imageChunks[0].data.data" alt="News image"/>
+               [src]="'data:image/jpeg;base64,'+news.imageChunks[0].data.data" alt="News image"/>-->
           <div class="card-body card-block">
             <h5 class="card-title">{{news.title}}</h5>
             <p class="news-content">{{news.description}}</p>
@@ -63,9 +63,9 @@
                  [ngClass]="{'fa-heart is-subscribed':news.isSubscribed == true,'fa-heart-o': !news.isSubscribed}"></i>
             </button>
           </div>
-          <img class="card-img-left card-image"
+          <!--<img class="card-img-left card-image"
                *ngIf="news.imageChunks.length > 0"
-               [src]="'data:image/jpeg;base64,'+news.imageChunks[0].data.data" alt="News image"/>
+               [src]="'data:image/jpeg;base64,'+news.imageChunks[0].data.data" alt="News image"/>-->
           <div class="card-body card-block">
             <h5 class="card-title">{{news.title}}</h5>
             <p class="news-content">{{news.description}}</p>
