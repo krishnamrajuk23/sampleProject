@@ -3,17 +3,28 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  background: #17a2b8;
+  background: #31c1ff;
+  font-weight: 600;
   color: #fff; }
   .subscribed-channel i {
     color: #fff; }
     .subscribed-channel i.is-subscribed {
       color: #ab3939; }
 
-.share-setion {
-  font-size: 21px; }
+.card-block {
+  box-shadow: 0 5px 30px 10px rgba(0, 0, 0, 0.3); }
 
-.text-transform-cap {
-  text-transform: capitalize; }
+.card-share {
+  background-color: #77d7b9;
+  font-size: 24px;
+  padding: 0.7rem 1.25rem; }
+  .card-share i, .card-share a {
+    color: #fff !important; }
+
+.post-information {
+  font-size: 12px;
+  padding-bottom: 1rem; }
+  .post-information span {
+    text-transform: capitalize; }
 
 /*# sourceMappingURL=home.component.css.map */

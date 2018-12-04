@@ -26,6 +26,10 @@
   }
 }*/
 @media (max-width: 575.98px) {
+  .col-xs-12{
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
   input{
     min-width: auto;
   }

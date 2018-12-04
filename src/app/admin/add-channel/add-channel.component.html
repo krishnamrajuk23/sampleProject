@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col col-sm-12">
       <div class="card p-3 mt-3">
-        <form class="p-5" [formGroup]="addChannelForm">
+        <form class="p-5 p-xs-0" [formGroup]="addChannelForm">
           <div class="form-group row">
             <label for="location" class="col-sm-3 col-form-label">Channel</label>
             <div class="col-sm-9">
@@ -40,7 +40,7 @@
                 <!-- you have to add your option elements inside of a select element for legacy reasons -->
 
                 <select [(ngModel)]="selectApprover" [ngModelOptions]="{standalone: true}"
-                  class="form-control col-4" (change)="approverSelection(selectApprover)">
+                  class="form-control col-4 col-xs-12" (change)="approverSelection(selectApprover)">
                   <option *ngFor="let approver of approversData" [ngValue]="approver">{{approver.name}} </option>
                 </select>
             </div>

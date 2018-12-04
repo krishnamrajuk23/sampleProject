@@ -15,9 +15,21 @@
       }
     }
 }
-.share-setion{
-  font-size: 21px;
+.card-block{
+  box-shadow: 0 5px 30px 10px rgba(0, 0, 0, 0.3);
 }
-.text-transform-cap{
-  text-transform: capitalize;
+.card-share{
+  background-color: #77d7b9;
+  font-size: 24px;
+  padding: 0.7rem 1.25rem;
+  i, a{
+    color: $white !important;
+  }
+}
+.post-information{
+  font-size: 12px;
+  padding-bottom: 1rem;
+  span{
+    text-transform: capitalize;
+  }
 }

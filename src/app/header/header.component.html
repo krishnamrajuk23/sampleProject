@@ -9,16 +9,6 @@
       <div class="col-lg-4 col-md-4 col-xs-12 hidden-xs-down customarea">
         <a class="btn follow d-inline-block" href="https://twitter.com/wowthemesnet" target="blank"><i class="fa fa-twitter"></i>
           Follow</a>
-        <div ngbDropdown class="d-inline-block">
-          <a class="nav-link hand" id="languageSelcet" ngbDropdownToggle>
-            <i class="fa fa-language"></i>
-          </a>
-          <div ngbDropdownMenu aria-labelledby="languageSelcet">
-            <button class="dropdown-item">English</button>
-            <button class="dropdown-item" onclick="selectLanguage()">Telugu</button>
-            <button class="dropdown-item">Hindi</button>
-          </div>
-        </div>
       </div>
       <div class="col-lg-4 col-md-4  col-xs-12 text-center logoarea">
         <a class="navbar-brand d-block d-xs-none" href="/">Near News</a>
@@ -77,7 +67,7 @@
     <div *ngIf="isLogin">
       <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm,modal)">
         <div class="form-group">
-          <label for="exampleInputEmail1">PhoneNum or Email</label>
+          <label for="exampleInputEmail1">Phone Number or Email</label>
           <input type="text" class="form-control" formControlName="user" id="exampleInputEmail1"
                  aria-describedby="emailHelp" placeholder="Enter email">
 
@@ -115,7 +105,7 @@
           <div
             *ngIf="registerForm.controls.emailId.errors && (registerForm.controls.emailId.touched || registerForm.controls.emailId.dirty)"
             class="invalid-feedback">
-            <div *ngIf="registerForm.controls.emailId.errors.required">First Name is required</div>
+            <div *ngIf="registerForm.controls.emailId.errors.required">Email required</div>
           </div>
         </div>
         <div class="form-group">
@@ -126,7 +116,7 @@
           <div
             *ngIf="registerForm.controls.phoneNum.errors && (registerForm.controls.phoneNum.touched || registerForm.controls.phoneNum.dirty)"
             class="invalid-feedback">
-            <div *ngIf="registerForm.controls.phoneNum.errors.required">First Name is required</div>
+            <div *ngIf="registerForm.controls.phoneNum.errors.required">Phone number required</div>
           </div>
         </div>
         <div class="form-group">
@@ -136,7 +126,18 @@
           <div
             *ngIf="registerForm.controls.password.errors && (registerForm.controls.password.touched || registerForm.controls.password.dirty)"
             class="invalid-feedback">
-            <div *ngIf="registerForm.controls.password.errors.required">First Name is required</div>
+            <div *ngIf="registerForm.controls.password.errors.required">Password required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="ConfirmPassword">Confirm Password</label>
+          <input type="password" class="form-control" formControlName="ConfirmPassword" id="ConfirmPassword" placeholder="Please re-enter yourPassword"
+                 [ngClass]="{ 'is-invalid':  registerForm.controls.ConfirmPassword.errors && (registerForm.controls.ConfirmPassword.touched || registerForm.controls.ConfirmPassword.dirty) }">
+          <div
+            *ngIf="registerForm.controls.ConfirmPassword.errors && (registerForm.controls.ConfirmPassword.touched || registerForm.controls.ConfirmPassword.dirty)"
+            class="invalid-feedback">
+            <div *ngIf="registerForm.controls.ConfirmPassword.errors.required">Confirm Password required</div>
+            <div *ngIf="registerForm.controls.password != registerForm.controls.ConfirmPassword">Those passwords didn't match. Try again.</div>
           </div>
         </div>
         <div class="form-group">
