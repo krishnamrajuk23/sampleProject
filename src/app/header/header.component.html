@@ -130,17 +130,6 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="ConfirmPassword">Confirm Password</label>
-          <input type="password" class="form-control" formControlName="ConfirmPassword" id="ConfirmPassword" placeholder="Please re-enter yourPassword"
-                 [ngClass]="{ 'is-invalid':  registerForm.controls.ConfirmPassword.errors && (registerForm.controls.ConfirmPassword.touched || registerForm.controls.ConfirmPassword.dirty) }">
-          <div
-            *ngIf="registerForm.controls.ConfirmPassword.errors && (registerForm.controls.ConfirmPassword.touched || registerForm.controls.ConfirmPassword.dirty)"
-            class="invalid-feedback">
-            <div *ngIf="registerForm.controls.ConfirmPassword.errors.required">Confirm Password required</div>
-            <div *ngIf="registerForm.controls.password != registerForm.controls.ConfirmPassword">Those passwords didn't match. Try again.</div>
-          </div>
-        </div>
-        <div class="form-group">
           <ngx-recaptcha2
             [siteKey]="siteKey"
             [size]="'Normal'"

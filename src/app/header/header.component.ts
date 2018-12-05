@@ -120,7 +120,6 @@ export class HeaderComponent implements OnInit {
       emailId: ["", /*[Validators.required, Validators.email]*/],
       phoneNum: ["", Validators.required],
       password: ["", Validators.required],
-      ConfirmPassword: ["", Validators.required],
       recaptchaResp: ['', Validators.required]
     });
   }

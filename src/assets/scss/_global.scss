@@ -13,11 +13,11 @@
   background-color: #31c1ff;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background: linear-gradient(to bottom, #31c1ff 0%, #31c1ff 18%, #30b3ff 35%, #2d6bfd 66%, #2d42fc 100%);
+  background: linear-gradient(to right, #525B78 0%, #77AFD2 25%, ##494C5D 55%, #2E293D 100%);
 
 }*/
 body {
-  background-image: linear-gradient(to right, $regal-blue, $san-juan);
+  background: linear-gradient(to top right, #525B78 0%, #77AFD2 25%, #494C5D 70%, #2E293D 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
@@ -85,14 +85,14 @@ ul[role="tablist"] {
 
 .elections-link {
   background-color: transparent;
-  color: #0077bc;
+  color: #B0AFC5;
   text-decoration: none;
   outline: 0;
   font-size: .875rem;
   line-height: 1.4;
   letter-spacing: .2px;
   &:hover, &:focus {
-    color: #19a5f0;
+    color: #B0AFC5;
     cursor: pointer;
     text-decoration: none;
   }

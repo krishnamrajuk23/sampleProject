@@ -421,11 +421,11 @@
   background-color: #31c1ff;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background: linear-gradient(to bottom, #31c1ff 0%, #31c1ff 18%, #30b3ff 35%, #2d6bfd 66%, #2d42fc 100%);
+  background: linear-gradient(to right, #525B78 0%, #77AFD2 25%, ##494C5D 55%, #2E293D 100%);
 
 }*/
 body {
-  background-image: linear-gradient(to right, #034378, #2d4e68);
+  background: linear-gradient(to top right, #525B78 0%, #77AFD2 25%, #494C5D 70%, #2E293D 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh; }
@@ -479,14 +479,14 @@ ul[role="tablist"] {
 
 .elections-link {
   background-color: transparent;
-  color: #0077bc;
+  color: #B0AFC5;
   text-decoration: none;
   outline: 0;
   font-size: .875rem;
   line-height: 1.4;
   letter-spacing: .2px; }
   .elections-link:hover, .elections-link:focus {
-    color: #19a5f0;
+    color: #B0AFC5;
     cursor: pointer;
     text-decoration: none; }
 
@@ -549,10 +549,51 @@ img::-moz-selection {
   letter-spacing: 0.8px;
   color: #999999; }
 
+/*
 input:not(input[type="radio"]) {
   min-height: 36px;
   min-width: 250px;
-  padding: 0.3rem 0.6rem; }
+  padding: 0.3rem 0.6rem;
+}
+*/
+.nn-input {
+  position: relative; }
+  .nn-input input {
+    width: 260px;
+    border-radius: 25px;
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid rgba(184, 172, 191, 0.55);
+    display: block;
+    padding: 15px 15px 15px 40px;
+    font-size: 1rem;
+    line-height: 1.5;
+    outline: 0;
+    cursor: text;
+    background-clip: padding-box;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; }
+  .nn-input i {
+    color: #93A2B0;
+    position: absolute;
+    font-size: 20px;
+    left: 10px;
+    top: 20px; }
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #fff; }
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #fff; }
+
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #fff; }
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #fff; }
 
 footer {
   padding: 50px 0 65px; }
@@ -783,6 +824,34 @@ footer {
 
 .white-font {
   color: #fff !important; }
+
+.full-height {
+  height: 100vh; }
+
+.no-overflow {
+  overflow: hidden; }
+
+.nn-button {
+  width: 260px;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  cursor: pointer;
+  background: transparent;
+  padding: 15px 32px; }
+  .nn-button.nn-button-primary {
+    background: linear-gradient(to right, #C579DB 0%, #A07EDD 40%, #8780DD 70%, #7483DE 100%);
+    box-shadow: inset 0 -10px 10px -10px #000000;
+    color: #fff;
+    border-color: #7483DE; }
+    .nn-button.nn-button-primary:hover, .nn-button.nn-button-primary:focus {
+      background: #A07EDD; }
+  .nn-button.nn-button-primary-outline {
+    border-color: #7483DE;
+    color: #fff; }
+    .nn-button.nn-button-primary-outline:hover, .nn-button.nn-button-primary-outline:focus {
+      background: #C579DB; }
 
 .switch {
   position: relative;

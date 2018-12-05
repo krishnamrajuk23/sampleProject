@@ -39,6 +39,8 @@ import { GooglePlacesDirective } from './shared/directives/google-places.directi
 
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { ApproveNewsComponent } from './editor/approve-news/approve-news.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { ApproveNewsComponent } from './editor/approve-news/approve-news.compone
     SearchComponent,
     SinglePostViewComponent,
     GooglePlacesDirective,
-    ApproveNewsComponent
+    ApproveNewsComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

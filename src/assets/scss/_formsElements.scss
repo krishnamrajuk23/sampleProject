@@ -1,7 +1,49 @@
-input:not(input[type="radio"]){
+@import "variables";
+
+/*
+input:not(input[type="radio"]) {
   min-height: 36px;
   min-width: 250px;
   padding: 0.3rem 0.6rem;
+}
+*/
+
+.nn-input {
+  position: relative;
+  input {
+    width: 260px;
+    border-radius: 25px;
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid rgba(184, 172, 191, 0.55);
+    display: block;
+    padding: 15px 15px 15px 40px;
+    font-size: 1rem;
+    line-height: 1.5;
+    outline: 0;
+    cursor: text;
+    background-clip: padding-box;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+  i{
+    color: #93A2B0;
+    position: absolute;
+    font-size: 20px;
+    left: 10px;
+    top: 20px;
+  }
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: $white;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: $white;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: $white;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: $white;
 }
 
 
