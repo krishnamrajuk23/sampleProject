@@ -1,55 +1,18 @@
 <!-- Navigation -->
 
-<header class="navbar-light navbar-expand-lg fixed-top" style="top: 0;">
-
-  <div class="container">
-
-    <!-- Begin Logo -->
-    <div class="row justify-content-center align-items-center brandrow">
-      <div class="col-lg-4 col-md-4 col-xs-12 hidden-xs-down customarea">
-        <a class="btn follow d-inline-block" href="https://twitter.com/wowthemesnet" target="blank"><i class="fa fa-twitter"></i>
-          Follow</a>
-      </div>
-      <div class="col-lg-4 col-md-4  col-xs-12 text-center logoarea">
-        <a class="navbar-brand d-block d-xs-none" href="/">Near News</a>
-      </div>
-      <div class="col-lg-4 col-md-4 mr-auto col-xs-12 text-right loginArea">
-        <a class="nav-link hand d-inline-block" *ngIf="!userInformation?.name"
-           (click)="openVerticallyCentered(content);showMenu =! showMenu">Login</a>
-        <a class="nav-link hand d-inline-block" *ngIf="userInformation?.name" (click)="logout()">Logout</a>
-      </div>
-
-    </div>
-    <!-- End Logo -->
-
-    <div class="navarea">
-      <nav class="navbar navbar-toggleable-sm">
-        <a class="navbar-brand d-none d-xs-block" href="/">Near News</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation" (click)="showMenu =! showMenu">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse"  [ngClass]="{'collapse' : showMenu ,'' : !showMenu }"
-             id="navbarSupportedContent">
-          <ul class="navbar-nav col-md-12 justify-content-center">
-            <li class="nav-item hand">
-              <a *ngIf="userInformation?.name"
-                 [ngClass]="{'active-link':dashboard}"
-                 (click)="dashboardRedirect(userInformation)" class="nav-link">Dashboard</a>
-            </li>
-            <li class="nav-item hand">
-              <a routerLink="/home" routerLinkActive="active-link" (click)="showMenu =! showMenu" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item hand">
-              <a routerLink="/about" routerLinkActive="active-link" (click)="showMenu =! showMenu" class="nav-link">About</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-    </div>
-
+<header class="fixed-top">
+  <div class="nn-header-left">
+    <a href="/">
+      <i class="fa fa-bars white-font"></i>
+    </a>
+    <span class="d-xs-none">News</span>
+  </div>
+  <span class="nn-logo">N</span>
+  <div class="nn-header-right">
+    <i class="fa fa-search white-font"></i>
+    <span *ngIf="!userInformation?.name" class="white-font d-xs-none hand"
+          (click)="openVerticallyCentered(content);showMenu =! showMenu">Login</span>
+    <span class="user-image d-xs-none hand" *ngIf="userInformation?.name" (click)="logout()">{{userMonoGram}}</span>
   </div>
 
 </header>

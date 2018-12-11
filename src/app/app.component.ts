@@ -6,7 +6,6 @@ import { SwUpdate } from "@angular/service-worker";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'election-result';
   constructor(private update:SwUpdate) {
     this.update.available.subscribe(res =>{
       this.update.activated

@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,aAAc;EACZ,WAAW,EAAE,4BAA4B;EACzC,SAAS,EAAE,IAAI;EACf,WAAW,EAAE,GAAG;EAChB,KAAK,EAAE,OAAO;EACd,YAAY,EAAE,CAAC;;AAEjB,YAAY;EACV,WAAW,EAAE,4BAA4B;EACzC,KAAK,EAAE,6BAAyB;;AAElC,mBAAoB;EAClB,UAAU,EAAE,IAAI;EAChB,UAAU,EAAE,kCAAiC;EAC7C,OAAO,EAAE,IAAI;EACb,UAAU,EAAE,oBAAoB;EAChC,KAAK,EAAE,kBAAiB",
+"mappings": "AAAA;;;;;;;;;;;;;;;;;GAiBG",
 "sources": ["header.component.scss"],
 "names": [],
 "file": "header.component.css"

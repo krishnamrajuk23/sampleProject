@@ -1,4 +1,4 @@
-.navbar {
+/*.navbar {
   padding: .2rem 1rem;
 }
 .nav-item{
@@ -13,4 +13,46 @@
   font-weight: 600;
   letter-spacing: 0.8px;
   color: #999999;
+}*/
+
+@import "variables";
+
+header{
+  background: linear-gradient(to right, #C579DB 0%,#A07EDD 40%, #8780DD 70%,#7483DE 100%);
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .nn-header-left{
+    color: $white;
+    display: flex;
+    align-items: center;
+    i{
+      font-weight: normal;
+      margin: 0 2rem;
+    }
+    span{
+      font-size: 12px;
+    }
+  }
+  .nn-header-right{
+    i{
+      font-weight: normal;
+      margin: 0 2rem;
+    }
+  }
+  .user-image{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background: #797882;
+    color: #fff;
+    margin-right: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 20px;
+  }
 }

@@ -1,19 +1,20 @@
-.navbar-brand {
+/*.navbar-brand {
   font-family: Merriweather, Georgia, serif;
   font-size: 26px;
   font-weight: 700;
   color: #111111;
-  margin-right: 0; }
-
-.active-link {
+  margin-right: 0;
+}
+.active-link{
   font-family: Merriweather, Georgia, serif;
-  color: rgba(0, 0, 0, 0.9) !important; }
-
+  color: rgba(0,0,0,.9) !important;
+}
 header.navbar-light {
   background: #fff;
-  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .15);
   padding: 10px;
   transition: top 0.2s ease-in-out;
-  color: rgba(0, 0, 0, 0.5); }
+  color: rgba(0, 0, 0, .5);
+}*/
 
 /*# sourceMappingURL=header.component.css.map */

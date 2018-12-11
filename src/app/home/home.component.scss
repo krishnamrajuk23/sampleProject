@@ -15,8 +15,32 @@
       }
     }
 }
-.card-block{
+/*.card-block{
   box-shadow: 0 5px 30px 10px rgba(0, 0, 0, 0.3);
+}*/
+.news-card
+{
+  position: relative;
+}
+.news-card:before, .news-card:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 25px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  box-shadow: 0 35px 20px #777;
+  transform: rotate(-8deg);
+}
+.news-card:after
+{
+  transform: rotate(8deg);
+  right: 10px;
+  left: auto;
 }
 .card-share{
   background-color: #77d7b9;

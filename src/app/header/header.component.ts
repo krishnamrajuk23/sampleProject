@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
   recaptcha:string;
   userInformation : LoginDataModal;
   dashboard = false;
+  userMonoGram;
   @ViewChild('content') content;
 
   constructor(
@@ -47,6 +48,7 @@ export class HeaderComponent implements OnInit {
     if(this.sharedProperties.loginResponseResult){
       this.sharedProperties.setLoginStatus(this.sharedProperties.loginResponseResult);
       this.userInformation = this.sharedProperties.loginResponseResult.data;
+
     }
     this.sharedProperties.loginStatusResponse.subscribe((result:any) => {
       if(result){
@@ -105,6 +107,7 @@ export class HeaderComponent implements OnInit {
     modal.close();
    /* this.loginService.authToken(this.loginForm.value);*/
    this.loginService.loginStatus(loginForm.value);
+    this.userMonoGram = this.userInformation.name;
   }
 
   goToRegister(content,alertmodal){

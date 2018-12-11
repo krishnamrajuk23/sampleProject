@@ -16,7 +16,7 @@
   background: linear-gradient(to right, #525B78 0%, #77AFD2 25%, ##494C5D 55%, #2E293D 100%);
 
 }*/
-body {
+.user-start-page {
   background: linear-gradient(to top right, #525B78 0%, #77AFD2 25%, #494C5D 70%, #2E293D 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -31,7 +31,10 @@ p {
 .hand {
   cursor: pointer;
 }
-
+.nn-logo{
+  font-size: 3em;
+  color: #fff;
+}
 .p-l-3 {
   padding-left: 3rem !important;
 }
