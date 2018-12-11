@@ -23,4 +23,8 @@ export class NewsService {
     return this.http.get(HOST_URL+ "public/channel/"+channelId + "/news");
   }
 
+  getNewsMediaImages(newsId){
+    return this.http.get(HOST_URL+"/api-ln/public/news"+newsId+"/media");
+  }
+
 }

@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
     private sharedProperties: SharedPropertiesService) { }
 
   ngOnInit() {
+    const count = 6;
     this.newsService.getLocalNews().subscribe((result:any) => {
       let newsData = [];
       newsData = result.data ? result.data : [];
@@ -46,7 +47,12 @@ export class HomeComponent implements OnInit {
         this.subscribedChannelList = res.data;
         this.subscribedChannelList.map(list=>{
           if(!list.publicChannel){
-            newsData = newsData.map(item=>{
+            newsData = newsData.map((item,index)=>{
+              if(count === index){
+                this.newsService.getNewsMediaImages(item.id).subscribe(res=>{
+                  console.log("Response",res);
+                });
+              }
               if(item.channel){
                 item.isSubscribed = true;
               }
