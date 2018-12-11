@@ -38,7 +38,7 @@
   }
   .card-image{
     width: 100%;
-    height: 200px;
+    height: 250px;
   }
   .p-xs-0{
     padding: 0 !important;
@@ -71,6 +71,13 @@
   }
   .navarea{
     margin-top: 50px;
+  }
+  .card-columns{
+    column-count: 1;
+    column-gap: 2.25rem;
+    .card{
+      margin-bottom: 1.25rem;
+    }
   }
 }
 

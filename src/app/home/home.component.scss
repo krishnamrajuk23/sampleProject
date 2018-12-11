@@ -5,7 +5,6 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    background: #31c1ff;
     font-weight: 600;
     color: $white;
     i{
@@ -22,7 +21,7 @@
 {
   position: relative;
 }
-.news-card:before, .news-card:after
+/*.news-card:before, .news-card:after
 {
   z-index: -1;
   position: absolute;
@@ -41,9 +40,8 @@
   transform: rotate(8deg);
   right: 10px;
   left: auto;
-}
+}*/
 .card-share{
-  background-color: #77d7b9;
   font-size: 24px;
   padding: 0.7rem 1.25rem;
   i, a{
@@ -55,5 +53,22 @@
   padding-bottom: 1rem;
   span{
     text-transform: capitalize;
+  }
+}
+.add-new{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  font-size: 60px;
+  color: #fff;
+}
+.add-buttons{
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  button{
+    display: block;
+    margin-bottom: 15px;
+    text-align: center;
   }
 }

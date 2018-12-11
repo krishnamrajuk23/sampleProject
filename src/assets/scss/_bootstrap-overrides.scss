@@ -1,5 +1,12 @@
 // Bootstrap overrides for this template
 @import "./variables.scss";
-.card{
-
+.card-columns{
+  column-count:2;
+  column-gap: 4.25rem;
+  .card{
+    margin-bottom: 4.25rem;
+  }
+}
+.container{
+  max-width: 960px;
 }

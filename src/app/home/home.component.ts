@@ -25,6 +25,8 @@ export class HomeComponent implements OnInit {
   subscribedChannelList : any[] = [];
   showChannelNews : boolean = false;
   channelNewsData: any[] = [];
+  isCircle = false;
+  isAdd = true;
 
   @ViewChild('places') places: GooglePlaceDirective;
   @ViewChild('search' ) public searchElement: ElementRef;
