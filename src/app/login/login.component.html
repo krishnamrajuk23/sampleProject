@@ -1,25 +1,26 @@
 <div class="row m-0 user-start-page">
   <div class="col-auto d-flex align-items-center m-auto full-height no-overflow">
-    <form>
+      
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm)">
       <div class="col-auto">
-        <label class="sr-only" for="Username">Username</label>
+        <label class="sr-only" for="Username">Phone Number or Email</label>
         <div class="nn-input mb-4">
           <i class="fa fa-user-circle-o"></i>
-          <input type="text" id="Username" placeholder="Username">
+          <input type="text" id="Username" formControlName="user" placeholder="Phone Number or Email">
         </div>
       </div>
       <div class="col-auto">
         <label class="sr-only" for="Password">Password</label>
         <div class="nn-input mb-4">
            <i class="fa fa-lock"></i>
-           <input type="password" id="Password" placeholder="Password">
+           <input type="password" id="Password"  formControlName="password" placeholder="Password">
         </div>
       </div>
       <div class="col-auto mb-4">
-        <button class="nn-button nn-button-primary">Get Started</button>
+        <button class="nn-button nn-button-primary" type="submit">Get Started</button>
       </div>
       <div class="col-auto d-flex align-items-center justify-content-between">
-        <a tabindex="0" routerLink="/register" class="elections-link">Create a new account</a>
+        <a tabindex="0" routerLink="/register" class="elections-link"  routerLink="/register">Create a new account</a>
         <a tabindex="0" class="elections-link">need help</a>
       </div>
     </form>

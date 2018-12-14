@@ -35,7 +35,7 @@
   <div class="nn-header-right">
     <i class="fa fa-search white-font"></i>
     <span *ngIf="!userInformation?.name" class="white-font d-xs-none hand"
-          (click)="openVerticallyCentered(content);showMenu =! showMenu">Login</span>
+          (click)="showMenu =! showMenu" routerLink="/login">Login</span>
     <div class="d-xs-none hand position-relative" *ngIf="userInformation?.name">
       <!---->
       <span class="user-image" (click)="openPopup()">{{userInformation.name}}</span>
@@ -61,27 +61,7 @@
   </div>
 
   <div class="modal-body">
-    <div *ngIf="isLogin">
-      <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm,modal)">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Phone Number or Email</label>
-          <input type="text" class="form-control" formControlName="user" id="exampleInputEmail1"
-                 aria-describedby="emailHelp" placeholder="Enter email">
-
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1"
-                 placeholder="Password">
-        </div>
-        <div class="d-flex justify-content-between">
-          <button type="submit" class="btn btn-primary">Login</button>
-          <button type="button" class="btn btn-info" (click)="isRegister = true;isLogin = false;registrationForm()">
-            Register
-          </button>
-        </div>
-      </form>
-    </div>
+    
     <div *ngIf="isRegister">
       <form [formGroup]="registerForm" (ngSubmit)="onRegistration(registerForm)">
         <div class="form-group">
@@ -138,10 +118,9 @@
           </ngx-recaptcha2>
         </div>
         <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-info" (click)="isRegister = false;isLogin = true; loginformDetails()">
+          <button type="button" class="btn btn-info" routerLink="/login">
             Login
           </button>
-          <button type="submit" class="btn btn-primary">Register</button>
         </div>
       </form>
     </div>

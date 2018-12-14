@@ -46,7 +46,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.registrationForm();
-    this.loginformDetails();
+    //this.loginformDetails();
     if(this.sharedProperties.loginResponseResult){
       this.sharedProperties.setLoginStatus(this.sharedProperties.loginResponseResult);
       this.userInformation = this.sharedProperties.loginResponseResult.data;
@@ -59,19 +59,7 @@ export class HeaderComponent implements OnInit {
     });
     if(this.router.url === "/editor" || this.router.url === "/admin"){
       this.dashboard = true;
-    }
-
-    this.sharedProperties.registrationRequired.subscribe(response=>{
-      this.isRegister = response ? true : false;
-      this.isLogin = false;
-      this.modalService.open(this.content, { centered: true });
-    });
-
-    setTimeout(()=>{
-      if(!this.userInformation){
-        this.authenticate_loop();
-      }
-    },1000)
+    }  
   }
   @ViewChild('authenticatePopUp') modalTemplate:TemplateRef<any>;
 
@@ -92,36 +80,19 @@ export class HeaderComponent implements OnInit {
     this.isRegister = false;
     this.modalService.open(content, { centered: true });
   }
-  // Login form fields
-  loginformDetails() {
-    this.loginForm = this.fb.group({
-      user: ["",Validators.required],
-      password: ["",Validators.required]
-    });
-  }
+  
   openPopup(){
     this.isOpen =! this.isOpen;
   }
   openMenu(){
     this.menuOpen =! this.menuOpen;
   }
-  onLogin(loginForm, modal) {
-    this.loginStatus = true;
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return;
-    }
-    modal.close();
-   /* this.loginService.authToken(this.loginForm.value);*/
-   this.loginService.loginStatus(loginForm.value);
-    this.userMonoGram = this.userInformation.name;
-  }
 
   goToRegister(content,alertmodal){
     this.isLogin = false;
     this.isRegister = true;
     alertmodal.close();
-    this.openVerticallyCentered(content);
+    //this.openVerticallyCentered(content);
   }
 
   registrationForm() {

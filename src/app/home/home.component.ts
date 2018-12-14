@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewsService } from '../shared/services/news.service';
 import { LocationsService } from '../shared/services/locations.service';
@@ -6,6 +6,7 @@ import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { ChannelService } from '../shared/services/channel.service';
 import { SharedPropertiesService } from '../shared/services/shared-properties.service';
 import { Router } from "@angular/router";
+
 
 declare var google:any;
 
@@ -30,6 +31,7 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('places') places: GooglePlaceDirective;
   @ViewChild('search' ) public searchElement: ElementRef;
+  @ViewChild('addChannelModel') addChannelModal:TemplateRef<any>;
 
   constructor(
     private modalService: NgbModal,
@@ -165,13 +167,17 @@ export class HomeComponent implements OnInit {
 
   addChannel(){
     if(this.sharedProperties.loginResponseResult){
-      this.route.navigate(['/addPost']);
+      this.route.navigate(['/addChannel']);
+    }else{
+      this.modalService.open(this.addChannelModal,{ centered: true });  
     }
   }
 
   addPost(){
     if(this.sharedProperties.loginResponseResult){
       this.route.navigate(['/addPost']);
+    }else{
+      this.route.navigate(['/login']);
     }
   }
 
