@@ -17,6 +17,7 @@ export class SharedPropertiesService {
   constructor() {
     if(sessionStorage.getItem('loginResult')){
       this.loginResponseResult = JSON.parse(sessionStorage.getItem('loginResult'));
+      this.loginStatusResponse.next(this.loginResponseResult);
     }
     if(sessionStorage.getItem('token')){
       this.tokenAuthKey = sessionStorage.getItem('token');
@@ -27,7 +28,7 @@ export class SharedPropertiesService {
   setLoginStatus(data){
     this.loginStatusResponse.next(data);
     this.loginResponseResult = data;
-    sessionStorage.setItem('loginResult',JSON.stringify(data));
+    sessionStorage.setItem('loginResult',JSON.stringify(data.data));
   }
 
   setEditPostNews(news){

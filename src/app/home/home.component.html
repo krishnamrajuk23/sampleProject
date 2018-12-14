@@ -97,12 +97,12 @@
         </div>
 
       </div>
+      
       <div class="add-buttons" *ngIf="isCircle">
-        <button class="btn btn-primary">Add Channel</button>
-        <button class="btn btn-primary">Add Post</button>
+        <button class="btn btn-primary" (click)="addChannel()">Add Channel</button>
+        <button class="btn btn-primary" (click)="addPost()">Add Post</button>
       </div>
       <div class="add-new">
-
         <a class="hand" (click)="isCircle = true;isAdd = false" *ngIf="isAdd"><i class="fa fa-plus-circle"></i></a>
         <a class="hand" (click)="isAdd = true;isCircle = false" *ngIf="isCircle"><i class="fa fa-times"></i></a>
       </div>

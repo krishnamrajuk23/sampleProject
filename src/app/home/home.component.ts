@@ -1,11 +1,11 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {NewsService} from '../shared/services/news.service';
-import {LocationsService} from '../shared/services/locations.service';
-import {GooglePlaceDirective} from 'ngx-google-places-autocomplete';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NewsService } from '../shared/services/news.service';
+import { LocationsService } from '../shared/services/locations.service';
+import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { ChannelService } from '../shared/services/channel.service';
-import { Router } from '../../../node_modules/@types/express';
 import { SharedPropertiesService } from '../shared/services/shared-properties.service';
+import { Router } from "@angular/router";
 
 declare var google:any;
 
@@ -36,7 +36,8 @@ export class HomeComponent implements OnInit {
     private newsService:NewsService,
     private locationService: LocationsService,
     private channelService: ChannelService,
-    private sharedProperties: SharedPropertiesService) { }
+    private sharedProperties: SharedPropertiesService,
+    private route:Router) { }
 
   ngOnInit() {
     const count = 6;
@@ -160,6 +161,18 @@ export class HomeComponent implements OnInit {
     this.newsService.getChannelNewsById(channelId).subscribe((res:any)=>{
       this.channelNewsData = res.data;
     });
+  }
+
+  addChannel(){
+    if(this.sharedProperties.loginResponseResult){
+      this.route.navigate(['/addPost']);
+    }
+  }
+
+  addPost(){
+    if(this.sharedProperties.loginResponseResult){
+      this.route.navigate(['/addPost']);
+    }
   }
 
 
