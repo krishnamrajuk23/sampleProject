@@ -29,6 +29,8 @@ export class HeaderComponent implements OnInit {
   userInformation : LoginDataModal;
   dashboard = false;
   userMonoGram;
+  isOpen = false;
+  menuOpen = false;
   @ViewChild('content') content;
 
   constructor(
@@ -97,7 +99,12 @@ export class HeaderComponent implements OnInit {
       password: ["",Validators.required]
     });
   }
-
+  openPopup(){
+    this.isOpen =! this.isOpen;
+  }
+  openMenu(){
+    this.menuOpen =! this.menuOpen;
+  }
   onLogin(loginForm, modal) {
     this.loginStatus = true;
     // stop here if form is invalid

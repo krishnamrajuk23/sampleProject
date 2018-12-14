@@ -415,7 +415,7 @@
   column-count: 2;
   column-gap: 4.25rem; }
   .card-columns .card {
-    margin-bottom: 5.25rem; }
+    margin-bottom: 4.25rem; }
 
 .container {
   max-width: 960px; }
@@ -953,7 +953,7 @@ input:checked + .slider:before {
   border-radius: 50%; }
 
 body {
-  background: url("src/assets/images/welcome-bg.7d762c90.jpg") center;
+  background: url("assets/images/welcome-bg.7d762c90.jpg") center;
   background-size: cover; }
 
 /*# sourceMappingURL=styles.css.map */

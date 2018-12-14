@@ -2,9 +2,33 @@
 
 <header class="fixed-top">
   <div class="nn-header-left">
-    <a href="/">
-      <i class="fa fa-bars white-font"></i>
-    </a>
+    <div class="position-relative">
+      <a (click)="openMenu()" class="hand">
+        <i class="fa fa-bars white-font"></i>
+      </a>
+      <div [attr.aria-hidden]="menuOpen" [class]="!menuOpen? 'slideMenu':'slideMenu menu-open'">
+        <a (click)="menuOpen = false"><i class="fa fa-arrow-left"></i></a>
+        <ul >
+          <li *ngIf="userInformation?.name" class="nav-item hand">
+            <a [ngClass]="{'active-link':dashboard}"
+               (click)="dashboardRedirect(userInformation)" class="nav-link">Dashboard</a>
+          </li>
+          <li class="nav-item hand">
+            <a routerLink="/home" routerLinkActive="active-link" (click)="showMenu =! showMenu"
+               class="nav-link">Home</a>
+          </li>
+          <li class="nav-item hand">
+            <a routerLink="/about" routerLinkActive="active-link" (click)="showMenu =! showMenu"
+               class="nav-link">About</a>
+          </li>
+          <li class="nav-item hand d-xs-block d-none">
+            <a (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
     <span class="d-xs-none">News</span>
   </div>
   <span class="nn-logo">N</span>
@@ -12,7 +36,17 @@
     <i class="fa fa-search white-font"></i>
     <span *ngIf="!userInformation?.name" class="white-font d-xs-none hand"
           (click)="openVerticallyCentered(content);showMenu =! showMenu">Login</span>
-    <span class="user-image d-xs-none hand" *ngIf="userInformation?.name" (click)="logout()">{{userMonoGram}}</span>
+    <div class="d-xs-none hand position-relative" *ngIf="userInformation?.name">
+      <!---->
+      <span class="user-image" (click)="openPopup()">{{userInformation.name}}</span>
+      <div class="pop-up shadow" *ngIf="isOpen">
+        <ul>
+          <li class="nav-item hand">
+            <a (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 
 </header>

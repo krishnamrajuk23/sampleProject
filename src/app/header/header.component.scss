@@ -16,5 +16,44 @@ header.navbar-light {
   transition: top 0.2s ease-in-out;
   color: rgba(0, 0, 0, .5);
 }*/
+.pop-up{
+  position: absolute;
+  top: 65px;
+  background-color: #fff;
+  right: 40px;
+  padding: 10px 30px;
+  &:before{
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
+    border-left: 10px solid transparent;
+    z-index: 1;
+  }
+  &:after{
+    content: '';
+    position: absolute;
+    top: -11px;
+    right: 9px;
+    border-right: 11px solid transparent;
+    border-bottom: 11px solid #ada5a5;
+    border-left: 11px solid transparent;
+  }
 
+}
+.slideMenu{
+  position: fixed;
+  left: -9999px;
+  bottom: 0;
+  top: 0;
+  background: #C579DB;
+  width: 300px;
+  color: #fff;
+  transition: 1s ease;
+  &.menu-open{
+    left: 0;
+  }
+}
 
