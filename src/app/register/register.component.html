@@ -1,40 +1,40 @@
 <div class="row m-0 user-start-page">
   <div class="col-auto d-flex align-items-center m-auto full-height no-overflow">
-    <form>
+    <form [formGroup]="registerForm" (ngSubmit)="onRegistration(registerForm)">
       <div class="col-auto">
-        <label class="sr-only" for="Username">Username</label>
+        <label class="sr-only" for="Username">Name</label>
         <div class="nn-input mb-4">
           <i class="fa fa-user-circle-o"></i>
-          <input type="text" id="Username" placeholder="Username">
+          <input type="text" id="Name" formControlName="name" placeholder="Username" (click)="formValidator(registerForm)"
+          [ngClass]="{ 'is-invalid':  registerForm.controls.name.errors && (registerForm.controls.name.touched || registerForm.controls.name.dirty) }">
+          <div
+          *ngIf="registerForm.controls.name.errors && (registerForm.controls.name.touched || registerForm.controls.name.dirty)"
+          class="invalid-feedback">
+            <div *ngIf="registerForm.controls.name.errors.required"> Name is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-auto">
+        <label class="sr-only" for="emailPhno">Email/Phone Number</label>
+        <div class="nn-input mb-4">
+          <i class="fa fa-lock"></i> 
+          <input type="text" id="emailPhno" formControlName="phnoEmail" placeholder="Email/Phone Number">
         </div>
       </div>
       <div class="col-auto">
         <label class="sr-only" for="Password">Password</label>
         <div class="nn-input mb-4">
           <i class="fa fa-lock"></i>
-          <input type="text" id="Password" placeholder="Password">
-        </div>
-      </div>
-      <div class="col-auto">
-        <label class="sr-only" for="Password">Password</label>
-        <div class="nn-input mb-4">
-          <i class="fa fa-lock"></i>
-          <input type="text" id="Password" placeholder="Password">
-        </div>
-      </div>
-      <div class="col-auto">
-        <label class="sr-only" for="Password">Password</label>
-        <div class="nn-input mb-4">
-          <i class="fa fa-lock"></i>
-          <input type="text" id="Password" placeholder="Password">
+          <input type="password" id="Password" placeholder="Password"  formControlName="password">
         </div>
       </div>
       <div class="col-auto mb-4">
-        <button routerLink="/login" class="nn-button nn-button-primary-outline">continue</button>
+        <button class="nn-button nn-button-primary-outline" type="submit" >continue</button>
       </div>
       <div class="col-auto d-flex align-items-center justify-content-center">
         <a tabindex="0" class="elections-link">Terms and Conditions</a>
       </div>
     </form>
+    
   </div>
 </div>

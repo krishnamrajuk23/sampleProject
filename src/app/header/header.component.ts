@@ -17,7 +17,7 @@ import {LoginDataModal} from '../shared/modal/loginData.modal';
 })
 export class HeaderComponent implements OnInit {
   showMenu = true;
-  isLogin = true;
+  isLogin = false;
   isRegister = false;
   registerForm: FormGroup;
   loginForm: FormGroup;
@@ -40,23 +40,24 @@ export class HeaderComponent implements OnInit {
     private registerService: RegistrationService,
     private registerValidationService: RegisterValidationService,
     private reCaptchaV3Service: ReCaptchaV3Service,
-    private loginService: LoginService,
     private sharedProperties: SharedPropertiesService
   ) {}
 
   ngOnInit() {
+    if(this.router.url === "login"){
+      this.isLogin = true;
+    }
     this.registrationForm();
     //this.loginformDetails();
-    if(this.sharedProperties.loginResponseResult){
-      this.sharedProperties.setLoginStatus(this.sharedProperties.loginResponseResult);
-      this.userInformation = this.sharedProperties.loginResponseResult.data;
-
+    if(this.sharedProperties.loginResponseResult){      
+      this.userInformation = this.sharedProperties.loginResponseResult;
     }
     this.sharedProperties.loginStatusResponse.subscribe((result:any) => {
       if(result){
         this.userInformation = result ? result.data : result;
       }
     });
+    
     if(this.router.url === "/editor" || this.router.url === "/admin"){
       this.dashboard = true;
     }  

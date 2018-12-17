@@ -43,6 +43,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     const count = 6;
+    this.route.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+    
     this.newsService.getLocalNews().subscribe((result:any) => {
       let newsData = [];
       newsData = result.data ? result.data : [];

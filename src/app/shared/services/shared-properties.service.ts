@@ -13,11 +13,14 @@ export class SharedPropertiesService {
   accessToken$ = new Subject<string>();
   tokenAuthKey : string;
   registrationRequired = new Subject<boolean>();
+  hideHeaderSection = new Subject<boolean>();
+  
 
   constructor() {
     if(sessionStorage.getItem('loginResult')){
       this.loginResponseResult = JSON.parse(sessionStorage.getItem('loginResult'));
       this.loginStatusResponse.next(this.loginResponseResult);
+      this.hideHeaderSection.next(false);
     }
     if(sessionStorage.getItem('token')){
       this.tokenAuthKey = sessionStorage.getItem('token');
@@ -26,8 +29,14 @@ export class SharedPropertiesService {
   }
 
   setLoginStatus(data){
-    this.loginStatusResponse.next(data);
-    this.loginResponseResult = data;
+    if(!data){
+      sessionStorage.setItem('loginResult',data);
+      this.loginStatusResponse.next(new LoginDataModal());
+      this.hideHeaderSection.next(false);
+    }
+    this.loginStatusResponse.next(data.data);
+    this.hideHeaderSection.next(false);
+    this.loginResponseResult = data.data;
     sessionStorage.setItem('loginResult',JSON.stringify(data.data));
   }
 

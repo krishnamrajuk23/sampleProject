@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.sharedProperties.loginStatusResponse.subscribe(result=>{
       console.log(result,"result");
-      this.router.navigate['/home'];
+      //this.sharedProperties.loginStatusResponse.next(result);
+      this.router.navigate(['/home']);
   });
     this.loginformDetails();
     

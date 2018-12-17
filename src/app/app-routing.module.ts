@@ -15,11 +15,12 @@ import {SinglePostViewComponent} from './single-post-view/single-post-view.compo
 import {SearchComponent} from './admin/search/search.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { LoginGuardService } from './shared/routeGuards/login-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate:[LoginGuardService] },
   { path: 'register', component: RegisterComponent },
   { path: 'home/:id', component: SinglePostViewComponent},
   { path: 'about', component: AboutComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'addChannel', component: AddChannelComponent, canActivate:[AuthGuardService] },
   { path: 'searchUsers', component: SearchComponent, /*canActivate:[AuthGuardService]*/ },
   { path: 'approveNews', component: SearchComponent, /*canActivate:[AuthGuardService]*/ },
+  { path: '**',component: HomeComponent }
 ];
 
 @NgModule({
