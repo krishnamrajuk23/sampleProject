@@ -196,7 +196,10 @@ export class AddPostComponent implements OnInit {
   }
 
   autoCompleteCallback1(event){
-    console.log("location",event);
+    if(event){
+      this.location = [event.data.geometry.location];
+    }
+    
   }
 
 }

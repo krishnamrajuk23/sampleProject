@@ -21,6 +21,8 @@ export class AdminComponent implements OnInit {
     {desc: "Approved",id:2},
     {desc: "Rejected",id:3}];
   selectedAdminList = this.adminList[0];
+  showAddChannel:boolean = true;
+
   constructor(
     private adminService:AdminService,
     private modalService: NgbModal,
@@ -28,6 +30,7 @@ export class AdminComponent implements OnInit {
     private sharedProperty: SharedPropertiesService) { }
 
   ngOnInit() {
+    this.showAddChannel = this.sharedProperty.loginResponseResult && this.sharedProperty.loginResponseResult.roles.indexOf("ROLE_PUSER1") ? false : true;
     this.adminService.getAdminReviewNews();
     this.adminService.newsData.subscribe(result =>{
       this.newsposts = result.data;
@@ -39,6 +42,7 @@ export class AdminComponent implements OnInit {
         }
       });
     });
+    
   }
 
   editpost(modal){

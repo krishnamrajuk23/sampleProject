@@ -20,6 +20,7 @@ export class EditorComponent implements OnInit {
   pendingNewsPost:any = [];
   uploadImage:boolean = false;
   publishData : any;
+  showReviewNews:boolean = false;
 
   editorList = [
     {desc: "Draft", id:1},
@@ -45,6 +46,8 @@ export class EditorComponent implements OnInit {
     this.userService.draftNews$.subscribe(result=>{
         this.editorNewsPost = result.data;
     });
+    this.showReviewNews = this.sharedProperties.loginResponseResult && this.sharedProperties.loginResponseResult.roles.indexOf("ROLE_PUSER1") > -1? true : false;
+      
 
     // Published News Data
     this.userService.getPublisherNewById();  // first time service call on page load

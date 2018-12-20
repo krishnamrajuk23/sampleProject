@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col col-sm-12">
       <button class="btn btn-outline-light mr-2" (click)="addPost()">Add New Post</button>
-      <button class="btn btn-outline-light" routerLink="/admin">Review News</button>
+      <button class="btn btn-outline-light" routerLink="/admin" *ngIf="showReviewNews">Review News</button>
     </div>
   </div>
 

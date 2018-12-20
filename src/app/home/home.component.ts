@@ -170,7 +170,7 @@ export class HomeComponent implements OnInit {
   }
 
   addChannel(){
-    if(this.sharedProperties.loginResponseResult){
+    if(this.sharedProperties.loginResponseResult && this.sharedProperties.loginResponseResult.roles.indexOf("ROLE_ADMIN") > -1){
       this.route.navigate(['/addChannel']);
     }else{
       this.modalService.open(this.addChannelModal,{ centered: true });  
@@ -178,7 +178,8 @@ export class HomeComponent implements OnInit {
   }
 
   addPost(){
-    if(this.sharedProperties.loginResponseResult){
+    const roles = this.sharedProperties.loginResponseResult ?this.sharedProperties.loginResponseResult.roles: null ;
+    if(roles &&   roles.indexOf("ROLE_ADMIN") > -1 || roles.indexOf("ROLE_USER") > -1){
       this.route.navigate(['/addPost']);
     }else{
       this.route.navigate(['/login']);

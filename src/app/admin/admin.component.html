@@ -1,5 +1,5 @@
 <div class="container main-section">
-  <button  class="btn btn-outline-light" routerLink="/addChannel">Add Channel</button>
+  <button  class="btn btn-outline-light" routerLink="/addChannel" *ngIf="showAddChannel">Add Channel</button>
   <button  class="btn btn-outline-light" routerLink="/addPost">Create Post</button>
   <div class="row">
     <div class="col-sm-12">

@@ -1,4 +1,5 @@
 <div class="row m-0 user-start-page">
+  <span class="hand" routerLink="/home">< Back</span>
   <div class="col-auto d-flex align-items-center m-auto full-height no-overflow">
       
     <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm)">
@@ -21,7 +22,7 @@
       </div>
       <div class="col-auto d-flex align-items-center justify-content-between">
         <a tabindex="0" routerLink="/register" class="elections-link"  routerLink="/register">Create a new account</a>
-        <a tabindex="0" class="elections-link">need help</a>
+        <a tabindex="0" class="elections-link">Need Help</a>
       </div>
     </form>
   </div>

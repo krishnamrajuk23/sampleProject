@@ -145,5 +145,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['home']);
     this.sharedProperties.setLoginStatus(null);
   }
+  toggleMenu(){
+    this.menuOpen = false;
+  }
 
 }

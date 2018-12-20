@@ -61,15 +61,15 @@
               <input type="date" class="form-control" id="date" formControlName="newsDate">
             </div>
           </div>
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <label class="col-sm-2 col-form-label">Current Location:</label>
             <div class="col-sm-10">
               <ng4geo-autocomplete (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
-              <!--<input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>-->
+              <input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
             </div>
-          </div>
+          </div> -->
 
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <label class="col-sm-2 col-form-label">Approver:</label>
             <div class="col-sm-10">
               <select [(ngModel)]="selectApprover" [ngModelOptions]="{standalone: true}"
@@ -77,7 +77,7 @@
                 <option *ngFor="let approver of approversData" [ngValue]="approver">{{approver.name}}</option>
               </select>
             </div>
-          </div>
+          </div> -->
 
           <div class="form-group row">
             <label for="upladImage" class="col-sm-2 col-form-label">Image Upload:</label>
