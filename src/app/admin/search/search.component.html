@@ -1,4 +1,5 @@
 <div class="container main-section">
+  <h3 class="white-font">Search Users</h3>
   <div class="card p-3 mt-3">
     <div class="row">
       <div class="col-3 mb-2">
@@ -26,13 +27,14 @@
                 <input type="checkbox" [(ngModel)]="list.isPaid" (change)="paidUser(list)">
                 <span class="slider round"></span>
                </label>-->
-              <div class="onoffswitch">
-                <input type="checkbox" [(ngModel)]="list.isPaid" (change)="paidUser(list)" name="onoffswitch"
+              <div class="onoffswitch" >
+                <input type="checkbox" [(ngModel)]="list.isPaid" (change)="paidUser(list)" [disabled]="list.isPaid" name="onoffswitch"
                        class="onoffswitch-checkbox" id="paid_{{i}}">
                 <label class="onoffswitch-label" for="paid_{{i}}">
                   <span class="onoffswitch-inner"></span>
                   <span class="onoffswitch-switch"></span>
                 </label>
+                <!--<span>{{list.isPaid ? 'Paid': 'Un Paid'}}</span>-->
               </div>
             </td>
           </tr>

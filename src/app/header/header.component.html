@@ -6,23 +6,30 @@
       <a (click)="openMenu()" class="hand">
         <i class="fa fa-bars white-font"></i>
       </a>
-      <div [attr.aria-hidden]="menuOpen" [class]="!menuOpen? 'slideMenu':'slideMenu menu-open'">
-        <a (click)="menuOpen = false"><i class="fa fa-arrow-left"></i></a>
-        <ul >
+      <div [attr.aria-hidden]="menuOpen" [class]="!menuOpen? 'slideMenu':'slideMenu menu-open shadow'">
+        <a (click)="menuOpen = false" class="close-icon hand"><i class="fa fa-close white-font"></i></a>
+        <ul class="side-menu">
           <li *ngIf="userInformation?.name" class="nav-item hand">
             <a [ngClass]="{'active-link':dashboard}"
                (click)="dashboardRedirect(userInformation)" class="nav-link">Dashboard</a>
           </li>
           <li class="nav-item hand">
-            <a routerLink="/home" routerLinkActive="active-link" (click)="showMenu =! showMenu"
-               class="nav-link">Home</a>
+            <a routerLink="/home" routerLinkActive="active-link"
+               class="nav-link"><i class="fa fa-list mr-4 m-0" aria-hidden="true"></i>Home</a>
           </li>
           <li class="nav-item hand">
-            <a routerLink="/about" routerLinkActive="active-link" (click)="showMenu =! showMenu"
-               class="nav-link">About</a>
+            <a routerLink="/about" routerLinkActive="active-link"
+               class="nav-link"><i class="fa fa-list mr-4 m-0" aria-hidden="true"></i>About</a>
           </li>
-          <li class="nav-item hand d-xs-block d-none">
-            <a (click)="logout()">Logout</a>
+        </ul>
+        <hr class="horizontal-line-menu">
+        <ul class="d-xs-block d-none side-menu">
+          <li class="nav-item hand" *ngIf="isAdmin">
+            <a (click)="searchUsers()" class="nav-link"><i class="fa fa-search mr-4 m-0" aria-hidden="true"></i>Search Users</a>
+          </li>
+
+          <li class="nav-item hand">
+            <a (click)="logout()" class="nav-link"><i class="fa fa-circle-o-notch mr-4 m-0" aria-hidden="true"></i>Logout</a>
           </li>
         </ul>
       </div>
@@ -34,15 +41,19 @@
   <span class="nn-logo">N</span>
   <div class="nn-header-right">
     <i class="fa fa-search white-font"></i>
-    <span *ngIf="!userInformation?.name" class="white-font d-xs-none hand"
-          routerLink="/login">Login</span>
-    <div class="d-xs-none hand position-relative" *ngIf="userInformation?.name">
-      <!---->
-      <span class="user-image" (click)="openPopup()">{{userInformation.name}}</span>
+    <span *ngIf="!userInformation?.name" class="white-font d-xs-none hand login-link"
+          (click)="redirectToLogin()">Login</span>
+    <div class="d-xs-none hand position-relative d-inline-block" *ngIf="userInformation?.name">
+      <span class="user-image text-uppercase" (click)="openPopup()">{{userMonoGram}}</span>
       <div class="pop-up shadow" *ngIf="isOpen">
-        <ul>
+        <ul class="user-menu m-0">
+          <li class="nav-item hand" *ngIf="isAdmin">
+            <a (click)="searchUsers()" class="nav-link">
+              <i class="fa fa-search mr-4 m-0" aria-hidden="true"></i>Search Users</a>
+          </li>
           <li class="nav-item hand">
-            <a (click)="logout()">Logout</a>
+            <a (click)="logout()" class="nav-link">
+              <i class="fa fa-circle-o-notch mr-4 m-0" aria-hidden="true"></i>Logout</a>
           </li>
         </ul>
       </div>
@@ -50,7 +61,7 @@
   </div>
 
 </header>
-
+<!--
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" *ngIf="isLogin">Login</h4>
@@ -61,7 +72,7 @@
   </div>
 
   <div class="modal-body">
-    
+
     <div *ngIf="isRegister">
       <form [formGroup]="registerForm" (ngSubmit)="onRegistration(registerForm)">
         <div class="form-group">
@@ -144,4 +155,4 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="goToRegister(content, alertmodal)">Go to register</button>
   </div>
-</ng-template>
+</ng-template>-->

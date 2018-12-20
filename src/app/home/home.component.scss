@@ -1,26 +1,29 @@
 @import "../../assets/scss/variables";
 
-.subscribed-channel{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;
-    font-weight: 600;
+.subscribed-channel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  font-weight: 600;
+  color: $white;
+  position: absolute;
+  top: 0;
+  i {
     color: $white;
-    i{
-      color: $white;
-      &.is-subscribed{
-        color: #ab3939;
-      }
+    &.is-subscribed {
+      color: #ab3939;
     }
+  }
 }
+
 /*.card-block{
   box-shadow: 0 5px 30px 10px rgba(0, 0, 0, 0.3);
 }*/
-.news-card
-{
+.news-card {
   position: relative;
 }
+
 /*.news-card:before, .news-card:after
 {
   z-index: -1;
@@ -41,32 +44,26 @@
   right: 10px;
   left: auto;
 }*/
-.card-share{
+.card-share {
   font-size: 24px;
-  padding: 0.7rem 1.25rem;
-  i, a{
-    color: $white !important;
+  i, a {
+    color: $black !important;
   }
 }
-.post-information{
-  font-size: 12px;
-  padding-bottom: 1rem;
-  span{
-    text-transform: capitalize;
-  }
-}
-.add-new{
+
+.add-new {
   position: fixed;
   bottom: 30px;
   right: 30px;
   font-size: 60px;
   color: #fff;
 }
-.add-buttons{
+
+.add-buttons {
   position: fixed;
   bottom: 100px;
   right: 30px;
-  button{
+  button {
     display: block;
     margin-bottom: 15px;
     text-align: center;

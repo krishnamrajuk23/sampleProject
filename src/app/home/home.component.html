@@ -25,20 +25,23 @@
                *ngIf="news.imageChunks.length > 0"
                [src]="'data:image/jpeg;base64,'+news.imageChunks[0].data.data" alt="News image"/>-->
           <img src="../../assets/images/nightsky.jpg" class="card-img-left card-image">
-          <div class="card-share d-flex align-items-center justify-content-end">
-            <tweet [text]="news.title" class="mr-1" [url]="localurl+'/'+ news.id"></tweet>
-            <a class="hand ml-3" (click)="getLinkWhatsapp(news.phoneNumber,news.description)">
-              <i class="fa fa-whatsapp"></i>
-            </a>
-          </div>
-          <div class="card-body card-block">            
+          <div class="card-body card-block">
             <h5 class="card-title">{{news.title}}</h5>
             <p class="news-content">{{news.description}}</p>
             <a target="_blank" class="reference-link" [href]="news.refLink">{{news.refLink}}</a>
-            <div class="d-flex align-items-center justify-content-between post-information">
-                <span class="post-name text-transform-cap">{{news.publishedBy}}</span>
-                <span class="post-date">{{news.newsDate}}</span>
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center justify-content-between small-font">
+                  <span class="post-name text-capitalize mr-2">{{news.publishedBy}}</span>
+                  <span class="post-date">{{news.newsDate}}</span>
+                </div>
+              <div class="card-share d-flex align-items-center justify-content-end">
+                <tweet [text]="news.title" class="mr-1" [url]="localurl+'/'+ news.id"></tweet>
+                <a class="hand ml-3" (click)="getLinkWhatsapp(news.phoneNumber,news.description)">
+                  <i class="fa fa-whatsapp"></i>
+                </a>
               </div>
+              </div>
+
           </div>
           <div class="subscribed-channel" *ngIf="news.channel && !news.channelData.publicChannel">
             <a class="hand text-capitalize" (click)="openChannelNews(news.channel)">{{news.channelData.name ?
@@ -97,7 +100,7 @@
         </div>
 
       </div>
-      
+
       <div class="add-buttons" *ngIf="isCircle">
         <button type="button" class="btn btn-primary" (click)="addChannel()">Add Channel</button>
         <button type="button" class="btn btn-primary" (click)="addPost()">Add Post</button>
@@ -138,7 +141,7 @@
           <div class="col-sm-10">
             <input type="text" class="form-control" name="purpose" id="title" maxlength="150">
           </div>
-        </div>     
+        </div>
     </form>
   </div>
   <div class="modal-footer">

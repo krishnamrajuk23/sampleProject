@@ -14,7 +14,7 @@ export class SharedPropertiesService {
   tokenAuthKey : string;
   registrationRequired = new Subject<boolean>();
   hideHeaderSection = new Subject<boolean>();
-  
+
 
   constructor() {
     if(sessionStorage.getItem('loginResult')){
@@ -33,11 +33,14 @@ export class SharedPropertiesService {
       sessionStorage.setItem('loginResult',data);
       this.loginStatusResponse.next(new LoginDataModal());
       this.hideHeaderSection.next(false);
+      this.loginResponseResult = null;
+    }else{
+      this.loginStatusResponse.next(data.data);
+      this.hideHeaderSection.next(false);
+      this.loginResponseResult = data.data;
+      sessionStorage.setItem('loginResult',JSON.stringify(data.data));
     }
-    this.loginStatusResponse.next(data.data);
-    this.hideHeaderSection.next(false);
-    this.loginResponseResult = data.data;
-    sessionStorage.setItem('loginResult',JSON.stringify(data.data));
+
   }
 
   setEditPostNews(news){

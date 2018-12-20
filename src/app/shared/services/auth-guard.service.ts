@@ -12,10 +12,10 @@ export class AuthGuardService implements CanActivate{
     private router: Router) { }
 
   canActivate(){
-    if(this.sharedProperty.loginResponseResult){
+    if(this.sharedProperty.loginResponseResult && this.sharedProperty.loginResponseResult.roles.indexOf("ROLE_ADMIN") > -1){
       return true;
     }
-    this.router.navigate(['home']);
+    this.router.navigate(['/home']);
   }
 
 }

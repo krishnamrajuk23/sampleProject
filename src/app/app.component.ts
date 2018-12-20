@@ -19,15 +19,19 @@ export class AppComponent implements OnInit {
     this.sharedProperties.hideHeaderSection.subscribe(result=>{
       //console.log("login Status",result);
       this.showHeaderSection = result;
-      this.router.events.subscribe(event => { 
-        console.log('this is what your looking for ', event); 
-        if(event['url'].indexOf('home') > -1){
+      /*this.router.events.subscribe(event => {
+        console.log('this is what your looking for ', event);
+        if(event['url'] && event['url'].indexOf('home') > -1){
           this.showHeaderSection = false;
         }
-      }) 
+      })*/
+
+      if(this.router.url && this.router.url.indexOf('home') > -1){
+        this.showHeaderSection = false;
+      }
     })
 
-   
+
   }
 
 }

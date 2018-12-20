@@ -22,6 +22,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
+  background-attachment: fixed;
 }
 
 p {
@@ -55,7 +56,8 @@ ul[role="tablist"] {
     font-size: 1.25rem;
     line-height: 1.25;
     font-weight: 700;
-    color: rgba(0, 0, 0, .8);
+    color: #010101;
+    letter-spacing: 0.35px;
   }
   .news-content {
     color: #888;

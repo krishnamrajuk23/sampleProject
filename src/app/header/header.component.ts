@@ -17,12 +17,6 @@ import {LoginDataModal} from '../shared/modal/loginData.modal';
 })
 export class HeaderComponent implements OnInit {
   showMenu = true;
-  isLogin = false;
-  isRegister = false;
-  registerForm: FormGroup;
-  loginForm: FormGroup;
-  submitted = false;
-  loginStatus = false;
   validationMessage: any = "";
   siteKey = '6Ldd13AUAAAAACSxjaIFUPhhHCRi1vBDeep0b3EG';
   recaptcha:string;
@@ -31,6 +25,7 @@ export class HeaderComponent implements OnInit {
   userMonoGram;
   isOpen = false;
   menuOpen = false;
+  isAdmin = false;
   @ViewChild('content') content;
 
   constructor(
@@ -44,30 +39,29 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if(this.router.url === "login"){
-      this.isLogin = true;
-    }
-    this.registrationForm();
+
+   // this.registrationForm();
     //this.loginformDetails();
-    if(this.sharedProperties.loginResponseResult){      
+    if(this.sharedProperties.loginResponseResult){
       this.userInformation = this.sharedProperties.loginResponseResult;
+      this.userMonoGram = this.userInformation.name.charAt(0);
+      this.isAdmin = this.sharedProperties.loginResponseResult.roles.indexOf("ROLE_ADMIN") > -1;
     }
     this.sharedProperties.loginStatusResponse.subscribe((result:any) => {
       if(result){
         this.userInformation = result ? result.data : result;
       }
     });
-    
+
     if(this.router.url === "/editor" || this.router.url === "/admin"){
       this.dashboard = true;
-    }  
+    }
   }
   @ViewChild('authenticatePopUp') modalTemplate:TemplateRef<any>;
 
   public ngAfterViewInit(): void {
 
   }
-
 
   private authenticate_loop() {
     setTimeout (() => {
@@ -76,12 +70,12 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  openVerticallyCentered(content) {
+  /*openVerticallyCentered(content) {
     this.isLogin = true;
     this.isRegister = false;
     this.modalService.open(content, { centered: true });
-  }
-  
+  }*/
+
   openPopup(){
     this.isOpen =! this.isOpen;
   }
@@ -89,7 +83,7 @@ export class HeaderComponent implements OnInit {
     this.menuOpen =! this.menuOpen;
   }
 
-  goToRegister(content,alertmodal){
+  /*goToRegister(content,alertmodal){
     this.isLogin = false;
     this.isRegister = true;
     alertmodal.close();
@@ -99,7 +93,7 @@ export class HeaderComponent implements OnInit {
   registrationForm() {
     this.registerForm = this.fb.group({
       name: ["", Validators.required],
-      emailId: ["", /*[Validators.required, Validators.email]*/],
+      emailId: ["", /!*[Validators.required, Validators.email]*!/],
       phoneNum: ["", Validators.required],
       password: ["", Validators.required],
       recaptchaResp: ['', Validators.required]
@@ -117,7 +111,7 @@ export class HeaderComponent implements OnInit {
     this.isLogin = this.registerService.registerStatus;
     this.isRegister = !this.registerService.registerStatus;
   }
-
+*/
   //register validation service for each input field
   onBlurMethod(event) {
     const fieldData = event.currentTarget;
@@ -139,9 +133,17 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  searchUsers(){
+    this.router.navigate(['/searchUsers'])
+  }
+  redirectToLogin(){
+    this.router.navigate(['/login']);
+  }
+
   logout(){
     sessionStorage.setItem("loginResult","");
     this.router.navigate(['home']);
     this.sharedProperties.setLoginStatus(null);
   }
+
 }

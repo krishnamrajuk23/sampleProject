@@ -14,12 +14,12 @@ export class LoginGuardService implements CanActivate{
       this.router.navigate(['/home']);
       return false;
     }else{
-      this.router.events.subscribe(event => { 
-        console.log('this is what your looking for ', event); 
-        if(event['url']){
+      this.router.events.subscribe(event => {
+        console.log('this is what your looking for ', event);
+        if(event['url'] && event['url'].indexOf('login') > -1){
           this.sharedService.hideHeaderSection.next(true);
         }
-      })      
+      });
       return true;
     }
     //this.router.navigate(['/login']);

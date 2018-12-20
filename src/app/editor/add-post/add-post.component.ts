@@ -32,7 +32,7 @@ export class AddPostComponent implements OnInit {
   selectApprover:any;
   private controlLanguageTranslation:any;
   userSettings: any = {
-    inputPlaceholderText: 'This is the placeholder text doring component initialization'
+    inputPlaceholderText: 'This is the placeholder text during component initialization'
   }
 
 
@@ -49,19 +49,19 @@ export class AddPostComponent implements OnInit {
     private channelService: ChannelService,
     private adminService:AdminService) {
 
-      setTimeout(()=>{
+      /*setTimeout(()=>{
         this.userSettings['inputPlaceholderText'] = 'This is the placeholder text after doing some external operation after some time';
         this.userSettings = Object.assign({},this.userSettings)
-      },10000)
+      },10000)*/
      }
 
 
   ngOnInit() {
-    // Load the Google Transliterate API
+    /*// Load the Google Transliterate API
     google.load("elements", "1", {
       packages: "transliteration"
     });
-
+*/
     this.editorFormDetails();
 
     this.channelService.subscribeChannelList().subscribe((response:any)=>{
@@ -85,7 +85,7 @@ export class AddPostComponent implements OnInit {
 
   addSavePost(data){
     let newsText:any = {...data.value};
-    newsText.editorId = this.sharedProperties.loginResponseResult.data.userId;
+    newsText.editorId = this.sharedProperties.loginResponseResult.userId;
     newsText.currentLocation =  {lat:17.387140,lng:78.491684};
     newsText.channel = this.channel;
     newsText.language = this.language;
@@ -100,7 +100,7 @@ export class AddPostComponent implements OnInit {
     if(data.valid){
       this.publishData = {...data.value};
 
-      this.publishData.editorId = this.sharedProperties.loginResponseResult.data.userId;
+      this.publishData.editorId = this.sharedProperties.loginResponseResult.userId;
       this.publishData.currentLocation = this.currentLocation ?  this.currentLocation : {lat:17.387140,lng:78.491684};
       this.publishData.channel = this.channel;
       this.publishData.language = this.language;

@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'editPost', component: EditPostComponent},
   { path: 'admin', component: AdminComponent,/* canActivate:[AuthGuardService]*/},
   { path: 'addChannel', component: AddChannelComponent, canActivate:[AuthGuardService] },
-  { path: 'searchUsers', component: SearchComponent, /*canActivate:[AuthGuardService]*/ },
+  { path: 'searchUsers', component: SearchComponent, canActivate:[AuthGuardService] },
   { path: 'approveNews', component: SearchComponent, /*canActivate:[AuthGuardService]*/ },
   { path: '**',component: HomeComponent }
 ];

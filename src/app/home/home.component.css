@@ -4,7 +4,9 @@
   justify-content: space-between;
   padding: 0 16px;
   font-weight: 600;
-  color: #fff; }
+  color: #fff;
+  position: absolute;
+  top: 0; }
   .subscribed-channel i {
     color: #fff; }
     .subscribed-channel i.is-subscribed {
@@ -37,16 +39,9 @@
   left: auto;
 }*/
 .card-share {
-  font-size: 24px;
-  padding: 0.7rem 1.25rem; }
+  font-size: 24px; }
   .card-share i, .card-share a {
-    color: #fff !important; }
-
-.post-information {
-  font-size: 12px;
-  padding-bottom: 1rem; }
-  .post-information span {
-    text-transform: capitalize; }
+    color: #000 !important; }
 
 .add-new {
   position: fixed;
