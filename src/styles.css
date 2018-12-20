@@ -911,6 +911,11 @@ footer {
     .nn-button.nn-button-primary-outline:hover, .nn-button.nn-button-primary-outline:focus {
       background: #C579DB; }
 
+input[type="file"] {
+  position: absolute;
+  z-index: -1;
+  opacity: 0; }
+
 .switch {
   position: relative;
   display: inline-block;

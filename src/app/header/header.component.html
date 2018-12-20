@@ -6,7 +6,7 @@
       <a (click)="openMenu()" class="hand">
         <i class="fa fa-bars white-font"></i>
       </a>
-      <div [attr.aria-hidden]="menuOpen" [class]="!menuOpen? 'slideMenu':'slideMenu menu-open shadow'">
+      <div [attr.aria-hidden]="!menuOpen" [attr.tabindex]="menuOpen? '0':'-1'" [class]="!menuOpen? 'slideMenu':'slideMenu menu-open shadow'">
         <a (click)="menuOpen = false" class="close-icon hand"><i class="fa fa-close white-font"></i></a>
         <ul class="side-menu">
           <li *ngIf="userInformation?.name" class="nav-item hand">
@@ -57,6 +57,7 @@
           </li>
         </ul>
       </div>
+     <!-- <div class="drop-shadow" *ngIf="isOpen" (click)="isOpen = false"></div>-->
     </div>
   </div>
 
